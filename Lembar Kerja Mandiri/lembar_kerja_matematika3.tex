@@ -1,0 +1,716 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=1.25cm,top=1.15cm,bottom=1.35cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,longtable,array,tabularx}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{microtype}
+\usepackage{hyperref}
+\graphicspath{{../assets/}}
+
+\definecolor{iteraBlue}{RGB}{17,79,111}
+\definecolor{iteraBlue2}{RGB}{7,68,99}
+\definecolor{iteraLight}{RGB}{226,239,247}
+\definecolor{iteraVeryLight}{RGB}{246,250,252}
+\definecolor{iteraGold}{RGB}{196,158,68}
+\definecolor{iteraGray}{RGB}{80,80,80}
+\definecolor{levelbg}{RGB}{220,235,244}
+\definecolor{sourcebg}{RGB}{240,240,240}
+
+\hypersetup{colorlinks=true,linkcolor=iteraBlue,urlcolor=iteraBlue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\setlist[itemize]{leftmargin=4mm,itemsep=1pt,topsep=1pt}
+\setlist[enumerate]{leftmargin=5mm,itemsep=1pt,topsep=1pt}
+\setlength{\columnsep}{6mm}
+\setlength{\columnseprule}{0pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\scriptsize Matematika 3 | Program Studi Teknik Kelautan ITERA | Hal. \thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\titleformat{\section}{\color{iteraBlue2}\Large\bfseries}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\color{iteraBlue2}\large\bfseries}{\thesubsection}{0.45em}{}
+
+\newcommand{\level}[1]{\colorbox{levelbg}{\scriptsize\strut #1}}
+\newcommand{\src}[1]{\colorbox{sourcebg}{\scriptsize\strut #1}}
+\newcommand{\Lap}[1]{\mathcal{L}\left\{#1\right\}}
+\newcommand{\iLap}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\R}{\mathbb{R}}
+
+\newtcolorbox{infobox}[1][]{enhanced,breakable,colback=iteraVeryLight,colframe=iteraBlue2,boxrule=.55pt,arc=2mm,left=2mm,right=2mm,top=1.5mm,bottom=1.5mm,#1}
+\newtcolorbox{formula}[1][]{enhanced,breakable,colback=iteraLight!45,colframe=iteraBlue2,boxrule=.55pt,arc=2mm,title={Formula ringkas},fonttitle=\bfseries,colbacktitle=iteraBlue2,coltitle=white,left=2mm,right=2mm,top=1.5mm,bottom=1.5mm,#1}
+\newtcolorbox{qbox}[1][]{enhanced,colback=white,colframe=iteraBlue!55,boxrule=.45pt,arc=2mm,left=1.6mm,right=1.6mm,top=1.3mm,bottom=1.3mm,colbacktitle=iteraLight,coltitle=black,fonttitle=\bfseries\small,#1}
+\newtcolorbox{exam}[1][]{enhanced,breakable,colback=white,colframe=iteraBlue2,boxrule=.7pt,arc=2mm,left=2mm,right=2mm,top=1.8mm,bottom=1.8mm,colbacktitle=iteraBlue2,coltitle=white,fonttitle=\bfseries,#1}
+
+\begin{document}
+\thispagestyle{fancy}
+\begin{minipage}[t]{0.77\textwidth}
+{\LARGE\bfseries\color{iteraBlue2} LEMBAR KERJA MANDIRI DAN BANK SOAL}\\[1mm]
+{\Large Matematika 3}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.18\textwidth}\raggedleft
+\includegraphics[width=2.2cm]{itera_logo.png}
+\end{minipage}
+
+\vspace{1mm}
+\begin{tabularx}{\textwidth}{@{}l X l X@{}}
+\textbf{Mata Kuliah} & KL25-21001, Matematika 3 & \textbf{SKS} & 3 \\
+\textbf{Program Studi} & Teknik Kelautan, ITERA & \textbf{Semester} & Ganjil 2026/2027 \\
+\textbf{Pengajar} & Rifky Fauzi & \textbf{Kelas RB} & Kamis, 14.50--17.30, E302 \\
+\textbf{Nama} & \dotfill & \textbf{NIM} & \dotfill \\
+\end{tabularx}
+
+\begin{infobox}[title={Tujuan dan penggunaan},colbacktitle=iteraBlue2,coltitle=white,fonttitle=\bfseries]
+Lembar kerja ini adalah \textbf{bank latihan} untuk keseluruhan Matematika 3. Soal dapat dipilih sebagai latihan kelas, tugas, kuis, latihan mandiri, mock UTS, atau mock UAS. Angka dan konteks dapat diubah tanpa mengubah kompetensi yang diuji. Mahasiswa dianjurkan mengerjakan proses secara lengkap: tulis model/rumus yang digunakan, langkah aljabar, dan pengecekan hasil.
+
+\textbf{Level:} \level{L1} dasar/konsep, \level{L2} rutin, \level{L3} multi-langkah, \level{L4} integrasi konsep/transfer. 
+\textbf{Sumber:} \src{PR} mengikuti atau memvariasikan PR resmi Matematika 3; \src{Boas} diadaptasi dari ide/contoh/latihan Mary L. Boas; \src{Var} varian baru untuk latihan tambahan.
+\end{infobox}
+
+\begin{infobox}[title={Peta materi dan sumber utama},colbacktitle=iteraBlue2,coltitle=white,fonttitle=\bfseries]
+\small
+\begin{tabularx}{\textwidth}{@{}c X X@{}}
+\toprule
+\textbf{Minggu} & \textbf{Fokus} & \textbf{Rujukan utama}\\
+\midrule
+1 & Refresh fungsi, kalkulus, PDB, solusi, kondisi awal/batas & Modul/PR Pekan 1; Boas Ch. 8 Sec. 1--2\\
+2--4 & Transformasi Laplace dan penyelesaian PDB/sistem & Modul/PR Pekan 2--4; Boas Ch. 8 Sec. 8--9\\
+5--7 & Deret Fourier, fungsi periodik, aplikasi & Modul/PR Pekan 5--7; Boas Ch. 7\\
+8 & UTS: Laplace dan Fourier & Draft/format UTS Matematika 3\\
+9--13 & PDP, BVP, separation of variables, persamaan Laplace & Modul/PR Pekan 9--13; Boas Ch. 13\\
+14--15 & Wave equation dan vibrating string & PR Pekan 13--14; Boas Ch. 13 Sec. 4\\
+16 & UAS: integrasi BVP/PDP/Fourier & Draft/format UAS Matematika 3\\
+\bottomrule
+\end{tabularx}
+\end{infobox}
+
+\begin{infobox}[title={Sumber utama},colbacktitle=iteraBlue2,coltitle=white,fonttitle=\bfseries]
+\begin{enumerate}
+\item Mary L. Boas, \textit{Mathematical Methods in the Physical Sciences}, khususnya Chapter 8 (Ordinary Differential Equations), Chapter 7 (Fourier), dan Chapter 13 (PDE/BVP).
+\item Modul Matematika 3 Pekan 1--4, Pekan 5--7, dan Pekan 9--13.
+\item PR/Tugas Matematika 3 Pekan 1, 2--4, 5--7, 9, 10--12, dan 13--14.
+\end{enumerate}
+Catatan: soal berlabel \src{Boas} disusun ulang atau divariasikan dari ide dan tipe latihan dalam buku, bukan salinan panjang dari buku.
+\end{infobox}
+
+\newpage
+\section*{Peta Konsep Inti}
+\begin{infobox}[title={Konsep yang harus dikuasai untuk menempuh UTS hingga UAS},colbacktitle=iteraBlue2,coltitle=white,fonttitle=\bfseries]
+\small
+\begin{tabularx}{\textwidth}{@{}c X X@{}}
+\toprule
+\textbf{No.}&\textbf{Konsep}&\textbf{Latihan terkait}\\\midrule
+1&Makna solusi PDB, orde, linearitas, kondisi awal/batas&M1.1--M1.8\\
+2&Integral/turunan sebagai alat PDB&M1.5--M1.10\\
+3&Definisi, linearitas, tabel Laplace&M2.1--M2.12\\
+4&Transformasi turunan dan kondisi awal&M3.1--M3.5\\
+5&Invers Laplace, pecahan parsial, shifting&M3.6--M3.12\\
+6&PDB dan sistem PDB dengan Laplace&M4.1--M4.12\\
+7&Fungsi harmonik, rata-rata, ortogonalitas&M5.1--M5.10\\
+8&Koefisien dan Deret Fourier&M6.1--M6.10\\
+9&Aplikasi/interpretasi Fourier&M7.1--M7.6\\
+10&PDB vs PDP dan unsur BVP&M9.1--M9.8\\
+11&Separation of variables&M10.1--M10.8\\
+12&Persamaan Laplace pada domain persegi panjang&M11.1--M11.8\\
+13&Kondisi batas + Fourier dalam BVP&M12.1--M12.8\\
+14&Interpretasi/visualisasi solusi PDP&M13.1--M13.6\\
+15&Wave equation dan vibrating string&M14.1--M15.6\\
+\bottomrule
+\end{tabularx}
+\end{infobox}
+
+\section*{Formula Ringkas}
+\begin{multicols}{2}
+\footnotesize
+\begin{formula}
+\textbf{PDB dan solusi}
+\[
+a_ny^{(n)}+\cdots+a_1y'+a_0y=f(x).
+\]
+Suatu $y$ adalah solusi bila substitusi ke persamaan menghasilkan identitas. PDB linear orde $n$ memiliki solusi umum yang memuat $n$ konstanta bebas; kondisi awal/batas memilih solusi partikular.
+\end{formula}
+\begin{formula}
+\textbf{Laplace}
+\[
+\Lap{f(t)}=F(s)=\int_0^\infty e^{-st}f(t)\,dt.
+\]
+\[
+\Lap{af+bg}=aF+bG.
+\]
+\[
+\Lap{y'}=sY-y(0),\qquad
+\Lap{y''}=s^2Y-sy(0)-y'(0).
+\]
+\end{formula}
+\begin{formula}
+\textbf{Tabel inti Laplace}
+\[
+\Lap{1}=\frac1s,\quad \Lap{t^n}=\frac{n!}{s^{n+1}},\quad
+\Lap{e^{at}}=\frac1{s-a},
+\]
+\[
+\Lap{\sin at}=\frac{a}{s^2+a^2},\qquad
+\Lap{\cos at}=\frac{s}{s^2+a^2}.
+\]
+\end{formula}
+\begin{formula}
+\textbf{Shifting}
+Jika $F(s)=\Lap{f(t)}$,
+\[
+\Lap{e^{-at}f(t)}=F(s+a),
+\]
+\[
+\Lap{f(t-a)u(t-a)}=e^{-as}F(s).
+\]
+\end{formula}
+\begin{formula}
+\textbf{Deret Fourier periode $2L$}
+\[
+f(x)\sim \frac{a_0}{2}+\sum_{n=1}^{\infty}\left[a_n\cos\frac{n\pi x}{L}+b_n\sin\frac{n\pi x}{L}\right],
+\]
+\[
+a_n=\frac1L\int_{-L}^{L}f(x)\cos\frac{n\pi x}{L}\,dx,
+\quad
+b_n=\frac1L\int_{-L}^{L}f(x)\sin\frac{n\pi x}{L}\,dx.
+\]
+\end{formula}
+\begin{formula}
+\textbf{Even/odd}
+Jika $f$ genap, $b_n=0$. Jika $f$ ganjil, $a_0=a_n=0$.
+\[
+\text{rata-rata }f=\frac1{b-a}\int_a^b f(x)\,dx.
+\]
+\end{formula}
+\begin{formula}
+\textbf{BVP dan PDE}
+Persamaan Laplace:
+\[
+T_{xx}+T_{yy}=0.
+\]
+Wave equation 1D:
+\[
+u_{tt}=c^2u_{xx}.
+\]
+Pemisahan variabel: $T(x,y)=X(x)Y(y)$ atau $u(x,t)=X(x)G(t)$.
+\end{formula}
+\begin{formula}
+\textbf{Tiga unsur BVP}
+\begin{enumerate}
+\item governing equation;
+\item domain;
+\item boundary conditions.
+\end{enumerate}
+Prosedur umum: separation of variables $\to$ seleksi dengan kondisi batas $\to$ Fourier untuk menyesuaikan data batas/awal.
+\end{formula}
+\end{multicols}
+\newpage
+\section*{M1: Refresh PDB dan Kalkulus}
+{\color{iteraGray}\small Fondasi sebelum Transformasi Laplace.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M1.1: Klasifikasi persamaan diferensial\hfill \level{L1}\;\src{Boas}}]
+\small Untuk setiap persamaan, tentukan: PDB/PDP, orde, dan linear/nonlinear.
+\begin{enumerate}
+\item $y'+xy^2=1$.
+\item $xy'+y=e^x$.
+\item $u_t=c^2u_{xx}$.
+\item $y''+4y'+5y=\sin x$.
+\end{enumerate}
+\end{qbox}
+\begin{qbox}[title={M1.2: Verifikasi solusi\hfill \level{L1}\;\src{Boas}}]
+\small Verifikasikan dengan substitusi bahwa $y=\sin x+C$ memenuhi $y'=\cos x$. Lalu verifikasikan bahwa $y=Ae^x+Be^{-x}$ memenuhi $y''=y$. Jelaskan mengapa konstanta bebas tidak mengganggu identitas.
+\end{qbox}
+\begin{qbox}[title={M1.3: Solusi umum dan solusi partikular\hfill \level{L2}\;\src{Boas}}]
+\small Diberikan $y''=y$ dengan solusi umum $y=Ae^x+Be^{-x}$. Tentukan $A,B$ jika $y(0)=2$ dan $y'(0)=0$. Bedakan kalimat ``solusi umum'' dan ``solusi partikular'' pada hasil Anda.
+\end{qbox}
+\begin{qbox}[title={M1.4: Kondisi awal atau kondisi batas?\hfill \level{L1}\;\src{Var}}]
+\small Klasifikasikan setiap informasi sebagai kondisi awal atau kondisi batas: (a) $y(0)=1$, $y'(0)=0$; (b) $T(0)=100$, $T(10)=50$; (c) $u(0,t)=u(L,t)=0$; (d) $u(x,0)=f(x)$. Jelaskan alasan Anda.
+\end{qbox}
+\begin{qbox}[title={M1.5: Benda jatuh\hfill \level{L2}\;\src{PR}}]
+\small Sebuah benda mempunyai $v(0)=1\,\mathrm{m/s}$ dan $x(0)=2\,\mathrm m$. Dengan $dv/dt=g$, tentukan $v(t)$ dan $x(t)$. Hitung posisi pada $t=10$ s. Gunakan $g$ sebagai parameter, lalu evaluasi jika $g=9.8\,\mathrm{m/s^2}$.
+\end{qbox}
+\begin{qbox}[title={M1.6: Massa-pegas\hfill \level{L2}\;\src{PR}}]
+\small Model gerak bebas memenuhi $y''+\omega^2y=0$. Jika $y(0)=0$ dan $y'(0)=1$, tentukan solusi dalam bentuk sinus-kosinus. Verifikasikan kembali kondisi awalnya.
+\end{qbox}
+\begin{qbox}[title={M1.7: Persamaan separabel\hfill \level{L2}\;\src{Boas}}]
+\small Selesaikan $dN/dt=-\lambda N$ dengan $N(0)=N_0$. Tunjukkan langkah pemisahan variabel, integral, penentuan konstanta, dan interpretasikan tanda negatif pada laju perubahan.
+\end{qbox}
+\begin{qbox}[title={M1.8: Integral sebagai penyelesaian PDB\hfill \level{L2}\;\src{Boas}}]
+\small Jelaskan mengapa menghitung $y=\int f(x)\,dx$ sama dengan menyelesaikan PDB $y'=f(x)$. Gunakan contoh $f(x)=3x^2-2x+1$ dan tuliskan keluarga solusinya.
+\end{qbox}
+\begin{qbox}[title={M1.9: Refresh turunan dan integral\hfill \level{L2}\;\src{Var}}]
+\small Hitung tanpa CAS:
+\begin{enumerate}
+\item $\frac{d}{dt}(t^2e^{-3t})$;
+\item $\frac{d^2}{dt^2}(\sin 2t)$;
+\item $\int (4t^3-2t+5)\,dt$;
+\item $\int_0^\pi \sin^2 x\,dx$.
+\end{enumerate}
+\end{qbox}
+\begin{qbox}[title={M1.10: Dari model ke persamaan\hfill \level{L3}\;\src{Var}}]
+\small Untuk masing-masing fenomena berikut, tuliskan variabel utama, dugaan persamaan pengatur paling sederhana, dan data tambahan yang diperlukan agar solusi unik: pendinginan batang, osilasi pegas, gelombang tali, dan gerak jatuh.
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{M2: Transformasi Laplace I}
+{\color{iteraGray}\small Definisi, linearitas, tabel dasar, dan manipulasi parameter.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M2.1: Makna Transformasi Laplace\hfill \level{L1}\;\src{PR}}]
+\small Jelaskan apa yang dimaksud dengan Transformasi Laplace dan mengapa transformasi ini berguna ketika menyelesaikan PDB linear dengan kondisi awal.
+\end{qbox}
+\begin{qbox}[title={M2.2: Dari definisi: fungsi konstanta\hfill \level{L2}\;\src{Boas}}]
+\small Mulai dari definisi $\Lap{f}=\int_0^\infty e^{-st}f(t)dt$, turunkan $\Lap{1}=1/s$ dan sebutkan syarat pada $s$ agar integral konvergen.
+\end{qbox}
+\begin{qbox}[title={M2.3: Dari definisi: eksponensial\hfill \level{L2}\;\src{Boas}}]
+\small Turunkan langsung $\Lap{e^{-at}}=1/(s+a)$. Jelaskan apa yang berubah jika fungsi menjadi $e^{at}$.
+\end{qbox}
+\begin{qbox}[title={M2.4: Linearitas\hfill \level{L2}\;\src{Var}}]
+\small Gunakan linearitas untuk menghitung $\Lap{4t^2-3\sin 2t+5e^{-t}}$. Pisahkan setiap suku dan tuliskan baris tabel yang digunakan.
+\end{qbox}
+\begin{qbox}[title={M2.5: Tugas resmi: transformasi dasar\hfill \level{L2}\;\src{PR}}]
+\small Tentukan Transformasi Laplace dari: (a) $5t^2$; (b) $3\sin 3t$; (c) $te^{2t}$.
+\end{qbox}
+\begin{qbox}[title={M2.6: Eksponensial kompleks\hfill \level{L3}\;\src{PR}}]
+\small Dengan $e^{iat}=\cos at+i\sin at$, turunkan transformasi $e^{iat}$ dari definisi atau transformasi eksponensial. Pisahkan bagian real dan imajiner untuk memperoleh transformasi sinus dan cosinus.
+\end{qbox}
+\begin{qbox}[title={M2.7: Kombinasi trigonometrik\hfill \level{L2}\;\src{PR}}]
+\small Tentukan transformasi $f(t)=2-2\cos 2t$ dan $f(t)=\frac1t\sin 3t$. Untuk soal kedua, identifikasi entri/relasi tabel yang diperlukan.
+\end{qbox}
+\begin{qbox}[title={M2.8: Eksponensial kali sinus\hfill \level{L2}\;\src{PR}}]
+\small Tentukan $\Lap{e^{2t}\sin 2t}$ dengan shifting theorem. Tuliskan bentuk $F(s-a)$ yang Anda gunakan.
+\end{qbox}
+\begin{qbox}[title={M2.9: Selisih eksponensial dibagi $t$\hfill \level{L3}\;\src{PR}}]
+\small Tentukan transformasi $\displaystyle f(t)=\frac{10}{t}(e^{-t}-e^{-7t})$. Jelaskan relasi tabel atau integral parameter yang digunakan.
+\end{qbox}
+\begin{qbox}[title={M2.10: Gelombang bergeser\hfill \level{L3}\;\src{PR}}]
+\small Anggap $k$ dan $x$ konstanta. Tentukan Transformasi Laplace terhadap $t$ dari $f(t)=2\sin(kx-t)$. Uraikan terlebih dahulu dengan identitas sinus selisih.
+\end{qbox}
+\begin{qbox}[title={M2.11: Tanh sebagai tantangan\hfill \level{L4}\;\src{PR}}]
+\small Selidiki $\Lap{\tanh 2t}$. Jika tidak dapat diperoleh dari tabel inti, jelaskan strategi yang mungkin: identitas eksponensial, tabel yang lebih lengkap, atau pendekatan numerik. Fokus pada proses, bukan hanya hasil akhir.
+\end{qbox}
+\begin{qbox}[title={M2.12: Turunkan rumus dari parameter\hfill \level{L3}\;\src{Boas}}]
+\small Mulai dari $\Lap{e^{-at}}=1/(s+a)$. Diferensiasikan terhadap $s$ untuk memperoleh transformasi $te^{-at}$ dan $t^2e^{-at}$.
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{M3: Transformasi Laplace II}
+{\color{iteraGray}\small Transformasi turunan, kondisi awal, invers, shifting, dan pecahan parsial.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M3.1: Transformasi turunan pertama\hfill \level{L2}\;\src{Boas}}]
+\small Dengan integral parsial, turunkan $\Lap{y'}=sY-y(0)$. Nyatakan jelas pilihan $u$ dan $dv$ serta asumsi pada suku batas ketika $t\to\infty$.
+\end{qbox}
+\begin{qbox}[title={M3.2: Transformasi turunan kedua\hfill \level{L2}\;\src{Boas}}]
+\small Dari rumus $\Lap{y'}$, turunkan $\Lap{y''}=s^2Y-sy(0)-y'(0)$.
+\end{qbox}
+\begin{qbox}[title={M3.3: Orde tiga dan empat\hfill \level{L2}\;\src{Var}}]
+\small Tuliskan $\Lap{y^{(3)}}$ dan $\Lap{y^{(4)}}$ secara lengkap. Kemudian evaluasi jika $y(0)=1$, $y'(0)=-2$, $y''(0)=0$, $y^{(3)}(0)=5$.
+\end{qbox}
+\begin{qbox}[title={M3.4: Verifikasi entri tabel dengan diferensiasi parameter\hfill \level{L3}\;\src{PR}}]
+\small Verifikasikan transformasi $t\cos at$ dengan mendiferensiasikan transformasi $\sin at$ atau $\cos at$ terhadap parameter $a$. Tunjukkan tanda yang muncul dengan teliti.
+\end{qbox}
+\begin{qbox}[title={M3.5: Shifting eksponensial\hfill \level{L3}\;\src{PR}}]
+\small Buktikan bentuk $\Lap{e^{-at}g(t)}=G(s+a)$ dari definisi. Gunakan untuk memperoleh transformasi $e^{-2t}\cos 3t$ dan $e^{-2t}(1-2t)$.
+\end{qbox}
+\begin{qbox}[title={M3.6: Invers Laplace langsung\hfill \level{L2}\;\src{Boas}}]
+\small Tentukan invers dari: (a) $6/s^4$; (b) $5/(s^2+25)$; (c) $s/(s^2+9)$; (d) $1/(s+4)$.
+\end{qbox}
+\begin{qbox}[title={M3.7: Invers rasional linear\hfill \level{L3}\;\src{Boas}}]
+\small Tentukan $\iLap{(5-2s)/(s^2+s-2)}$. Faktorkan penyebut dan gunakan pecahan parsial.
+\end{qbox}
+\begin{qbox}[title={M3.8: Lengkapi kuadrat\hfill \level{L3}\;\src{Boas}}]
+\small Tentukan $\iLap{(6-s)/(s^2+4s+20)}$. Ubah penyebut menjadi $(s+2)^2+16$ dan pecah pembilang agar cocok dengan sinus/kosinus bergeser.
+\end{qbox}
+\begin{qbox}[title={M3.9: Faktor berulang\hfill \level{L3}\;\src{Var}}]
+\small Uraikan $1/[s(s+2)^2]$ menjadi pecahan parsial dan tentukan invers Laplace-nya.
+\end{qbox}
+\begin{qbox}[title={M3.10: Shifting waktu\hfill \level{L3}\;\src{Boas}}]
+\small Tentukan invers $e^{-2s}/s$ dan $e^{-\pi s}s/(s^2+1)$. Tulis jawaban menggunakan fungsi step $u(t-a)$ dan sketsa kapan fungsi mulai aktif.
+\end{qbox}
+\begin{qbox}[title={M3.11: Pilih strategi sebelum menghitung\hfill \level{L2}\;\src{Var}}]
+\small Untuk setiap bentuk, tentukan strategi awal: langsung tabel, pecahan parsial, melengkapi kuadrat, shifting-$s$, atau shifting-waktu: $4/(s^2+16)$, $(s+2)/[(s+2)^2+9]$, $(3s+5)/[s(s+2)]$, $e^{-3s}/(s^2+1)$.
+\end{qbox}
+\begin{qbox}[title={M3.12: Inverse transform campuran\hfill \level{L4}\;\src{Var}}]
+\small Tentukan $\iLap{(2s^2+7s+9)/[s(s+1)(s+3)]}$. Verifikasi hasil akhir dengan mentransformasikan kembali jawaban Anda.
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{M4: PDB dengan Transformasi Laplace}
+{\color{iteraGray}\small Penerapan penuh pada IVP, sistem PDB, dan integral.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M4.1: IVP orde satu\hfill \level{L2}\;\src{Var}}]
+\small Selesaikan dengan Laplace: $y'+y=2$, $y(0)=1$. Tunjukkan transformasi, penyelesaian aljabar untuk $Y(s)$, pecahan parsial, dan invers.
+\end{qbox}
+\begin{qbox}[title={M4.2: IVP orde dua eksponensial\hfill \level{L3}\;\src{PR}}]
+\small Selesaikan $y''-y=8e^{3t}$ dengan $y(0)=1$, $y'(0)=3$ menggunakan Transformasi Laplace.
+\end{qbox}
+\begin{qbox}[title={M4.3: IVP dengan faktor berulang\hfill \level{L3}\;\src{PR}}]
+\small Selesaikan $y''+4y'+4y=\tfrac12 t^2e^{-2t}$, $y(0)=0$, $y'(0)=0$.
+\end{qbox}
+\begin{qbox}[title={M4.4: Resonansi trigonometrik\hfill \level{L3}\;\src{PR}}]
+\small Selesaikan $y''+9y=\cos 3t$ dengan $y(0)=0$, $y'(0)=6$. Perhatikan bahwa frekuensi forcing sama dengan frekuensi alami.
+\end{qbox}
+\begin{qbox}[title={M4.5: Forcing hiperbolik\hfill \level{L3}\;\src{PR}}]
+\small Selesaikan $y''+y=5\sinh 2t$ dengan $y(0)=0$, $y'(0)=2$.
+\end{qbox}
+\begin{qbox}[title={M4.6: Eksponensial-sinus\hfill \level{L3}\;\src{PR}}]
+\small Selesaikan $y''+2y'+10y=-6e^{-t}\sin 3t$, $y(0)=0$, $y'(0)=1$.
+\end{qbox}
+\begin{qbox}[title={M4.7: Varian Boas 1\hfill \level{L3}\;\src{Boas}}]
+\small Selesaikan $y''+4y'+4y=e^{-2t}$ dengan $y(0)=0$, $y'(0)=4$.
+\end{qbox}
+\begin{qbox}[title={M4.8: Varian Boas 2\hfill \level{L3}\;\src{Boas}}]
+\small Selesaikan $y''+16y=8\cos 4t$ dengan $y(0)=0$, $y'(0)=8$. Bandingkan bentuk solusi dengan kasus kondisi awal nol.
+\end{qbox}
+\begin{qbox}[title={M4.9: Sistem PDB I\hfill \level{L4}\;\src{PR}}]
+\small Selesaikan sistem $y'+z'-3z=0$, $y''+z'=0$ dengan $y(0)=y'(0)=0$ dan $z(0)=4/3$ menggunakan Laplace.
+\end{qbox}
+\begin{qbox}[title={M4.10: Sistem PDB II\hfill \level{L4}\;\src{PR}}]
+\small Selesaikan $y'+2z=1$, $2y-z'=2t$ dengan $y(0)=0$, $z(0)=1$. Tulis sistem aljabar dalam $Y(s),Z(s)$ sebelum melakukan eliminasi.
+\end{qbox}
+\begin{qbox}[title={M4.11: Integral tak wajar via tabel Laplace\hfill \level{L3}\;\src{PR}}]
+\small Evaluasi $\displaystyle \int_0^\infty \frac{1}{t}e^{-2t}\sin(\sqrt2\,t)\,dt$ dengan memanfaatkan interpretasi transformasi Laplace/tabel yang sesuai.
+\end{qbox}
+\begin{qbox}[title={M4.12: Cek solusi\hfill \level{L2}\;\src{Var}}]
+\small Ambil satu solusi M4.2--M4.10. Verifikasi dua hal: (1) kondisi awal terpenuhi; (2) substitusi ke PDB/sistem menghasilkan ruas kanan yang benar.
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{M5: Dasar Fourier}
+{\color{iteraGray}\small Fungsi harmonik, periodik, rata-rata, ortogonalitas, dan parity.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M5.1: Fungsi harmonik\hfill \level{L1}\;\src{Var}}]
+\small Untuk $y=A\sin(\omega t+\phi)$, jelaskan makna amplitudo, frekuensi sudut, periode, frekuensi, dan fase. Hitung periode jika $\omega=4\pi$.
+\end{qbox}
+\begin{qbox}[title={M5.2: Radian dan periodisitas\hfill \level{L1}\;\src{Var}}]
+\small Ubah $30^\circ,90^\circ,225^\circ$ ke radian. Tentukan periode $\sin 3x$, $\cos(x/2)$, dan $\sin(2\pi t/T)$.
+\end{qbox}
+\begin{qbox}[title={M5.3: Fungsi periodik atau bukan\hfill \level{L2}\;\src{Var}}]
+\small Tentukan apakah fungsi berikut periodik dan, jika ya, periodenya: $\sin x+\cos 2x$, $\sin x+\cos(\sqrt2x)$, $e^{-x}\sin x$, dan fungsi gelombang kotak periode $2L$.
+\end{qbox}
+\begin{qbox}[title={M5.4: Rata-rata fungsi\hfill \level{L2}\;\src{Var}}]
+\small Hitung rata-rata $f(x)=x^2$ pada $[-1,1]$, $\sin^2 x$ pada $[-\pi,\pi]$, dan $\cos x$ pada satu periode penuh.
+\end{qbox}
+\begin{qbox}[title={M5.5: Ortogonalitas\hfill \level{L2}\;\src{Var}}]
+\small Evaluasi $\int_{-\pi}^{\pi}\sin(mx)\sin(nx)dx$ untuk $m=n$ dan $m\ne n$ pada beberapa pasangan bilangan bulat. Apa pola yang terlihat?
+\end{qbox}
+\begin{qbox}[title={M5.6: Representasi sinus-kosinus\hfill \level{L1}\;\src{PR}}]
+\small Jelaskan bagaimana fungsi periodik dapat direpresentasikan sebagai kombinasi sinus dan cosinus. Buat ilustrasi konseptual dengan menyebutkan fungsi target dan beberapa harmoniknya.
+\end{qbox}
+\begin{qbox}[title={M5.7: Asal koefisien Fourier\hfill \level{L3}\;\src{PR}}]
+\small Turunkan ide formula $a_n=(1/\pi)\int_{-\pi}^{\pi}f(x)\cos nx\,dx$ dan $b_n=(1/\pi)\int_{-\pi}^{\pi}f(x)\sin nx\,dx$ dengan memanfaatkan ortogonalitas.
+\end{qbox}
+\begin{qbox}[title={M5.8: Even dan odd\hfill \level{L2}\;\src{Var}}]
+\small Tentukan apakah $x^2$, $x^3$, $\sin x$, $\cos x$, $x\sin x$, dan $x\cos x$ genap atau ganjil. Prediksi koefisien Fourier mana yang otomatis nol.
+\end{qbox}
+\begin{qbox}[title={M5.9: Gelombang progresif\hfill \level{L2}\;\src{Var}}]
+\small Untuk $\eta(x,t)=A\cos(kx-\omega t)$, tentukan panjang gelombang, periode, dan cepat rambat fase. Hubungkan bentuk ini dengan penggunaan Fourier dalam teknik kelautan.
+\end{qbox}
+\begin{qbox}[title={M5.10: Dari grafik ke fungsi potongan\hfill \level{L3}\;\src{Var}}]
+\small Gambarkan satu periode gelombang persegi dengan nilai $-1$ untuk $-\pi<x<0$ dan $1$ untuk $0<x<\pi$. Tulis definisi fungsi potongannya dan tentukan sifat genap/ganjil.
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{M6: Deret Fourier}
+{\color{iteraGray}\small Koefisien, fungsi potongan, parity, dan perluasan half-range.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M6.1: Fourier fungsi potongan I\hfill \level{L3}\;\src{PR}}]
+\small Cari ekspansi Fourier untuk $f(x)=0$ pada $-\pi<x<0$ dan $f(x)=x$ pada $0<x<\pi$. Tulis $a_0,a_n,b_n$ sebelum menyusun deret.
+\end{qbox}
+\begin{qbox}[title={M6.2: Fourier gelombang kotak\hfill \level{L3}\;\src{PR}}]
+\small Untuk satu periode $f(x)=-0.5$ pada $-L<x<0$ dan $f(x)=0.5$ pada $0<x<L$, tentukan parity dan ekspansi Fourier. Buat plot beberapa periode secara manual.
+\end{qbox}
+\begin{qbox}[title={M6.3: Pergeseran fungsi\hfill \level{L3}\;\src{PR}}]
+\small Jika $h(x)=f(x+\pi/2)$ dan ekspansi Fourier $f$ diketahui, jelaskan bagaimana pergeseran memengaruhi sinus/cosinus. Terapkan pada satu contoh sederhana.
+\end{qbox}
+\begin{qbox}[title={M6.4: Periode $2L$\hfill \level{L3}\;\src{Var}}]
+\small Cari koefisien Fourier periode $2L$ untuk $f(x)=x$ pada $-L<x<L$. Gunakan sifat ganjil untuk menyederhanakan perhitungan.
+\end{qbox}
+\begin{qbox}[title={M6.5: Fungsi genap\hfill \level{L3}\;\src{Var}}]
+\small Cari deret Fourier untuk $f(x)=|x|$ pada $-\pi<x<\pi$. Gunakan sifat genap agar hanya koefisien kosinus yang dihitung.
+\end{qbox}
+\begin{qbox}[title={M6.6: Half-range sine series\hfill \level{L3}\;\src{Var}}]
+\small Untuk $f(x)=x$ pada $0<x<L$, bentuk perluasan ganjil dan cari sine series-nya. Gambarkan perluasan ke interval negatif.
+\end{qbox}
+\begin{qbox}[title={M6.7: Half-range cosine series\hfill \level{L3}\;\src{Var}}]
+\small Untuk $f(x)=x$ pada $0<x<L$, bentuk perluasan genap dan cari cosine series-nya. Bandingkan dengan M6.6.
+\end{qbox}
+\begin{qbox}[title={M6.8: Nilai di titik diskontinu\hfill \level{L3}\;\src{Var}}]
+\small Untuk gelombang kotak, apa nilai yang didekati deret Fourier tepat di titik loncatan? Jelaskan menggunakan rata-rata limit kiri dan kanan.
+\end{qbox}
+\begin{qbox}[title={M6.9: Jumlah harmonik\hfill \level{L2}\;\src{PR}}]
+\small Jalankan/analisis konsep plot deret Fourier untuk $N=1,3,5,10,20$. Jelaskan perubahan bentuk, error di daerah halus, dan overshoot dekat diskontinuitas.
+\end{qbox}
+\begin{qbox}[title={M6.10: Koefisien kompleks\hfill \level{L4}\;\src{Var}}]
+\small Tuliskan hubungan antara bentuk real $a_n,b_n$ dan bentuk kompleks $c_n$. Tunjukkan pada fungsi ganjil sederhana bagaimana simetri koefisien muncul.
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{M7: Interpretasi dan Aplikasi Fourier}
+{\color{iteraGray}\small Menutup blok sebelum UTS dan menyiapkan penggunaan Fourier kembali pada BVP.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M7.1: Aplikasi Fourier di Teknik Kelautan\hfill \level{L1}\;\src{PR}}]
+\small Jelaskan minimal tiga penggunaan Fourier dalam teknik kelautan, misalnya analisis gelombang acak, spektrum, respons struktur, atau pemrosesan data sensor.
+\end{qbox}
+\begin{qbox}[title={M7.2: Interpretasi spektrum\hfill \level{L2}\;\src{Var}}]
+\small Sebuah sinyal terdiri dari $\cos t+0.4\cos 3t+0.2\sin 5t$. Identifikasi frekuensi harmonik dan amplitudo relatifnya. Apa yang terlihat jika digambar sebagai spektrum diskrit?
+\end{qbox}
+\begin{qbox}[title={M7.3: Fungsi dari grafik\hfill \level{L3}\;\src{Var}}]
+\small Diberikan grafik periodik berbentuk segitiga simetris terhadap sumbu-$y$. Tulis fungsi potongan yang masuk akal pada $[-L,L]$, tentukan parity, dan pilih koefisien yang perlu dihitung.
+\end{qbox}
+\begin{qbox}[title={M7.4: Bandingkan representasi\hfill \level{L3}\;\src{Var}}]
+\small Bandingkan representasi fungsi potongan asli dengan aproksimasi Fourier 1, 3, dan 10 harmonik. Diskusikan akurasi dan biaya komputasi.
+\end{qbox}
+\begin{qbox}[title={M7.5: Fourier sebagai jembatan ke BVP\hfill \level{L2}\;\src{Var}}]
+\small Jelaskan mengapa kondisi batas yang berbentuk fungsi $f(x)$ pada pelat dapat dicocokkan dengan deret sinus. Hubungkan dengan ide separation of variables.
+\end{qbox}
+\begin{qbox}[title={M7.6: Latihan integrasi UTS\hfill \level{L4}\;\src{Var}}]
+\small Buat sendiri satu fungsi periodik potongan sederhana. Tentukan periodenya, parity, $a_0,a_n,b_n$, lalu tulis tiga suku nonnol pertama dari deret Fourier.
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{Mock UTS}
+\begin{exam}[title={Mock UTS A - Format 100 menit}]
+\textbf{Soal 1 (15\%)} Jelaskan definisi Transformasi Laplace dan dua alasan mengapa metode ini membantu penyelesaian PDB dengan kondisi awal.\\[1mm]
+\textbf{Soal 2 (20\%)} Tentukan transformasi: (a) $4t^2$; (b) $3e^{-t}\sin 2t$; (c) $2-2\cos 3t$.\\[1mm]
+\textbf{Soal 3 (20\%)} Selesaikan dengan Laplace: $y''+4y'+4y=e^{-2t}$, $y(0)=0$, $y'(0)=4$.\\[1mm]
+\textbf{Soal 4 (30\%)} Cari ekspansi Fourier fungsi $f(x)=0$ untuk $-\pi<x<0$ dan $f(x)=x$ untuk $0<x<\pi$.\\[1mm]
+\textbf{Soal 5 (15\%)} Jelaskan kegunaan deret/transformasi Fourier dalam satu kasus teknik kelautan dan apa arti komponen frekuensi pada kasus tersebut.
+\end{exam}
+
+\begin{exam}[title={Mock UTS B - Varian}]
+\textbf{Soal 1 (15\%)} Turunkan $\Lap{y'}$ dengan integral parsial dan jelaskan munculnya $y(0)$.\\[1mm]
+\textbf{Soal 2 (20\%)} Tentukan $\iLap{(3s+10)/(s^2-25)}$ dan $\iLap{(6-s)/(s^2+4s+20)}$.\\[1mm]
+\textbf{Soal 3 (20\%)} Selesaikan $y''+9y=\cos 3t$, $y(0)=0$, $y'(0)=6$.\\[1mm]
+\textbf{Soal 4 (30\%)} Untuk gelombang kotak $f(x)=-1$ pada $-\pi<x<0$ dan $1$ pada $0<x<\pi$, tentukan deret Fourier dan jelaskan koefisien mana yang nol karena simetri.\\[1mm]
+\textbf{Soal 5 (15\%)} Jelaskan hubungan antara jumlah harmonik yang dipakai dan kualitas aproksimasi di sekitar diskontinuitas.
+\end{exam}
+\newpage
+\section*{M9: Pengenalan PDP dan BVP}
+{\color{iteraGray}\small Dari PDB menuju problem medan dengan domain dan kondisi batas.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M9.1: PDB vs PDP\hfill \level{L1}\;\src{PR}}]
+\small Jelaskan perbedaan PDB dan PDP berdasarkan banyaknya variabel bebas dan jenis turunannya. Berikan dua contoh masing-masing.
+\end{qbox}
+\begin{qbox}[title={M9.2: Tiga unsur BVP\hfill \level{L1}\;\src{PR}}]
+\small Sebutkan dan jelaskan tiga unsur yang harus ada dalam permasalahan nilai batas: governing equation, domain, dan boundary conditions.
+\end{qbox}
+\begin{qbox}[title={M9.3: Verifikasi solusi sinus\hfill \level{L2}\;\src{PR}}]
+\small Buktikan bahwa $f(x)=A\sin kx+B\cos kx$ memenuhi $f''=-k^2f$.
+\end{qbox}
+\begin{qbox}[title={M9.4: Verifikasi solusi eksponensial\hfill \level{L2}\;\src{PR}}]
+\small Buktikan bahwa $f(x)=Ae^{kx}+Be^{-kx}$ memenuhi $f''=k^2f$.
+\end{qbox}
+\begin{qbox}[title={M9.5: Batang suhu 1D\hfill \level{L2}\;\src{PR}}]
+\small Batang $0\le x\le10$ cm memenuhi $T''=0$, dengan $T(0)=100^\circ C$ dan $T(10)=50^\circ C$. Tentukan $T(x)$ dan interpretasikan gradiennya.
+\end{qbox}
+\begin{qbox}[title={M9.6: Klasifikasi PDE\hfill \level{L2}\;\src{Var}}]
+\small Cocokkan fenomena dengan persamaan sederhana: steady heat/potential $\to$ Laplace; sumber internal $\to$ Poisson; gelombang $\to$ wave equation; bentuk time-harmonic $\to$ Helmholtz.
+\end{qbox}
+\begin{qbox}[title={M9.7: Cek kandidat solusi 2D\hfill \level{L3}\;\src{Var}}]
+\small Periksa apakah $T=e^{-ky}\sin kx$ memenuhi $T_{xx}+T_{yy}=0$. Lakukan turunan parsial lengkap.
+\end{qbox}
+\begin{qbox}[title={M9.8: Dari fenomena ke BVP\hfill \level{L3}\;\src{PR}}]
+\small Pilih satu fenomena nyata sekitar teknik kelautan. Tentukan variabel, governing equation sederhana, domain, dan jenis kondisi batas yang masuk akal.
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{M10: Separation of Variables}
+{\color{iteraGray}\small Membangun keluarga solusi dan memilih mode yang sesuai kondisi batas.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M10.1: Asumsi produk\hfill \level{L2}\;\src{Var}}]
+\small Untuk persamaan Laplace $T_{xx}+T_{yy}=0$, ambil $T=X(x)Y(y)$. Substitusikan dan pisahkan sehingga diperoleh $X''/X=-Y''/Y=\lambda$.
+\end{qbox}
+\begin{qbox}[title={M10.2: Tanda konstanta pemisah\hfill \level{L3}\;\src{Var}}]
+\small Untuk $\lambda=k^2$, $\lambda=0$, dan $\lambda=-k^2$, tuliskan keluarga bentuk solusi $X$ dan $Y$. Jelaskan mengapa kondisi batas menentukan tanda yang berguna.
+\end{qbox}
+\begin{qbox}[title={M10.3: Boundary kiri-kanan nol\hfill \level{L3}\;\src{Var}}]
+\small Pada domain $0<x<L$, syarat $X(0)=X(L)=0$ diterapkan pada $X''+k^2X=0$. Tunjukkan bahwa $k=n\pi/L$ dan $X_n=\sin(n\pi x/L)$.
+\end{qbox}
+\begin{qbox}[title={M10.4: Seleksi alternatif solusi\hfill \level{L3}\;\src{Var}}]
+\small Diberikan empat kandidat berbasis $\sin,\cos,e^{ky},e^{-ky}$. Gunakan kondisi $T(0,y)=T(L,y)=0$ dan keterbatasan saat $y\to\infty$ untuk mengeliminasi kandidat yang tidak mungkin.
+\end{qbox}
+\begin{qbox}[title={M10.5: Superposisi mode\hfill \level{L3}\;\src{Var}}]
+\small Mengapa satu mode $\sin(n\pi x/L)e^{-n\pi y/L}$ umumnya tidak cukup memenuhi kondisi batas $T(x,0)=f(x)$? Jelaskan kebutuhan penjumlahan tak hingga.
+\end{qbox}
+\begin{qbox}[title={M10.6: Separation pada wave equation\hfill \level{L3}\;\src{Var}}]
+\small Untuk $u_{tt}=c^2u_{xx}$, ambil $u=X(x)G(t)$. Turunkan dua ODE terpisah dan interpretasikan konstanta pemisah.
+\end{qbox}
+\begin{qbox}[title={M10.7: Fixed ends\hfill \level{L3}\;\src{Var}}]
+\small Gunakan $u(0,t)=u(L,t)=0$ untuk menunjukkan bahwa mode ruang tali berupa $\sin(n\pi x/L)$.
+\end{qbox}
+\begin{qbox}[title={M10.8: Peta proses\hfill \level{L2}\;\src{Var}}]
+\small Tuliskan urutan lengkap penyelesaian BVP analitik: model $\to$ separation $\to$ solusi ODE $\to$ kondisi batas $\to$ superposisi $\to$ Fourier $\to$ verifikasi.
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{M11: Persamaan Laplace pada Domain Persegi Panjang}
+{\color{iteraGray}\small Solusi mode dan interpretasi medan steady.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M11.1: Pelat semi-infinite\hfill \level{L3}\;\src{Var}}]
+\small Pada $0<x<L$, $y>0$, selesaikan bentuk umum Laplace dengan $T(0,y)=T(L,y)=0$ dan $T\to0$ saat $y\to\infty$. Tuliskan bentuk seri dengan koefisien $B_n$.
+\end{qbox}
+\begin{qbox}[title={M11.2: Batas bawah konstan\hfill \level{L3}\;\src{PR}}]
+\small Untuk pelat semi-infinite lebar $L=10$ cm dengan tiga sisi efektif nol dan $T(x,0)=100$, cari koefisien sine-series yang diperlukan dalam solusi analitik.
+\end{qbox}
+\begin{qbox}[title={M11.3: Evaluasi solusi seri\hfill \level{L2}\;\src{PR}}]
+\small Diberikan $\phi(x,y)=\sum_{n=1}^{\infty}\frac{4}{n\pi}e^{-n\pi x}\sin(n\pi y)$. Aproksimasi $\phi$ pada dua titik yang dipilih dengan 5 dan 20 suku. Bandingkan.
+\end{qbox}
+\begin{qbox}[title={M11.4: Verifikasi PDE\hfill \level{L3}\;\src{Var}}]
+\small Buktikan bahwa setiap mode $e^{-n\pi y/L}\sin(n\pi x/L)$ memenuhi persamaan Laplace.
+\end{qbox}
+\begin{qbox}[title={M11.5: Verifikasi kondisi batas\hfill \level{L3}\;\src{Var}}]
+\small Untuk solusi seri pelat, periksa secara analitik apa yang terjadi pada $x=0$, $x=L$, dan $y\to\infty$.
+\end{qbox}
+\begin{qbox}[title={M11.6: Pelat finite height\hfill \level{L4}\;\src{Var}}]
+\small Jika domain $0<x<L$, $0<y<H$ dan $T=0$ di $x=0,x=L,y=H$, tentukan bentuk $Y(y)$ yang lebih sesuai daripada $e^{-ky}$ dan jelaskan alasannya.
+\end{qbox}
+\begin{qbox}[title={M11.7: Dimensi dan scaling\hfill \level{L3}\;\src{Var}}]
+\small Ubah variabel $\xi=x/L$, $\eta=y/L$ pada persamaan Laplace. Tunjukkan bentuk nondimensional dan jelaskan bagaimana lebar $L$ muncul pada eksponen/mode.
+\end{qbox}
+\begin{qbox}[title={M11.8: Interpretasi fisik\hfill \level{L2}\;\src{Var}}]
+\small Untuk pelat dengan batas bawah panas dan tiga batas nol, prediksi lokasi suhu tertinggi, arah umum penurunan suhu, dan bentuk kontur sebelum melakukan perhitungan.
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{M12: Kondisi Batas dan Fourier}
+{\color{iteraGray}\small Mengubah data batas menjadi koefisien mode.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M12.1: Definisi dan tiga langkah BVP\hfill \level{L1}\;\src{PR}}]
+\small Jelaskan apa yang dimaksud BVP dan tiga langkah utama penyelesaian analitik yang dipakai di modul: separation, aplikasi kondisi batas, dan ekspansi Fourier.
+\end{qbox}
+\begin{qbox}[title={M12.2: Data batas potongan\hfill \level{L3}\;\src{Var}}]
+\small Pada $0<x<L$, batas bawah $T(x,0)=T_0$ untuk $0<x<L/2$ dan $2T_0$ untuk $L/2<x<L$. Tentukan formula koefisien sine-series $B_n$.
+\end{qbox}
+\begin{qbox}[title={M12.3: Varian NIM\hfill \level{L3}\;\src{PR}}]
+\small Gunakan $XY$ = dua digit terakhir NIM. Selesaikan BVP pelat pada modul jika batas bawah konstan $T=XY^\circ C$ dan batas lain nol. Nyatakan jawaban sebagai seri.
+\end{qbox}
+\begin{qbox}[title={M12.4: Lebar domain berubah\hfill \level{L3}\;\src{PR}}]
+\small Selesaikan varian pelat dengan $T(x,0)=100^\circ C$ dan lebar $L=10+XY$ cm. Tunjukkan bagian solusi yang berubah saat $L$ berubah.
+\end{qbox}
+\begin{qbox}[title={M12.5: Batas bawah piecewise\hfill \level{L4}\;\src{PR}}]
+\small Untuk $L=10$ cm, ambil $T(x,0)=20^\circ C$ pada $0\le x<5$ dan $0^\circ C$ pada $5\le x\le10$. Turunkan koefisien Fourier dan solusi seri.
+\end{qbox}
+\begin{qbox}[title={M12.6: Mengapa Fourier muncul lagi?\hfill \level{L2}\;\src{Var}}]
+\small Jelaskan secara matematis mengapa fungsi batas $f(x)$ perlu diekspansi ke basis sinus yang sama dengan mode dari separation of variables.
+\end{qbox}
+\begin{qbox}[title={M12.7: Orthogonality extraction\hfill \level{L3}\;\src{Var}}]
+\small Dari $f(x)=\sum B_n\sin(n\pi x/L)$, kalikan dengan $\sin(m\pi x/L)$ dan integralkan pada $[0,L]$ untuk memperoleh formula $B_m$.
+\end{qbox}
+\begin{qbox}[title={M12.8: Uji batas bawah\hfill \level{L3}\;\src{Var}}]
+\small Ambil solusi seri hasil M12.5 dan evaluasi numerik di $y=0$ menggunakan 5, 20, 100 mode. Jelaskan konvergensi dekat titik diskontinu $x=5$.
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{M13: Interpretasi dan Visualisasi PDP}
+{\color{iteraGray}\small Pengecekan solusi, residual, plot, dan makna fisik.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M13.1: Cek Laplace diskrit\hfill \level{L3}\;\src{PR}}]
+\small Diberikan grid nilai $\phi_{i,j}$. Gunakan pendekatan lima titik $\phi_{i+1,j}+\phi_{i-1,j}+\phi_{i,j+1}+\phi_{i,j-1}-4\phi_{i,j}\approx0$ untuk memeriksa beberapa titik interior.
+\end{qbox}
+\begin{qbox}[title={M13.2: Plot kontur\hfill \level{L2}\;\src{PR}}]
+\small Dari solusi seri satu BVP, buat plot kontur/permukaan dengan MATLAB, Octave, Python, atau perangkat lain. Tandai batas domain dan verifikasi nilai batas dari plot.
+\end{qbox}
+\begin{qbox}[title={M13.3: Konvergensi jumlah mode\hfill \level{L3}\;\src{Var}}]
+\small Bandingkan medan yang dihitung dengan $N=3,10,50$ mode. Pilih tiga titik domain dan laporkan perubahan nilai.
+\end{qbox}
+\begin{qbox}[title={M13.4: Residual PDE\hfill \level{L4}\;\src{Var}}]
+\small Untuk solusi numerik pada grid, hitung residual Laplace diskrit pada semua titik interior. Sajikan residual maksimum dan rata-rata absolut.
+\end{qbox}
+\begin{qbox}[title={M13.5: Analitik vs numerik\hfill \level{L2}\;\src{Var}}]
+\small Jelaskan perbedaan makna solusi analitik berbentuk seri dan solusi numerik pada grid. Kapan masing-masing lebih praktis?
+\end{qbox}
+\begin{qbox}[title={M13.6: Interpretasi medan\hfill \level{L2}\;\src{Var}}]
+\small Dari sebuah contour plot suhu/potensial, jelaskan hubungan kerapatan kontur dengan gradien dan arah perubahan medan.
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{M14: Persamaan Gelombang dan Vibrating String}
+{\color{iteraGray}\small Mode normal, fixed ends, dan kondisi awal.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M14.1: Wave equation 1D\hfill \level{L2}\;\src{Var}}]
+\small Tuliskan arti setiap variabel dan parameter pada $u_{tt}=c^2u_{xx}$. Verifikasikan bahwa $u=A\cos(kx-\omega t)$ memenuhi persamaan jika $\omega=ck$.
+\end{qbox}
+\begin{qbox}[title={M14.2: Mode fixed-end\hfill \level{L3}\;\src{Var}}]
+\small Dengan $u(0,t)=u(L,t)=0$, turunkan mode ruang $X_n=\sin(n\pi x/L)$ dan frekuensi alami $\omega_n=n\pi c/L$.
+\end{qbox}
+\begin{qbox}[title={M14.3: Solusi umum modal\hfill \level{L3}\;\src{Var}}]
+\small Tuliskan bentuk $u(x,t)=\sum [A_n\cos(\omega_nt)+B_n\sin(\omega_nt)]\sin(n\pi x/L)$. Jelaskan arti $A_n$ dan $B_n$.
+\end{qbox}
+\begin{qbox}[title={M14.4: Kondisi awal ke koefisien\hfill \level{L3}\;\src{Var}}]
+\small Jika $u(x,0)=f(x)$ dan $u_t(x,0)=0$, tunjukkan bahwa $B_n=0$ dan $A_n$ diperoleh dari sine-series $f(x)$.
+\end{qbox}
+\begin{qbox}[title={M14.5: Tali segitiga\hfill \level{L4}\;\src{PR}}]
+\small Untuk simpangan awal segitiga dengan puncak $h$ di $x=L/2$ dan kedua ujung nol, turunkan koefisien mode $A_n$. Tunjukkan mengapa hanya mode ganjil tertentu yang dominan/nonzero.
+\end{qbox}
+\begin{qbox}[title={M14.6: Energi modal secara kualitatif\hfill \level{L3}\;\src{Var}}]
+\small Jika bentuk awal lebih tajam, bagaimana Anda menduga distribusi koefisien mode tinggi dibanding bentuk awal yang halus? Jelaskan secara Fourier.
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{M15: Kondisi Awal dan Interpretasi Mode}
+{\color{iteraGray}\small Mengikat Fourier dengan solusi wave equation.}\par\vspace{1mm}
+\begin{multicols}{2}
+\begin{qbox}[title={M15.1: Rekonstruksi simpangan awal\hfill \level{L3}\;\src{Var}}]
+\small Gunakan 1, 3, 10, dan 30 mode untuk merekonstruksi profil segitiga awal. Bandingkan error maksimum dan bentuk di titik puncak.
+\end{qbox}
+\begin{qbox}[title={M15.2: Animasi tali\hfill \level{L2}\;\src{PR}}]
+\small Buat plot/animasi $u(x,t)$ untuk beberapa waktu menggunakan solusi modal. Tunjukkan minimal satu periode gerak dan jelaskan pola yang terlihat.
+\end{qbox}
+\begin{qbox}[title={M15.3: Kecepatan awal nonnol\hfill \level{L3}\;\src{Var}}]
+\small Jika $u(x,0)=0$ tetapi $u_t(x,0)=g(x)$, turunkan formula koefisien $B_n$ dalam bentuk integral Fourier.
+\end{qbox}
+\begin{qbox}[title={M15.4: Mode tunggal\hfill \level{L2}\;\src{Var}}]
+\small Jika kondisi awal tepat $f(x)=h\sin(3\pi x/L)$ dan kecepatan awal nol, tunjukkan bahwa hanya mode $n=3$ yang aktif. Tulis solusi waktunya.
+\end{qbox}
+\begin{qbox}[title={M15.5: Superposisi dua mode\hfill \level{L3}\;\src{Var}}]
+\small Ambil $f(x)=\sin(\pi x/L)+0.5\sin(2\pi x/L)$. Tulis solusi $u(x,t)$ dan diskusikan apakah bentuk tali periodik kembali ke bentuk awal.
+\end{qbox}
+\begin{qbox}[title={M15.6: Hubungan Fourier-BVP-Wave\hfill \level{L2}\;\src{Var}}]
+\small Buat diagram singkat yang menunjukkan peran Fourier pada (a) batas pelat Laplace dan (b) kondisi awal tali bergetar. Apa kesamaan matematisnya?
+\end{qbox}
+\end{multicols}
+\newpage
+\section*{Mock UAS}
+\begin{exam}[title={Mock UAS A - Pelat dengan batas bawah piecewise}]
+Gunakan $XY$ = dua digit terakhir NIM. Sebuah pelat memenuhi $T_{xx}+T_{yy}=0$ pada $0<x<1$, $0<y<2$. Kondisi batas: $T(0,y)=T(1,y)=T(x,2)=0$, sedangkan
+\[
+T(x,0)=\begin{cases}XY/2,&0<x<0.5,\\XY,&0.5<x<1.\end{cases}
+\]
+\textbf{Tugas:} (1) lakukan separation of variables; (2) tentukan mode yang memenuhi tiga batas homogen; (3) hitung koefisien Fourier dari batas bawah; (4) tulis solusi seri $T(x,y)$; (5) jelaskan cara memverifikasi kondisi batas dan PDE; (6) buat sketsa/plot kontur untuk satu nilai $XY$ pilihan.
+\end{exam}
+
+\begin{exam}[title={Mock UAS B - Pelat semi-infinite dengan variasi domain}]
+Pada domain $0<x<L$, $y>0$, diketahui $T_{xx}+T_{yy}=0$, $T(0,y)=T(L,y)=0$, $T\to0$ saat $y\to\infty$, dan
+\[
+T(x,0)=T_0\left(1-\frac{x}{L}\right),\qquad 0<x<L.
+\]
+Tentukan solusi analitik dalam bentuk seri. Hitung formula koefisien secara eksplisit, lalu evaluasi pendekatan 5 dan 20 mode pada $(x,y)=(L/2,L/4)$.
+\end{exam}
+
+\begin{exam}[title={Mock UAS C - Integrasi BVP dan Fourier}]
+Pelat $0<x<L$, $0<y<H$ memenuhi persamaan Laplace. Tiga sisi $x=0$, $x=L$, dan $y=H$ bernilai nol. Batas bawah berupa fungsi segitiga:
+\[
+f(x)=\begin{cases}
+2T_0x/L,&0\le x\le L/2,\\
+2T_0(1-x/L),&L/2<x\le L.
+\end{cases}
+\]
+Bangun solusi dengan separation of variables dan deret Fourier. Identifikasi parity relatif terhadap titik tengah, turunkan koefisien, dan jelaskan pengaruh $H$ terhadap faktor pada arah $y$.
+\end{exam}
+
+\begin{infobox}[title={Checklist kesiapan UAS},colbacktitle=iteraBlue2,coltitle=white,fonttitle=\bfseries]
+Anda siap jika dapat melakukan tanpa melihat contoh: (1) menuliskan governing equation, domain, dan BC; (2) memisahkan variabel; (3) memilih bentuk sinus/eksponensial atau hiperbolik dari BC; (4) memperoleh eigenvalue; (5) membentuk superposisi seri; (6) menghitung koefisien Fourier dari data batas; (7) memeriksa PDE dan kondisi batas; (8) menginterpretasikan/mengeplot solusi.
+\end{infobox}
+
+\section*{Penutup}
+Gunakan bank ini secara bertahap. Untuk setiap topik, selesaikan dahulu soal \level{L1} dan \level{L2}, kemudian lanjutkan ke \level{L3}. Soal \level{L4} dipakai untuk menguji apakah beberapa konsep sudah dapat digabungkan. Tidak perlu mengerjakan seluruh soal sekaligus; yang penting adalah proses pengerjaan dapat dijelaskan dan diverifikasi.
+\end{document}

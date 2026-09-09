@@ -1,0 +1,611 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{ragged2e}
+\graphicspath{{../../assets/}}
+
+\definecolor{iteraBlue}{RGB}{20,76,123}
+\definecolor{iteraLav}{RGB}{226,226,247}
+\definecolor{iteraGreen}{RGB}{24,122,48}
+\definecolor{iteraGreenLight}{RGB}{231,245,233}
+\definecolor{iteraRed}{RGB}{180,35,35}
+\definecolor{iteraRedLight}{RGB}{252,235,235}
+\definecolor{iteraGold}{RGB}{197,159,70}
+\definecolor{iteraGray}{RGB}{90,90,90}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.72cm,dp=0.18cm,leftskip=0.45cm]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}}
+\setbeamercolor{frametitle}{bg=iteraLav,fg=iteraBlue}
+\setbeamerfont{frametitle}{series=\bfseries,size=\large}
+\setbeamercolor{structure}{fg=iteraBlue}
+\setbeamercolor{block title}{bg=iteraBlue,fg=white}
+\setbeamercolor{block body}{bg=iteraLav!35,fg=black}
+\setbeamercolor{example title}{bg=iteraGreen,fg=white}
+\setbeamercolor{example body}{bg=iteraGreenLight,fg=black}
+\setbeamercolor{alerted text}{fg=iteraRed}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{itemize item}{\color{iteraBlue}$\bullet$}
+\setbeamertemplate{itemize subitem}{\color{iteraBlue}$\circ$}
+\setbeamerfont{footline}{size=\tiny}
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox{%
+  \begin{beamercolorbox}[wd=.78\paperwidth,ht=2.6ex,dp=1.1ex,leftskip=.45cm]{author in head/foot}%
+  \color{iteraGray}Matematika 3 - KL25-21001 | Kelas RB | Rifky Fauzi
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.22\paperwidth,ht=2.6ex,dp=1.1ex,rightskip=.45cm plus1fil]{date in head/foot}%
+  \hfill\color{iteraGray}\insertframenumber/\inserttotalframenumber
+  \end{beamercolorbox}}}
+
+\newcommand{\Lcal}{\mathcal{L}}
+\newcommand{\Lap}[1]{\Lcal\left\{#1\right\}}
+\newcommand{\invLap}[1]{\Lcal^{-1}\left\{#1\right\}}
+\newcommand{\key}[1]{\textcolor{iteraBlue}{\textbf{#1}}}
+\newcommand{\warn}[1]{\textcolor{iteraRed}{\textbf{#1}}}
+\newcommand{\boasnote}{\scriptsize\color{iteraGray}Acuan: Mary L. Boas, \textit{Mathematical Methods in the Physical Sciences}, Ch. 8, Sec. 8--9.}
+
+\title{Pertemuan 3\\Transformasi Laplace II}
+\subtitle{Transformasi turunan, invers Laplace, shifting, dan pecahan parsial}
+\author{Rifky Fauzi}
+\institute{Program Studi Teknik Kelautan\\Institut Teknologi Sumatera}
+\date{Kelas RB | Kamis, 14.50--17.30 | E302}
+
+\begin{document}
+
+\begin{frame}[plain]
+\centering
+\vspace{0.4cm}
+\begin{beamercolorbox}[wd=.93\textwidth,sep=10pt,rounded=true,shadow=true]{frametitle}
+\centering\Large\bfseries Pertemuan 3\\[2mm]
+\large Transformasi Laplace II
+\end{beamercolorbox}
+\vspace{0.35cm}
+\large Transformasi turunan, invers Laplace, shifting, dan pecahan parsial
+\vspace{0.55cm}
+
+\normalsize Rifky Fauzi\\[1mm]
+Program Studi Teknik Kelautan\\Institut Teknologi Sumatera
+\vspace{0.35cm}
+
+\textbf{Kelas RB} \quad | \quad Kamis, 14.50--17.30 \quad | \quad E302
+\vfill
+\includegraphics[height=1.05cm]{itera_logo.png}
+\end{frame}
+
+\begin{frame}{Posisi Pertemuan 3 dalam Matematika 3}
+\begin{block}{Yang sudah dibangun}
+Pertemuan 1: refresh fungsi, turunan, integral, PDB.\\
+Pertemuan 2: definisi Transformasi Laplace, linearitas, dan tabel transformasi dasar.
+\end{block}
+\vspace{1mm}
+\begin{exampleblock}{Hari ini}
+Kita belajar bagaimana \key{turunan membawa kondisi awal masuk ke domain Laplace}, lalu bagaimana \key{mengembalikan} fungsi dari domain Laplace ke domain waktu.
+\end{exampleblock}
+\vspace{1mm}
+\centering
+\Large
+$f(t)\ \longrightarrow\ F(s)\ \longrightarrow\ \boxed{\text{aljabar}}\ \longrightarrow\ f(t)$
+\end{frame}
+
+\begin{frame}{Target Pertemuan 3}
+Setelah pertemuan ini, mahasiswa diharapkan mampu:
+\begin{enumerate}
+\item menghitung $\Lap{y'}$, $\Lap{y''}$, dan bentuk turunan orde lebih tinggi;
+\item menggunakan kondisi awal $y(0),y'(0),\ldots$ di domain Laplace;
+\item menentukan invers Laplace dari fungsi rasional sederhana;
+\item melakukan dekomposisi pecahan parsial yang diperlukan sebelum invers Laplace;
+\item menggunakan shifting theorem sederhana;
+\item menyiapkan langkah untuk menyelesaikan PDB dengan Laplace pada pertemuan berikutnya.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Notasi: Boas memakai $p$, kita memakai $s$}
+\begin{block}{Definisi yang sama}
+\[
+F(s)=\Lap{f(t)}=\int_0^\infty e^{-st}f(t)\,dt.
+\]
+\end{block}
+\begin{itemize}
+\item Mary L. Boas menuliskan variabel transform sebagai $p$.
+\item Banyak buku teknik menuliskannya sebagai $s$.
+\item Di kuliah ini kita pakai $s$, tetapi rumusnya identik.
+\end{itemize}
+\vfill
+\boasnote
+\end{frame}
+
+\begin{frame}{Refresh Cepat: Tabel Dasar}
+\small
+\begin{center}
+\begin{tabular}{>{\centering\arraybackslash}m{.34\textwidth} >{\centering\arraybackslash}m{.45\textwidth}}
+\toprule
+$f(t)$ & $F(s)=\Lap{f(t)}$\\
+\midrule
+$1$ & $\dfrac{1}{s}$\\[2mm]
+$t^n$ & $\dfrac{n!}{s^{n+1}}$\\[2mm]
+$e^{at}$ & $\dfrac{1}{s-a}$\\[2mm]
+$\sin at$ & $\dfrac{a}{s^2+a^2}$\\[2mm]
+$\cos at$ & $\dfrac{s}{s^2+a^2}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{alertblock}{Kunci}
+Invers Laplace pada dasarnya adalah membaca tabel ini dari kanan ke kiri, setelah bentuk aljabarnya dirapikan.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Pemanasan 1: Transformasi Langsung}
+Tanpa melihat catatan, tentukan:
+\begin{enumerate}
+\item $\Lap{5t^2}$
+\item $\Lap{3\sin 3t}$
+\item $\Lap{4-2\cos 2t}$
+\item $\Lap{e^{-2t}}$
+\item $\Lap{2t^3+5\cos 4t}$
+\end{enumerate}
+\vspace{2mm}
+\begin{exampleblock}{Strategi}
+Pisahkan dengan linearitas, lalu cocokkan satu per satu dengan tabel.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Mengapa Transformasi Turunan Penting?}
+PDB hampir selalu berisi $y'$, $y''$, dan seterusnya.
+\[
+y''+4y'+4y=f(t).
+\]
+Jika hanya tahu $\Lap{y}$, kita belum bisa mentransformasikan seluruh persamaan.
+\vspace{2mm}
+\begin{block}{Pertanyaan utama}
+Jika $Y(s)=\Lap{y(t)}$, apa bentuk $\Lap{y'(t)}$ dan $\Lap{y''(t)}$?
+\end{block}
+\end{frame}
+
+\begin{frame}{Menurunkan $\Lap{y'}$: Mulai dari Definisi}
+\[
+\Lap{y'}=\int_0^\infty e^{-st}y'(t)\,dt.
+\]
+Gunakan integral parsial:
+\[
+\int u\,dv=uv-\int v\,du.
+\]
+Ambil
+\[
+u=e^{-st},\qquad dv=y'(t)dt.
+\]
+Maka
+\[
+du=-se^{-st}dt,\qquad v=y(t).
+\]
+\end{frame}
+
+\begin{frame}{Hasil $\Lap{y'}$}
+\begin{align*}
+\Lap{y'}
+&=\left[e^{-st}y(t)\right]_0^\infty
++s\int_0^\infty e^{-st}y(t)\,dt\\
+&=-y(0)+sY(s).
+\end{align*}
+\begin{alertblock}{Rumus penting}
+\[
+\boxed{\Lap{y'}=sY(s)-y(0)}
+\]
+\end{alertblock}
+\begin{itemize}
+\item Turunan berubah menjadi perkalian oleh $s$.
+\item Kondisi awal $y(0)$ otomatis muncul.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Dari $y'$ ke $y''$}
+Anggap $y''=(y')'$. Terapkan rumus yang sama:
+\[
+\Lap{y''}=s\Lap{y'}-y'(0).
+\]
+Substitusikan $\Lap{y'}=sY-y(0)$:
+\[
+\Lap{y''}=s[sY-y(0)]-y'(0).
+\]
+\begin{alertblock}{Rumus penting}
+\[
+\boxed{\Lap{y''}=s^2Y-sy(0)-y'(0)}
+\]
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Pola Turunan Orde Tinggi}
+\small
+\[
+\Lap{y^{(n)}}=s^nY-s^{n-1}y(0)-s^{n-2}y'(0)-\cdots-y^{(n-1)}(0).
+\]
+Contoh orde tiga:
+\[
+\Lap{y'''}=s^3Y-s^2y(0)-sy'(0)-y''(0).
+\]
+\begin{block}{Cara mengingat}
+Pangkat $s$ turun satu per satu, sedangkan orde kondisi awal naik satu per satu.
+\end{block}
+\vfill
+\boasnote
+\end{frame}
+
+\begin{frame}{Latihan Kelas 1: Transformasi Turunan}
+Diketahui $Y(s)=\Lap{y(t)}$. Tuliskan transformasi dari:
+\begin{enumerate}
+\item $y'$ jika $y(0)=4$;
+\item $y''$ jika $y(0)=2$ dan $y'(0)=-1$;
+\item $y'''$ jika $y(0)=0$, $y'(0)=3$, $y''(0)=5$;
+\item $2y''-3y'+7y$ dengan $y(0)=1$, $y'(0)=2$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Contoh: Transformasikan PDB, Belum Perlu Diselesaikan}
+Diberikan
+\[
+y''+3y'+2y=4t,\qquad y(0)=1,\quad y'(0)=0.
+\]
+Transformasikan setiap suku:
+\[
+(s^2Y-s)+(3sY-3)+2Y=\frac{4}{s^2}.
+\]
+Gabungkan:
+\[
+(s^2+3s+2)Y-s-3=\frac{4}{s^2}.
+\]
+\begin{exampleblock}{Yang terjadi}
+PDB di $t$ berubah menjadi \textbf{persamaan aljabar dalam $Y(s)$}.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Invers Laplace: Jalan Pulang}
+Jika
+\[
+F(s)=\Lap{f(t)},
+\]
+maka
+\[
+f(t)=\invLap{F(s)}.
+\]
+\begin{block}{Ide}
+Kita tidak biasanya menghitung integral invers dari nol. Kita merapikan $F(s)$ agar cocok dengan tabel transformasi.
+\end{block}
+\centering
+\Large
+$F(s)\ \xrightarrow{\text{rapikan}}\ \text{bentuk tabel}\ \xrightarrow{\Lcal^{-1}}\ f(t)$
+\end{frame}
+
+\begin{frame}{Contoh Invers Laplace Dasar}
+\begin{exampleblock}{Contoh 1}
+\[
+\invLap{\frac{6}{s^4}}
+=6\invLap{\frac{1}{s^4}}
+=6\frac{t^3}{3!}=t^3.
+\]
+\end{exampleblock}
+\begin{exampleblock}{Contoh 2}
+\[
+\invLap{\frac{5}{s^2+25}}=\sin 5t.
+\]
+\end{exampleblock}
+\begin{exampleblock}{Contoh 3}
+\[
+\invLap{\frac{s}{s^2+9}}=\cos 3t.
+\]
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Latihan Kelas 2: Invers dari Tabel}
+Tentukan:
+\begin{enumerate}
+\item $\displaystyle \invLap{\frac{1}{s+4}}$
+\item $\displaystyle \invLap{\frac{12}{s^3}}$
+\item $\displaystyle \invLap{\frac{7}{s^2+49}}$
+\item $\displaystyle \invLap{\frac{s}{s^2+16}}$
+\item $\displaystyle \invLap{\frac{3s+8}{s^2+4}}$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Masalah Nyata: Bentuknya Tidak Selalu Ada di Tabel}
+Misalnya
+\[
+Y(s)=\frac{3s+5}{s(s+2)}.
+\]
+Tidak ada satu baris tabel yang langsung cocok.
+\vspace{2mm}
+\begin{alertblock}{Solusi}
+Pecah menjadi beberapa pecahan sederhana:
+\[
+\frac{3s+5}{s(s+2)}=\frac{A}{s}+\frac{B}{s+2}.
+\]
+Inilah \textbf{pecahan parsial}.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Pecahan Parsial: Faktor Linear Berbeda}
+Untuk
+\[
+\frac{P(s)}{(s-a)(s-b)},
+\]
+ambil
+\[
+\frac{P(s)}{(s-a)(s-b)}=\frac{A}{s-a}+\frac{B}{s-b}.
+\]
+\begin{exampleblock}{Contoh}
+\[
+\frac{3s+5}{s(s+2)}=\frac{A}{s}+\frac{B}{s+2}.
+\]
+Kalikan $s(s+2)$:
+\[
+3s+5=A(s+2)+Bs.
+\]
+Set $s=0\Rightarrow A=\frac52$; set $s=-2\Rightarrow B=\frac12$.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Dari Pecahan Parsial ke Invers}
+Dari
+\[
+Y(s)=\frac{5/2}{s}+\frac{1/2}{s+2},
+\]
+maka
+\[
+y(t)=\frac52+\frac12e^{-2t}.
+\]
+\begin{block}{Pola kerja}
+\begin{enumerate}
+\item faktorkan penyebut;
+\item pecah ke pecahan parsial;
+\item cocokkan setiap suku dengan tabel;
+\item ambil invers Laplace.
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{Pecahan Parsial: Faktor Berulang}
+Jika penyebut mengandung $(s+a)^2$, jangan hanya tulis satu suku.
+\[
+\frac{P(s)}{s(s+2)^2}
+=\frac{A}{s}+\frac{B}{s+2}+\frac{C}{(s+2)^2}.
+\]
+\begin{alertblock}{Ingat}
+Untuk faktor berulang $(s+a)^m$, tuliskan semua pangkat:
+\[
+\frac{A_1}{s+a}+\frac{A_2}{(s+a)^2}+\cdots+\frac{A_m}{(s+a)^m}.
+\]
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Penyebut Kuadrat: Lengkapi Kuadrat}
+Bentuk
+\[
+s^2+4s+13
+\]
+dirubah menjadi
+\[
+(s+2)^2+9.
+\]
+Kemudian pecah pembilang menjadi bagian $(s+2)$ dan konstanta.
+\begin{exampleblock}{Contoh}
+\[
+\frac{-s+1}{s^2+4s+13}
+= -\frac{s+2}{(s+2)^2+9}+\frac{3}{(s+2)^2+9}.
+\]
+Masing-masing cocok dengan bentuk eksponensial-kosinus dan eksponensial-sinus.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Contoh Boas: Mengapa Pecahan Parsial Muncul}
+Pada salah satu contoh Boas,
+\[
+Y(s)=\frac{s^2+8s+27}{(s+1)(s^2+4s+13)}.
+\]
+Setelah pecahan parsial dan melengkapi kuadrat:
+\[
+Y(s)=\frac{2}{s+1}
+-\frac{s+2}{(s+2)^2+9}
++\frac{3}{(s+2)^2+9}.
+\]
+Sehingga bentuk waktunya merupakan kombinasi
+\[
+e^{-t},\qquad e^{-2t}\cos 3t,\qquad e^{-2t}\sin 3t.
+\]
+\vfill
+\boasnote
+\end{frame}
+
+\begin{frame}{Latihan Kelas 3: Pecahan Parsial}
+Uraikan, lalu tentukan invers Laplace bila memungkinkan:
+\begin{enumerate}
+\item $\displaystyle \frac{2s+3}{s(s+1)}$
+\item $\displaystyle \frac{s+5}{(s+1)(s+3)}$
+\item $\displaystyle \frac{1}{s(s+2)^2}$
+\item $\displaystyle \frac{2s+7}{s^2+4s+13}$
+\item $\displaystyle \frac{3s+10}{s^2-25}$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Shifting I: Pergeseran di Domain $s$}
+Jika
+\[
+\Lap{f(t)}=F(s),
+\]
+maka
+\[
+\boxed{\Lap{e^{at}f(t)}=F(s-a)}.
+\]
+Atau ekuivalen:
+\[
+\boxed{\Lap{e^{-at}f(t)}=F(s+a)}.
+\]
+\begin{exampleblock}{Contoh}
+Karena $\Lap{\sin bt}=\dfrac{b}{s^2+b^2}$,
+\[
+\Lap{e^{-at}\sin bt}
+=\frac{b}{(s+a)^2+b^2}.
+\]
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Latihan Kelas 4: Shifting I}
+Tentukan transformasi atau inversnya:
+\begin{enumerate}
+\item $\Lap{e^{-3t}\cos 2t}$
+\item $\Lap{e^{2t}\sin 5t}$
+\item $\displaystyle \invLap{\frac{4}{(s+1)^2+16}}$
+\item $\displaystyle \invLap{\frac{s-3}{(s-3)^2+9}}$
+\item $\displaystyle \invLap{\frac{6}{(s+2)^2+36}}$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Shifting II: Fungsi yang Mulai Terlambat}
+Definisikan fungsi step Heaviside
+\[
+u(t-a)=\begin{cases}
+0,& t<a,\\
+1,& t\ge a.
+\end{cases}
+\]
+Jika $G(s)=\Lap{g(t)}$, maka
+\[
+\boxed{\Lap{g(t-a)u(t-a)}=e^{-as}G(s)}.
+\]
+\begin{block}{Makna}
+Faktor $e^{-as}$ di domain Laplace menandakan pergeseran waktu sebesar $a$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Contoh Pergeseran Waktu}
+Tentukan invers:
+\[
+F(s)=e^{-\pi s}\frac{s}{s^2+1}.
+\]
+Tanpa $e^{-\pi s}$:
+\[
+\invLap{\frac{s}{s^2+1}}=\cos t.
+\]
+Dengan shifting:
+\[
+\boxed{f(t)=\cos(t-\pi)\,u(t-\pi)}.
+\]
+\begin{exampleblock}{Baca secara fisik}
+Sinyal kosinus ``dinyalakan'' mulai $t=\pi$.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Latihan Kelas 5: Shifting II}
+Tentukan invers Laplace:
+\begin{enumerate}
+\item $\displaystyle e^{-2s}\frac{1}{s}$
+\item $\displaystyle e^{-3s}\frac{2}{s^2+4}$
+\item $\displaystyle e^{-s}\frac{s}{s^2+9}$
+\end{enumerate}
+Kemudian gambarkan secara skematik fungsi waktunya: kapan fungsi bernilai nol, dan kapan mulai aktif?
+\end{frame}
+
+\begin{frame}{Jembatan ke Penyelesaian PDB}
+Pertemuan berikutnya akan memakai alur berikut:
+\begin{enumerate}
+\item transformasikan semua suku PDB;
+\item masukkan kondisi awal;
+\item selesaikan persamaan aljabar untuk $Y(s)$;
+\item pecah/rapikan $Y(s)$;
+\item ambil invers Laplace untuk mendapatkan $y(t)$;
+\item cek kondisi awal dan, bila perlu, substitusikan kembali.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Contoh Mini IVP: Sampai Selesai}
+Selesaikan
+\[
+y'+2y=1,\qquad y(0)=0.
+\]
+Transformasi:
+\[
+sY-0+2Y=\frac1s.
+\]
+Maka
+\[
+Y=\frac{1}{s(s+2)}
+=\frac12\frac1s-\frac12\frac1{s+2}.
+\]
+Invers:
+\[
+\boxed{y(t)=\frac12\left(1-e^{-2t}\right)}.
+\]
+\end{frame}
+
+\begin{frame}{Latihan Kelas 6: IVP Ringan}
+Selesaikan dengan Transformasi Laplace:
+\begin{enumerate}
+\item $y'+y=2$, $y(0)=1$.
+\item $y'+3y=e^{-t}$, $y(0)=0$.
+\item $y''+4y=0$, $y(0)=2$, $y'(0)=0$.
+\item $y''+y=\sin t$, $y(0)=1$, $y'(0)=0$.
+\end{enumerate}
+\begin{alertblock}{Untuk nomor 4}
+Jika bentuk aljabarnya terasa tidak langsung, justru itu latihan untuk merapikan $Y(s)$ sebelum invers.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Latihan Kelas 7: Pilih Strategi}
+Untuk setiap bentuk berikut, sebutkan \textbf{strategi pertama} yang harus dilakukan:
+\begin{enumerate}
+\item $\displaystyle \frac{4}{s^2+16}$
+\item $\displaystyle \frac{s+2}{(s+2)^2+9}$
+\item $\displaystyle \frac{3s+5}{s(s+2)}$
+\item $\displaystyle e^{-2s}\frac{1}{s^2+1}$
+\item $\displaystyle \frac{2s+7}{s^2+4s+13}$
+\end{enumerate}
+Pilihan strategi: \emph{langsung tabel, shifting, pecahan parsial, melengkapi kuadrat}.
+\end{frame}
+
+\begin{frame}{Kaitan dengan Tugas Pekan 2--4}
+Bank tugas resmi meminta kemampuan yang sama, antara lain:
+\begin{itemize}
+\item transformasi fungsi polinomial, sinus, eksponensial, dan kombinasi;
+\item verifikasi rumus tabel melalui diferensiasi parameter;
+\item penggunaan shifting theorem;
+\item penyelesaian PDB dan sistem PDB dengan Transformasi Laplace;
+\item evaluasi integral tak wajar menggunakan tabel Laplace.
+\end{itemize}
+\begin{block}{Saran}
+Kerjakan latihan kelas dulu. Setelah itu, lanjutkan ke bank soal Lembar Kerja Mandiri.
+\end{block}
+\end{frame}
+
+\begin{frame}{Ringkasan Rumus Hari Ini}
+\small
+\begin{align*}
+\Lap{y'} &= sY-y(0),\\
+\Lap{y''} &= s^2Y-sy(0)-y'(0),\\
+\Lap{y^{(n)}} &= s^nY-s^{n-1}y(0)-\cdots-y^{(n-1)}(0),\\
+\Lap{e^{-at}f(t)} &= F(s+a),\\
+\Lap{f(t-a)u(t-a)} &= e^{-as}F(s).
+\end{align*}
+\begin{alertblock}{Skill inti}
+Rumus penting, tetapi kemampuan paling penting hari ini adalah \textbf{merapikan bentuk aljabar agar cocok dengan tabel invers}.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Exit Ticket}
+Kerjakan tanpa melihat catatan selama 8--10 menit.
+\begin{enumerate}
+\item Tuliskan $\Lap{y''}$ jika $y(0)=2$, $y'(0)=-3$.
+\item Tentukan $\displaystyle \invLap{\frac{s+1}{(s+1)^2+4}}$.
+\item Uraikan $\displaystyle \frac{3s+4}{s(s+2)}$ menjadi pecahan parsial.
+\item Apa arti faktor $e^{-2s}$ pada suatu transformasi Laplace?
+\end{enumerate}
+\vspace{2mm}
+\centering\large Pertemuan berikutnya: \textbf{PDB dengan Transformasi Laplace}
+\end{frame}
+
+\end{document}
