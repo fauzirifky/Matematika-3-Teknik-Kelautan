@@ -37,8 +37,8 @@
   \end{beamercolorbox}}%
 }
 
-\title[Transformasi Laplace I]{Pertemuan 2\\Transformasi Laplace I}
-\subtitle{PDB dasar, operator diferensial, dan pengantar transformasi Laplace}
+\title[Transformasi Laplace]{Pertemuan 2\\Transformasi Laplace}
+\subtitle{Materi pendukung: trigonometri, turunan, dan persamaan diferensial biasa (PDB)}
 \author{\pengajar}
 \institute{Program Studi Teknik Kelautan\\Institut Teknologi Sumatera}
 \date{\kelas\quad |\quad \jadwal}
@@ -51,9 +51,9 @@
   \centering\includegraphics[width=1.05cm]{itera_logo.png}
 \end{frame}
 
-\section{Transformasi Laplace I}
+\section{Pekan 2--4: Transformasi Laplace}
 
-\begin{frame}{Transformasi Laplace I: Posisi Pertemuan Ini}
+\begin{frame}{Transformasi Laplace: I: Posisi Pertemuan Ini}
 \begin{block}{Agenda sesuai alur perkuliahan}
 Pekan 2--4 masuk ke \textbf{Transformasi Laplace}. Hari ini jembatannya adalah:
 \end{block}
@@ -65,7 +65,7 @@ Pekan 2--4 masuk ke \textbf{Transformasi Laplace}. Hari ini jembatannya adalah:
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace I: Target Belajar}
+\begin{frame}{Transformasi Laplace: I: Target Belajar}
 Setelah pertemuan ini, mahasiswa diharapkan mampu:
 \begin{enumerate}
   \item membedakan PDB dan PDP melalui bentuk umumnya;
@@ -76,7 +76,7 @@ Setelah pertemuan ini, mahasiswa diharapkan mampu:
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{PDB dan PDP: Singkatan yang Dipakai}
+\begin{frame}{Transformasi Laplace: PDB dan PDP: Singkatan yang Dipakai}
 \begin{block}{PDB}
 \textbf{Persamaan Diferensial Biasa}. Turunan yang muncul adalah turunan terhadap \textbf{satu variabel bebas}. 
 \[
@@ -91,7 +91,7 @@ Setelah pertemuan ini, mahasiswa diharapkan mampu:
 \end{block}
 \end{frame}
 
-\begin{frame}{PDB: Bentuk Umum dan Orde}
+\begin{frame}{Transformasi Laplace: PDB: Bentuk Umum dan Orde}
 \begin{block}{Bentuk umum PDB orde $n$}
 \[
 F\left(x,y,y',y'',\ldots,y^{(n)}\right)=0.
@@ -110,7 +110,7 @@ y''+5y'+4y=0 \quad \Rightarrow \quad \text{orde 2}.
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{PDP: Bentuk Umum dan Orde}
+\begin{frame}{Transformasi Laplace: PDP: Bentuk Umum dan Orde}
 \begin{block}{Bentuk umum PDP}
 \[
 F\left(x,t,u,u_x,u_t,u_{xx},u_{xt},u_{tt},\ldots\right)=0.
@@ -127,7 +127,7 @@ Pada pertemuan ini PDP hanya dikenalkan sebagai pembeda. Fokus utama hari ini te
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Istilah Dasar: Linear dan Nonlinear}
+\begin{frame}{Transformasi Laplace: Istilah Dasar: Linear dan Nonlinear}
 \begin{block}{Linear}
 Persamaan disebut linear jika $y,y',y'',\ldots$ muncul dalam pangkat satu dan tidak saling dikalikan.
 \[
@@ -142,7 +142,7 @@ y'=y^2,\qquad yy'=1,\qquad y''+\sin y=0.
 \end{block}
 \end{frame}
 
-\begin{frame}{Istilah Dasar: Homogen dan Nonhomogen}
+\begin{frame}{Transformasi Laplace: Istilah Dasar: Homogen dan Nonhomogen}
 Untuk PDB linear:
 \[
 a_2y''+a_1y'+a_0y=f(x).
@@ -167,7 +167,7 @@ y''+5y'+4y=\cos(2x).
 \end{block}
 \end{frame}
 
-\begin{frame}{Istilah Dasar: Solusi Umum dan Solusi Khusus}
+\begin{frame}{Transformasi Laplace: Istilah Dasar: Solusi Umum dan Solusi Khusus}
 \begin{block}{Solusi umum}
 Solusi yang masih memuat konstanta bebas.
 \[
@@ -185,7 +185,7 @@ Turunkan fungsi, substitusi kembali ke persamaan, lalu lihat apakah identitasnya
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Urutan Pemahaman Hari Ini}
+\begin{frame}{Transformasi Laplace: Urutan Pemahaman Hari Ini}
 \begin{enumerate}
   \item PDB muncul dari masalah laju dan perubahan.
   \item PDB paling dasar dapat diselesaikan dengan integrasi.
@@ -195,9 +195,9 @@ Turunkan fungsi, substitusi kembali ke persamaan, lalu lihat apakah identitasnya
 \end{enumerate}
 \end{frame}
 
-\section{PDB dari Masalah Fisis}
+\section{Transformasi Laplace: PDB dari Masalah Fisis}
 
-\begin{frame}{PDB dari Masalah Fisis}
+\begin{frame}{Transformasi Laplace: PDB dari Masalah Fisis}
 Banyak masalah fisis dimulai dari kalimat seperti:
 \begin{itemize}
   \item laju perubahan posisi adalah kecepatan;
@@ -213,7 +213,7 @@ Kalimat ``laju perubahan'' biasanya berubah menjadi turunan.
 \end{block}
 \end{frame}
 
-\begin{frame}{Contoh 1: Gerak Jatuh Bebas}
+\begin{frame}{Transformasi Laplace: Contoh 1: Gerak Jatuh Bebas}
 Misalkan $s(t)$ adalah jarak yang ditempuh benda dan $v(t)$ adalah kecepatannya.
 \[
 v(t)=\frac{ds}{dt},\qquad \frac{dv}{dt}=g.
@@ -233,7 +233,7 @@ v(t)=\frac{ds}{dt},\qquad \frac{dv}{dt}=g.
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Contoh 1: Makna Syarat Awal}
+\begin{frame}{Transformasi Laplace: Contoh 1: Makna Syarat Awal}
 Dari
 \[
 s(t)=\frac{1}{2}gt^2+v_0t+s_0,
@@ -252,7 +252,7 @@ s(t)=\frac{1}{2}gt^2+t+2.
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Contoh 2: Penurunan Intensitas Cahaya}
+\begin{frame}{Transformasi Laplace: Contoh 2: Penurunan Intensitas Cahaya}
 Misalkan $I(s)$ adalah intensitas cahaya pada kedalaman $s$.
 \begin{block}{Model fisis}
 Laju penurunan intensitas sebanding dengan intensitas yang tersisa.
@@ -265,7 +265,7 @@ Jika $I(0)=I_0$, bagaimana bentuk $I(s)$?
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Contoh 2: Penyelesaian}
+\begin{frame}{Transformasi Laplace: Contoh 2: Penyelesaian}
 \[
 \frac{dI}{ds}=-\mu I.
 \]
@@ -290,7 +290,7 @@ Dengan $I(0)=I_0$:
 \]
 \end{frame}
 
-\begin{frame}{Pola Eksponen dari PDB Separabel}
+\begin{frame}{Transformasi Laplace: Pola Eksponen dari PDB Separabel}
 Bentuk yang sangat sering muncul:
 \[
 \frac{dy}{dt}=ky.
@@ -312,7 +312,7 @@ y=Ce^{kt}.
 \end{block}
 \end{frame}
 
-\begin{frame}{Pola Logaritma dari PDB Separabel}
+\begin{frame}{Transformasi Laplace: Pola Logaritma dari PDB Separabel}
 Contoh:
 \[
 x\frac{dy}{dx}=y+1.
@@ -334,7 +334,7 @@ y+1=Cx.
 \end{block}
 \end{frame}
 
-\begin{frame}{PDB Separabel: Bentuk Umum}
+\begin{frame}{Transformasi Laplace: PDB Separabel: Bentuk Umum}
 \begin{block}{Bentuk}
 \[
 \frac{dy}{dx}=g(x)h(y).
@@ -353,7 +353,7 @@ H(y)=G(x)+C.
 \end{block}
 \end{frame}
 
-\begin{frame}{Contoh: Pisahkan Variabel}
+\begin{frame}{Transformasi Laplace: Contoh: Pisahkan Variabel}
 Selesaikan
 \[
 \frac{dy}{dx}=x(y+2),\qquad y(0)=1.
@@ -375,7 +375,7 @@ y+2=Ce^{x^2/2}.
 \end{block}
 \end{frame}
 
-\begin{frame}{Contoh: Gunakan Syarat Awal}
+\begin{frame}{Transformasi Laplace: Contoh: Gunakan Syarat Awal}
 Dari
 \[
 y+2=Ce^{x^2/2},
@@ -396,7 +396,7 @@ Logaritma muncul saat ada $\int \frac{1}{y}\,dy$ atau $\int \frac{1}{y+a}\,dy$. 
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Latihan}
+\begin{frame}{Transformasi Laplace: Latihan}
 Selesaikan PDB berikut.
 \begin{enumerate}
   \item $\displaystyle \frac{dy}{dt}=5y$, dengan $y(0)=2$.
@@ -406,9 +406,9 @@ Selesaikan PDB berikut.
 \end{enumerate}
 \end{frame}
 
-\section{Operator Diferensial}
+\section{Transformasi Laplace: Operator Diferensial}
 
-\begin{frame}{Notasi Operator: Mulai dari $D$}
+\begin{frame}{Transformasi Laplace: Notasi Operator: Mulai dari $D$}
 \begin{block}{Definisi}
 Jika variabel bebasnya $x$, tulis
 \[
@@ -426,7 +426,7 @@ D=\frac{d}{dt},\qquad Dy=\frac{dy}{dt},\qquad D^2y=\frac{d^2y}{dt^2}.
 \end{block}
 \end{frame}
 
-\begin{frame}{Operator Diferensial: Untuk Apa?}
+\begin{frame}{Transformasi Laplace: Operator Diferensial: Untuk Apa?}
 PDB linear orde dua
 \[
 y''+5y'+4y=0
@@ -444,7 +444,7 @@ Ekspresi $D^2+5D+4$ diperlakukan seperti bentuk aljabar, tetapi tetap harus diin
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Operator Diferensial: Faktorisasi}
+\begin{frame}{Transformasi Laplace: Operator Diferensial: Faktorisasi}
 \[
 (D^2+5D+4)y=0.
 \]
@@ -463,7 +463,7 @@ Maka
 \end{block}
 \end{frame}
 
-\begin{frame}{Operator Diferensial: Hasil Eksponen}
+\begin{frame}{Transformasi Laplace: Operator Diferensial: Hasil Eksponen}
 \[
 (D+1)y=0 \quad \Rightarrow \quad y'+y=0.
 \]
@@ -482,7 +482,7 @@ Karena PDB orde dua memerlukan dua solusi bebas:
 \]
 \end{frame}
 
-\begin{frame}{Persamaan Karakteristik}
+\begin{frame}{Transformasi Laplace: Persamaan Karakteristik}
 Untuk
 \[
 y''+5y'+4y=0,
@@ -507,7 +507,7 @@ y=C_1e^{r_1x}+C_2e^{r_2x}.
 \end{block}
 \end{frame}
 
-\begin{frame}{Akar Kembar: Mengapa Ada $xe^{rx}$?}
+\begin{frame}{Transformasi Laplace: Akar Kembar: Mengapa Ada $xe^{rx}$?}
 Misalkan
 \[
 y''-6y'+9y=0.
@@ -525,7 +525,7 @@ Jika ditulis $C_1e^{3x}+C_2e^{3x}$, dua suku itu sebenarnya sama jenisnya dan ha
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Akar Kembar: Bentuk Solusi}
+\begin{frame}{Transformasi Laplace: Akar Kembar: Bentuk Solusi}
 Untuk akar kembar $r=a$, solusi kedua yang bebas adalah
 \[
 xe^{ax}.
@@ -545,7 +545,7 @@ memiliki solusi umum
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Akar Kompleks: Muncul Sinus dan Cosinus}
+\begin{frame}{Transformasi Laplace: Akar Kompleks: Muncul Sinus dan Cosinus}
 Misalkan akar karakteristik
 \[
 r=\alpha\pm i\beta.
@@ -569,7 +569,7 @@ y=C_1\cos\omega x+C_2\sin\omega x.
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Contoh Fisis: Pegas Tanpa Redaman}
+\begin{frame}{Transformasi Laplace: Contoh Fisis: Pegas Tanpa Redaman}
 \small
 Model massa-pegas sederhana:
 \[
@@ -593,7 +593,7 @@ Solusi berbentuk osilasi. Konstanta ditentukan oleh posisi awal dan kecepatan aw
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Contoh Fisis: Pegas Dengan Redaman}
+\begin{frame}{Transformasi Laplace: Contoh Fisis: Pegas Dengan Redaman}
 Jika ada gaya redaman sebanding dengan kecepatan:
 \[
 m\frac{d^2y}{dt^2}=-ky-l\frac{dy}{dt}.
@@ -615,7 +615,7 @@ r^2+2br+\omega^2=0.
 \end{block}
 \end{frame}
 
-\begin{frame}{Latihan}
+\begin{frame}{Transformasi Laplace: Latihan}
 Selesaikan PDB homogen berikut.
 \begin{enumerate}
   \item $y''+3y'+2y=0$.
@@ -632,9 +632,9 @@ Untuk tiap soal, tuliskan:
 \end{itemize}
 \end{frame}
 
-\section{Nonhomogen dan Solusi Partikular}
+\section{Transformasi Laplace: Nonhomogen dan Solusi Partikular}
 
-\begin{frame}{PDB Nonhomogen}
+\begin{frame}{Transformasi Laplace: PDB Nonhomogen}
 Bentuk umum:
 \[
 a_2y''+a_1y'+a_0y=f(x),\qquad f(x)\ne 0.
@@ -650,7 +650,7 @@ a_2y''+a_1y'+a_0y=f(x),\qquad f(x)\ne 0.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Contoh: Solusi Komplementer dan Partikular}
+\begin{frame}{Transformasi Laplace: Contoh: Solusi Komplementer dan Partikular}
 Selesaikan
 \[
 y''+5y'+4y=\cos(2x).
@@ -671,7 +671,7 @@ y_p''+5y_p'+4y_p=\cos(2x).
 \end{block}
 \end{frame}
 
-\begin{frame}{Contoh: Bentuk Solusi Akhir}
+\begin{frame}{Transformasi Laplace: Contoh: Bentuk Solusi Akhir}
 Jika diperoleh satu solusi partikular
 \[
 y_p=\frac{1}{10}\sin(2x),
@@ -685,7 +685,7 @@ Solusi homogen memberi bagian alami sistem. Solusi partikular memberi respon kar
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Batas Metode Separabel dan Operator}
+\begin{frame}{Transformasi Laplace: Batas Metode Separabel dan Operator}
 Tidak semua PDB nyaman diselesaikan dengan pemisahan variabel atau operator sederhana.
 \begin{exampleblock}{Tidak separabel langsung}
 \[
@@ -706,7 +706,7 @@ Bentuk operator linear tidak berlaku.
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Mengapa Perlu Transformasi Laplace?}
+\begin{frame}{Transformasi Laplace: Mengapa Perlu Transformasi Laplace?}
 Pada banyak PDB, kita harus mengurus:
 \begin{itemize}
   \item turunan pertama dan kedua;
@@ -719,7 +719,7 @@ Ubah PDB menjadi persamaan aljabar dalam variabel baru, selesaikan, lalu kembali
 \end{block}
 \end{frame}
 
-\section{Pengantar Transformasi Laplace}
+\section{Transformasi Laplace: Pengantar Transformasi Laplace}
 
 \begin{frame}{Transformasi Laplace: Definisi}
 Untuk fungsi $f(t)$, transformasi Laplace didefinisikan sebagai
@@ -736,7 +736,7 @@ $F(p)$ adalah hasil pengukuran fungsi $f(t)$ setelah diberi bobot $e^{-pt}$ dari
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Apa yang Terjadi Saat Fungsi Ditransformasi?}
+\begin{frame}{Transformasi Laplace: Apa yang Terjadi Saat Fungsi Ditransformasi?}
 \[
 F(p)=\int_0^{\infty} e^{-pt}f(t)\,dt.
 \]
@@ -751,7 +751,7 @@ Satu fungsi $f(t)$ berubah menjadi fungsi baru $F(p)$ yang menyimpan informasi t
 \end{block}
 \end{frame}
 
-\begin{frame}{Contoh Transformasi dari Definisi: $f(t)=1$}
+\begin{frame}{Transformasi Laplace: Contoh Transformasi dari Definisi: $f(t)=1$}
 \[
 \Lap\{1\}=\int_0^{\infty}e^{-pt}\,dt.
 \]
@@ -768,7 +768,7 @@ Maka
 \]
 \end{frame}
 
-\begin{frame}{Contoh Transformasi dari Definisi: $f(t)=e^{-at}$}
+\begin{frame}{Transformasi Laplace: Contoh Transformasi dari Definisi: $f(t)=e^{-at}$}
 \[
 \Lap\{e^{-at}\}=\int_0^{\infty}e^{-pt}e^{-at}\,dt.
 \]
@@ -784,7 +784,7 @@ Eksponen dalam $t$ berubah menjadi pecahan sederhana dalam $p$.
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Beberapa Pasangan Transformasi}
+\begin{frame}{Transformasi Laplace: Beberapa Pasangan Transformasi}
 \begin{center}
 \begin{tabular}{c c}
 \toprule
@@ -803,7 +803,7 @@ Mulai dari tabel, bukan selalu dari integral. Tetapi minimal harus paham asal de
 \end{block}
 \end{frame}
 
-\begin{frame}{Sifat Linear}
+\begin{frame}{Transformasi Laplace: Sifat Linear}
 Transformasi Laplace bersifat linear:
 \[
 \Lap\{af(t)+bg(t)\}=a\Lap\{f(t)\}+b\Lap\{g(t)\}.
@@ -818,7 +818,7 @@ Transformasi Laplace bersifat linear:
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Transformasi Turunan}
+\begin{frame}{Transformasi Laplace: Transformasi Turunan}
 Jika
 \[
 \Lap\{y(t)\}=Y(p),
@@ -835,7 +835,7 @@ Syarat awal masuk otomatis dalam proses transformasi.
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Alur Menyelesaikan PDB dengan Laplace}
+\begin{frame}{Transformasi Laplace: Alur Menyelesaikan PDB dengan Laplace}
 \begin{enumerate}
   \item Transformasikan kedua ruas PDB.
   \item Gunakan rumus transformasi turunan.
@@ -848,7 +848,7 @@ Syarat awal masuk otomatis dalam proses transformasi.
 \]
 \end{frame}
 
-\begin{frame}{Contoh: PDB Orde 1 dengan Laplace}
+\begin{frame}{Transformasi Laplace: Contoh: PDB Orde 1 dengan Laplace}
 Selesaikan
 \[
 y'+2y=4,\qquad y(0)=1.
@@ -866,7 +866,7 @@ Masukkan $y(0)=1$:
 \]
 \end{frame}
 
-\begin{frame}{Contoh: Selesaikan $Y(p)$}
+\begin{frame}{Transformasi Laplace: Contoh: Selesaikan $Y(p)$}
 \[
 (p+2)Y-1=\frac{4}{p}.
 \]
@@ -886,7 +886,7 @@ Transformasi balik:
 \]
 \end{frame}
 
-\begin{frame}{Contoh: PDB Orde 2 dengan Laplace}
+\begin{frame}{Transformasi Laplace: Contoh: PDB Orde 2 dengan Laplace}
 Selesaikan
 \[
 y''+4y=0,\qquad y(0)=0,\quad y'(0)=3.
@@ -907,7 +907,7 @@ Y=\frac{3}{p^2+4}.
 \]
 \end{frame}
 
-\begin{frame}{Contoh: Transformasi Balik}
+\begin{frame}{Transformasi Laplace: Contoh: Transformasi Balik}
 Dari tabel:
 \[
 \Lap\{\sin(at)\}=\frac{a}{p^2+a^2}.
@@ -922,9 +922,9 @@ Maka
 \]
 \end{frame}
 
-\section{Latihan}
+\section{Transformasi Laplace: Latihan}
 
-\begin{frame}{Latihan: Identifikasi PDB dan PDP}
+\begin{frame}{Transformasi Laplace: Latihan: Identifikasi PDB dan PDP}
 Tentukan apakah persamaan berikut PDB atau PDP. Tentukan juga ordenya.
 \begin{enumerate}
   \item $y'+3y=0$.
@@ -935,7 +935,7 @@ Tentukan apakah persamaan berikut PDB atau PDP. Tentukan juga ordenya.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Latihan: Separabel}
+\begin{frame}{Transformasi Laplace: Latihan: Separabel}
 Selesaikan dengan pemisahan variabel.
 \begin{enumerate}
   \item $\displaystyle \frac{dy}{dt}=-3y$, $y(0)=5$.
@@ -945,7 +945,7 @@ Selesaikan dengan pemisahan variabel.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Latihan: Operator dan Karakteristik}
+\begin{frame}{Transformasi Laplace: Latihan: Operator dan Karakteristik}
 Selesaikan PDB homogen berikut.
 \begin{enumerate}
   \item $y''+5y'+6y=0$.
@@ -955,7 +955,7 @@ Selesaikan PDB homogen berikut.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Latihan: Transformasi Laplace dari Integral}
+\begin{frame}{Transformasi Laplace: Latihan: Transformasi Laplace dari Integral}
 Hitung langsung dari definisi integral.
 \begin{enumerate}
   \item $\displaystyle \Lap\{1\}=\int_0^\infty e^{-pt}\,dt$.
@@ -964,7 +964,7 @@ Hitung langsung dari definisi integral.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Latihan: Transformasi Laplace dengan Tabel}
+\begin{frame}{Transformasi Laplace: Latihan: Transformasi Laplace dengan Tabel}
 Gunakan tabel transformasi Laplace.
 \begin{enumerate}
   \item $\Lap\{5\}$.
@@ -975,7 +975,7 @@ Gunakan tabel transformasi Laplace.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Latihan: Transformasi Balik}
+\begin{frame}{Transformasi Laplace: Latihan: Transformasi Balik}
 Tentukan $f(t)$ dari $F(p)$ berikut.
 \begin{enumerate}
   \item $\displaystyle F(p)=\frac{1}{p+3}$.
@@ -985,7 +985,7 @@ Tentukan $f(t)$ dari $F(p)$ berikut.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Latihan: Selesaikan PDB dengan Laplace}
+\begin{frame}{Transformasi Laplace: Latihan: Selesaikan PDB dengan Laplace}
 Selesaikan dengan transformasi Laplace.
 \begin{enumerate}
   \item $y'+y=0$, $y(0)=2$.
@@ -995,7 +995,7 @@ Selesaikan dengan transformasi Laplace.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Latihan: Lebih Menantang}
+\begin{frame}{Transformasi Laplace: Latihan: Lebih Menantang}
 Selesaikan dengan transformasi Laplace.
 \begin{enumerate}
   \item $y''+3y'+2y=0$, $y(0)=1$, $y'(0)=0$.
@@ -1007,7 +1007,7 @@ Kerjakan sampai memperoleh $Y(p)$. Jika pecahan parsial panjang, boleh ditunda u
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Penutup}
+\begin{frame}{Transformasi Laplace: Penutup}
 Hari ini kita sudah membangun jembatan:
 \[
 \text{PDB dasar}\rightarrow \text{integrasi dan separabel}\rightarrow \text{operator }D\rightarrow \text{Laplace}.
