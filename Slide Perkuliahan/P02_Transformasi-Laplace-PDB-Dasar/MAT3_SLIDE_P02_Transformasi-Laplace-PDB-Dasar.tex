@@ -1,0 +1,918 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{ragged2e}
+\graphicspath{{../../assets/}{./}}
+\setbeamertemplate{navigation symbols}{}
+\definecolor{iteraBlue}{RGB}{23,70,125}
+\definecolor{iteraGold}{RGB}{175,145,55}
+\definecolor{softBlue}{RGB}{235,241,250}
+\definecolor{softGold}{RGB}{255,249,232}
+\definecolor{iteraRed}{RGB}{170,35,35}
+\setbeamercolor{title}{fg=iteraBlue}
+\setbeamercolor{frametitle}{fg=iteraBlue,bg=softBlue}
+\setbeamercolor{block title}{bg=iteraBlue,fg=white}
+\setbeamercolor{block body}{bg=softBlue,fg=black}
+\setbeamercolor{example title}{bg=iteraGold,fg=black}
+\setbeamercolor{example body}{bg=softGold,fg=black}
+\setbeamercolor{alertblock title}{bg=iteraRed,fg=white}
+\setbeamercolor{alertblock body}{bg=red!5,fg=black}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+\setbeamerfont{footline}{size=\tiny}
+\newcommand{\course}{Matematika 3 - KL25-21001}
+\newcommand{\kelas}{Kelas RB}
+\newcommand{\jadwal}{Kamis, 14.50-17.30 - E302}
+\newcommand{\pengajar}{Rifky Fauzi}
+\newcommand{\Lap}{\mathcal{L}}
+\newcommand{\invLap}{\mathcal{L}^{-1}}
+\newcommand{\D}{\mathrm{D}}
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox{%
+  \begin{beamercolorbox}[wd=.42\paperwidth,ht=2.5ex,dp=1ex,leftskip=1em]{author in head/foot}%
+    \color{gray}\pengajar
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.42\paperwidth,ht=2.5ex,dp=1ex,center]{title in head/foot}%
+    \color{gray}\course
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.16\paperwidth,ht=2.5ex,dp=1ex,rightskip=1em plus1fil]{date in head/foot}%
+    \hfill\color{gray}\insertframenumber/\inserttotalframenumber
+  \end{beamercolorbox}}%
+}
+
+\title[Transformasi Laplace]{Pertemuan 2\\Transformasi Laplace}
+\subtitle{PDB, integrasi, operator diferensial, dan gagasan transformasi}
+\author{\pengajar}
+\institute{Program Studi Teknik Kelautan\\Institut Teknologi Sumatera}
+\date{\kelas\quad |\quad \jadwal}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+  \vspace{-0.4cm}
+  \centering\includegraphics[width=1.05cm]{itera_logo.png}
+\end{frame}
+
+\section{Pekan 2--4: Transformasi Laplace}
+
+\begin{frame}{Posisi Pertemuan Ini}
+\begin{block}{Agenda resmi pekan 2--4}
+Topik besar perkuliahan adalah \textbf{Transformasi Laplace}. Sebelum memakai tabel Laplace untuk menyelesaikan persamaan, kita rapikan dulu fondasi PDB.
+\end{block}
+\begin{enumerate}
+  \item PDB dan PDP: definisi singkat dan bentuk umum.
+  \item PDB separabel: integrasi, logaritma, dan eksponen.
+  \item PDB linear orde dua: operator diferensial dan persamaan karakteristik.
+  \item Gagasan awal Transformasi Laplace.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Target Belajar}
+Setelah pertemuan ini, mahasiswa diharapkan mampu:
+\begin{enumerate}
+  \item menuliskan kepanjangan PDB dan PDP serta mengenali bentuk umumnya;
+  \item menentukan orde, linear/nonlinear, dan homogen/nonhomogen;
+  \item menyelesaikan PDB separabel sederhana;
+  \item menggunakan notasi operator diferensial seperti yang dipakai Boas;
+  \item menjelaskan dari mana solusi komplementer dan partikular muncul;
+  \item memakai definisi dan tabel awal Transformasi Laplace untuk latihan PDB.
+\end{enumerate}
+\end{frame}
+
+\section{PDB dan PDP}
+
+\begin{frame}{PDB dan PDP: Kepanjangan dan Ide}
+\begin{block}{PDB}
+\textbf{Persamaan Diferensial Biasa}. Persamaan diferensial dengan turunan terhadap \textbf{satu variabel bebas}.
+\[
+y=y(t),\qquad \frac{dy}{dt},\qquad \frac{d^2y}{dt^2}.
+\]
+\end{block}
+\begin{block}{PDP}
+\textbf{Persamaan Diferensial Parsial}. Persamaan diferensial dengan turunan parsial terhadap \textbf{lebih dari satu variabel bebas}.
+\[
+u=u(x,t),\qquad \frac{\partial u}{\partial x},\qquad \frac{\partial u}{\partial t}.
+\]
+\end{block}
+\end{frame}
+
+\begin{frame}{PDB: Bentuk Umum dan Orde}
+\begin{block}{Bentuk umum PDB orde $n$}
+\[
+F\bigl(t,y,y',y'',\ldots,y^{(n)}\bigr)=0.
+\]
+\end{block}
+\begin{block}{Orde}
+Orde PDB adalah \textbf{orde turunan tertinggi} yang muncul.
+\end{block}
+\begin{exampleblock}{Contoh}
+\[
+y'+2y=0 \quad \text{orde 1},
+\qquad
+my''+cy'+ky=0 \quad \text{orde 2}.
+\]
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{PDP: Bentuk Umum Singkat}
+\begin{block}{Bentuk umum PDP}
+\[
+F\bigl(x,t,u,u_x,u_t,u_{xx},u_{xt},u_{tt},\ldots\bigr)=0.
+\]
+\end{block}
+\begin{exampleblock}{Contoh PDP orde 2}
+\[
+\frac{\partial^2 T}{\partial x^2}+\frac{\partial^2 T}{\partial y^2}=0.
+\]
+\end{exampleblock}
+\begin{alertblock}{Untuk sekarang}
+PDP hanya dikenalkan sebagai pembeda. Fokus pertemuan ini tetap pada PDB sebagai jembatan menuju Transformasi Laplace.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Klasifikasi PDB: Linear dan Nonlinear}
+\begin{block}{Linear}
+Bentuk linear orde dua dapat ditulis sebagai
+\[
+a_2(t)y''+a_1(t)y'+a_0(t)y=f(t).
+\]
+Tidak ada $y^2$, $yy'$, $(y')^2$, atau fungsi seperti $\sin y$.
+\end{block}
+\begin{block}{Nonlinear}
+\[
+y'=y^2,
+\qquad yy'=1,
+\qquad y''+\sin y=0.
+\]
+\end{block}
+\end{frame}
+
+\begin{frame}{Klasifikasi PDB: Homogen dan Nonhomogen}
+Untuk PDB linear
+\[
+a_2(t)y''+a_1(t)y'+a_0(t)y=f(t),
+\]
+\begin{block}{Homogen}
+Ruas kanan nol:
+\[
+a_2(t)y''+a_1(t)y'+a_0(t)y=0.
+\]
+\end{block}
+\begin{block}{Nonhomogen}
+Ruas kanan tidak nol:
+\[
+a_2(t)y''+a_1(t)y'+a_0(t)y=f(t),\qquad f(t)\neq 0.
+\]
+\end{block}
+\end{frame}
+
+\begin{frame}{Solusi Umum, Solusi Khusus, dan Syarat Awal}
+\begin{block}{Solusi umum}
+Solusi yang masih memuat konstanta bebas.
+\[
+y=C e^{-2t}.
+\]
+\end{block}
+\begin{block}{Solusi khusus}
+Solusi yang sudah memenuhi data tambahan, misalnya $y(0)=3$.
+\[
+y(0)=3 \quad \Rightarrow \quad y=3e^{-2t}.
+\]
+\end{block}
+\begin{alertblock}{Cara memeriksa}
+Turunkan fungsi, substitusi ke PDB, lalu cek apakah persamaan terpenuhi.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Urutan Penyajian ala Boas}
+\begin{enumerate}
+  \item Mulai dari masalah laju: turunan muncul dari fenomena fisis.
+  \item PDB separabel diselesaikan dengan integrasi.
+  \item PDB linear orde satu dan orde dua dipelajari bertahap.
+  \item Untuk PDB linear orde dua koefisien konstan, Boas memperkenalkan operator diferensial $D$.
+  \item Setelah itu muncul PDB nonhomogen, solusi komplementer, solusi partikular, dan akhirnya Transformasi Laplace.
+\end{enumerate}
+\end{frame}
+
+\section{PDB Separabel dan Masalah Fisis}
+
+\begin{frame}{Masalah Fisis: Penurunan Intensitas}
+Misalkan $I(s)$ adalah intensitas cahaya pada kedalaman $s$.
+\begin{block}{Kalimat fisis}
+Laju penurunan intensitas sebanding dengan intensitas yang masih tersisa.
+\end{block}
+\begin{block}{Model PDB}
+\[
+\frac{dI}{ds}=-\mu I,\qquad \mu>0,
+\]
+dengan $\mu$ menyatakan koefisien penyerapan.
+\end{block}
+\end{frame}
+
+\begin{frame}{Penyelesaian Penurunan Intensitas}
+Mulai dari
+\[
+\frac{dI}{ds}=-\mu I.
+\]
+Pisahkan variabel:
+\[
+\frac{1}{I}\,dI=-\mu\,ds.
+\]
+Integralkan kedua sisi:
+\[
+\ln |I|=-\mu s+C.
+\]
+Ubah ke bentuk eksponen:
+\[
+I(s)=C e^{-\mu s}.
+\]
+Jika $I(0)=I_0$, maka
+\[
+\boxed{I(s)=I_0 e^{-\mu s}}.
+\]
+\end{frame}
+
+\begin{frame}{PDB Separabel: Bentuk Umum}
+\begin{block}{Bentuk separabel}
+\[
+\frac{dy}{dt}=g(t)h(y).
+\]
+Jika $h(y)\neq 0$, maka
+\[
+\frac{1}{h(y)}\,dy=g(t)\,dt.
+\]
+\end{block}
+\begin{block}{Metode}
+Pisahkan variabel $y$ dan $t$, lalu integralkan kedua sisi.
+\end{block}
+\end{frame}
+
+\begin{frame}{Contoh Logaritma pada PDB Separabel}
+Selesaikan
+\[
+t\frac{dy}{dt}=y+1,\qquad t>0.
+\]
+Ubah bentuk:
+\[
+\frac{1}{y+1}\,dy=\frac{1}{t}\,dt.
+\]
+Integralkan:
+\[
+\ln |y+1|=\ln t+C.
+\]
+Maka
+\[
+y+1=Ct,
+\qquad \boxed{y=Ct-1}.
+\]
+\end{frame}
+
+\begin{frame}{Masalah Fisis: Gerak Jatuh Bebas}
+Misalkan $s(t)$ adalah posisi benda dan $v(t)$ kecepatannya.
+\[
+v(t)=\frac{ds}{dt},\qquad \frac{dv}{dt}=g.
+\]
+Maka
+\[
+\frac{d^2s}{dt^2}=g.
+\]
+Dengan integrasi berturut-turut:
+\[
+v(t)=gt+v_0,
+\]
+\[
+s(t)=\frac{1}{2}gt^2+v_0t+s_0.
+\]
+\end{frame}
+
+\begin{frame}{Masalah Fisis: Pendulum Sudut Kecil}
+Untuk pendulum sudut kecil, model idealnya dapat ditulis
+\[
+\theta''+\omega^2\theta=0.
+\]
+Ini bukan separabel langsung seperti $I'=-\mu I$, tetapi merupakan PDB linear orde dua.
+\begin{block}{Makna}
+\begin{itemize}
+\item $\theta(t)$: simpangan sudut.
+\item $\theta''(t)$: percepatan sudut.
+\item Bentuk solusi mengarah ke sinus dan cosinus.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\section{Operator Diferensial pada PDB Linear}
+
+\begin{frame}{Operator Diferensial: Definisi $D$}
+Dalam Boas, setelah PDB linear orde dua dikenalkan, turunan ditulis lebih ringkas memakai operator diferensial.
+\begin{block}{Definisi}
+\[
+Dy=\frac{dy}{dx},
+\qquad
+D^2y=\frac{d^2y}{dx^2},
+\qquad
+D^3y=\frac{d^3y}{dx^3}.
+\]
+\end{block}
+Jadi $D$ bukan konstanta baru. $D$ adalah perintah: \textbf{turunkan terhadap variabel bebas}.
+\end{frame}
+
+\begin{frame}{Operator Diferensial: Menulis Ulang PDB}
+Contoh PDB:
+\[
+y''+5y'+4y=0.
+\]
+Dengan $D=d/dx$, persamaan ini menjadi
+\[
+D^2y+5Dy+4y=0,
+\]
+atau lebih ringkas
+\[
+(D^2+5D+4)y=0.
+\]
+\begin{alertblock}{Poin penting}
+Operator bekerja pada fungsi $y$, sehingga tanda $(D^2+5D+4)y$ harus dibaca sebagai ``terapkan operator itu pada $y$''.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Operator Diferensial: Faktorisasi}
+Karena koefisiennya konstan,
+\[
+D^2+5D+4=(D+1)(D+4).
+\]
+Maka
+\[
+(D^2+5D+4)y=0
+\]
+dapat ditulis sebagai
+\[
+(D+1)(D+4)y=0.
+\]
+Boas kemudian menyelesaikan persamaan yang lebih sederhana:
+\[
+(D+4)y=0,
+\qquad
+(D+1)y=0.
+\]
+\end{frame}
+
+\begin{frame}{Operator Diferensial: Dari Faktor ke Solusi}
+Dari
+\[
+(D+4)y=0,
+\]
+berarti
+\[
+y'+4y=0.
+\]
+Ini separabel:
+\[
+\frac{dy}{y}=-4dx
+\quad \Rightarrow \quad
+\ln |y|=-4x+C
+\quad \Rightarrow \quad
+ y=C_1e^{-4x}.
+\]
+Demikian juga
+\[
+(D+1)y=0 \quad \Rightarrow \quad y=C_2e^{-x}.
+\]
+Jadi
+\[
+\boxed{y=C_1e^{-4x}+C_2e^{-x}}.
+\]
+\end{frame}
+
+\begin{frame}{Persamaan Karakteristik}
+Untuk
+\[
+a_2y''+a_1y'+a_0y=0,
+\]
+coba bentuk solusi
+\[
+y=e^{rx}.
+\]
+Substitusi menghasilkan
+\[
+(a_2r^2+a_1r+a_0)e^{rx}=0.
+\]
+Karena $e^{rx}\neq 0$, maka
+\[
+\boxed{a_2r^2+a_1r+a_0=0}.
+\]
+Persamaan ini disebut \textbf{persamaan karakteristik} atau \textbf{auxiliary equation}.
+\end{frame}
+
+\begin{frame}{Akar Berbeda}
+Jika persamaan karakteristik memiliki akar berbeda $r_1$ dan $r_2$, maka
+\[
+\boxed{y=C_1e^{r_1x}+C_2e^{r_2x}}.
+\]
+Contoh:
+\[
+y''+5y'+4y=0.
+\]
+Persamaan karakteristik:
+\[
+r^2+5r+4=0=(r+1)(r+4).
+\]
+Jadi
+\[
+y=C_1e^{-x}+C_2e^{-4x}.
+\]
+\end{frame}
+
+\begin{frame}{Akar Kembar: Mengapa Ada $xe^{rx}$?}
+Jika akar kembar $r=a$, maka solusi $e^{ax}$ hanya memberikan satu keluarga solusi.
+Padahal PDB orde dua memerlukan dua konstanta bebas.
+\begin{block}{Ide Boas}
+Tulis
+\[
+(D-a)(D-a)y=0.
+\]
+Misalkan
+\[
+u=(D-a)y.
+\]
+Maka
+\[
+(D-a)u=0 \quad \Rightarrow \quad u=Ae^{ax}.
+\]
+Dari $(D-a)y=Ae^{ax}$ diperoleh
+\[
+\boxed{y=(A x+B)e^{ax}}.
+\]
+\end{block}
+\end{frame}
+
+\begin{frame}{Akar Kompleks}
+Jika akar karakteristik
+\[
+r=\alpha\pm i\beta,
+\]
+maka bentuk real solusinya
+\[
+\boxed{y=e^{\alpha x}(C_1\cos \beta x+C_2\sin \beta x)}.
+\]
+\begin{exampleblock}{Contoh}
+\[
+y''+\omega^2y=0
+\quad \Rightarrow \quad
+r^2+\omega^2=0
+\quad \Rightarrow \quad r=\pm i\omega.
+\]
+Jadi
+\[
+y=C_1\cos \omega x+C_2\sin \omega x.
+\]
+\end{exampleblock}
+\end{frame}
+
+\section{PDB Nonhomogen}
+
+\begin{frame}{PDB Nonhomogen dan Forcing Function}
+Bentuk umum PDB linear orde dua nonhomogen:
+\[
+a_2y''+a_1y'+a_0y=f(x).
+\]
+Dalam konteks fisis, $f(x)$ sering disebut \textbf{forcing function}: gaya luar, sumber, masukan, atau pengaruh dari luar sistem.
+\begin{block}{Struktur solusi}
+\[
+\boxed{y=y_c+y_p}
+\]
+\begin{itemize}
+  \item $y_c$: solusi komplementer dari persamaan homogen.
+  \item $y_p$: satu solusi partikular dari persamaan nonhomogen.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Dari Mana Solusi Partikular?}
+Solusi partikular dicari dari bentuk ruas kanan $f(x)$.
+\begin{block}{Ide sederhana}
+Pilih bentuk tebakan yang jika diturunkan tetap mirip dengan ruas kanan.
+\end{block}
+\begin{center}
+\begin{tabular}{c c}
+\toprule
+Ruas kanan $f(x)$ & Bentuk awal $y_p$ yang dicoba \\
+\midrule
+konstanta & konstanta \\
+$e^{cx}$ & $Ae^{cx}$ \\
+$\sin bx$ atau $\cos bx$ & $A\sin bx+B\cos bx$ \\
+polinom derajat $n$ & polinom derajat $n$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Setelah ditebak, turunkan, substitusi, lalu cocokkan koefisien.
+\end{frame}
+
+\begin{frame}{Contoh Partikular dengan Inspeksi}
+Selesaikan
+\[
+y''-2y'+3y=5.
+\]
+Persamaan homogen:
+\[
+r^2-2r+3=0.
+\]
+Untuk solusi partikular, karena ruas kanan konstanta, coba $y_p=A$.
+\[
+y_p'=0,\qquad y_p''=0.
+\]
+Substitusi:
+\[
+0-0+3A=5 \quad \Rightarrow \quad A=\frac{5}{3}.
+\]
+Jadi
+\[
+y=y_c+\frac{5}{3}.
+\]
+\end{frame}
+
+\begin{frame}{Contoh Partikular dengan Eksponen}
+Selesaikan bagian partikular dari
+\[
+y''+y'-2y=e^{2x}.
+\]
+Coba
+\[
+y_p=Ae^{2x}.
+\]
+Maka
+\[
+y_p'=2Ae^{2x},\qquad y_p''=4Ae^{2x}.
+\]
+Substitusi:
+\[
+(4A+2A-2A)e^{2x}=e^{2x}.
+\]
+Jadi
+\[
+4A=1 \quad \Rightarrow \quad y_p=\frac14 e^{2x}.
+\]
+\end{frame}
+
+\begin{frame}{Ketika Tebakan Bertabrakan dengan Solusi Homogen}
+Untuk
+\[
+y''+y'-2y=e^x,
+\]
+persamaan homogen memiliki akar
+\[
+r^2+r-2=(r-1)(r+2)=0.
+\]
+Karena $e^x$ sudah bagian dari solusi homogen, tebakan $Ae^x$ gagal.
+\begin{alertblock}{Perbaikan bentuk}
+Gunakan
+\[
+y_p=Axe^x.
+\]
+Jika masih bertabrakan karena akar kembar, gunakan
+\[
+y_p=Ax^2e^x.
+\]
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Batas Metode Sebelum Laplace}
+Metode integrasi, separabel, dan operator sangat berguna, tetapi tidak selalu nyaman.
+\begin{itemize}
+  \item Tidak semua PDB dapat dipisahkan variabelnya.
+  \item Operator karakteristik paling nyaman untuk PDB linear koefisien konstan.
+  \item Ruas kanan yang potongan atau berubah mendadak sering membuat penyelesaian panjang.
+  \item Sistem PDB dapat menghasilkan aljabar yang banyak.
+\end{itemize}
+\begin{block}{Motivasi}
+Transformasi Laplace membuat PDB dengan syarat awal menjadi persoalan aljabar pada fungsi transformasinya.
+\end{block}
+\end{frame}
+
+\section{Pengantar Transformasi Laplace}
+
+\begin{frame}{Definisi Transformasi Laplace}
+Untuk fungsi $f(t)$, Transformasi Laplace didefinisikan sebagai
+\[
+\boxed{F(s)=\Lap\{f(t)\}=\int_0^\infty e^{-st}f(t)\,dt.}
+\]
+\begin{block}{Catatan notasi}
+Boas memakai variabel $p$. Banyak buku teknik memakai $s$. Di slide ini dipakai $s$.
+\end{block}
+\begin{alertblock}{Makna awal}
+Fungsi awal $f(t)$ diubah menjadi fungsi baru $F(s)$.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Apa yang Terjadi Saat Fungsi Ditransformasi?}
+\[
+f(t) \quad \longrightarrow \quad F(s).
+\]
+\begin{block}{Cara membaca integral}
+\[
+F(s)=\int_0^\infty e^{-st}f(t)\,dt.
+\]
+Nilai $F(s)$ adalah hasil penjumlahan kontinu dari $f(t)$ yang diberi bobot $e^{-st}$.
+\end{block}
+\begin{itemize}
+  \item Jika $s$ besar, bobot $e^{-st}$ cepat mengecil.
+  \item Jika $s$ kecil, bagian fungsi pada waktu lebih panjang masih berpengaruh.
+  \item Karena itu $F(s)$ menyimpan informasi fungsi awal dalam bentuk baru.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Contoh dari Definisi: $f(t)=1$}
+\[
+\Lap\{1\}=\int_0^\infty e^{-st}\,dt.
+\]
+Untuk $s>0$,
+\[
+\int_0^\infty e^{-st}\,dt
+=\left[-\frac{1}{s}e^{-st}\right]_0^\infty.
+\]
+Karena $e^{-st}\to0$ saat $t\to\infty$,
+\[
+\Lap\{1\}=0-\left(-\frac{1}{s}\right)=\frac{1}{s}.
+\]
+\end{frame}
+
+\begin{frame}{Contoh dari Definisi: $f(t)=e^{-at}$}
+\[
+\Lap\{e^{-at}\}=\int_0^\infty e^{-st}e^{-at}\,dt.
+\]
+Gabungkan eksponen:
+\[
+=\int_0^\infty e^{-(s+a)t}\,dt.
+\]
+Jika $s+a>0$,
+\[
+\Lap\{e^{-at}\}=\frac{1}{s+a}.
+\]
+\end{frame}
+
+\begin{frame}{Tabel Dasar yang Dipakai Hari Ini}
+\small
+\begin{center}
+\begin{tabular}{c c}
+\toprule
+$f(t)$ & $\Lap\{f(t)\}=F(s)$ \\
+\midrule
+$1$ & $\dfrac{1}{s}$ \\[1mm]
+$t$ & $\dfrac{1}{s^2}$ \\[1mm]
+$t^n$ & $\dfrac{n!}{s^{n+1}}$ \\[1mm]
+$e^{at}$ & $\dfrac{1}{s-a}$ \\[1mm]
+$\sin at$ & $\dfrac{a}{s^2+a^2}$ \\[1mm]
+$\cos at$ & $\dfrac{s}{s^2+a^2}$ \\[1mm]
+$e^{at}\sin bt$ & $\dfrac{b}{(s-a)^2+b^2}$ \\[1mm]
+$e^{at}\cos bt$ & $\dfrac{s-a}{(s-a)^2+b^2}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Tabel Turunan yang Dipakai Hari Ini}
+Jika
+\[
+\Lap\{y(t)\}=Y(s),
+\]
+maka
+\[
+\Lap\{y'(t)\}=sY(s)-y(0),
+\]
+\[
+\Lap\{y''(t)\}=s^2Y(s)-sy(0)-y'(0).
+\]
+\begin{alertblock}{Cukup untuk latihan hari ini}
+Latihan akhir memakai kombinasi: tabel dasar, linearitas, pecahan parsial sederhana, dan dua rumus turunan ini.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Dari Definisi Integral ke Transformasi Turunan}
+Mulai dari definisi:
+\[
+\Lap\{y'\}=\int_0^\infty e^{-st}y'(t)\,dt.
+\]
+Gunakan integral parsial dengan
+\[
+u=e^{-st},\qquad dv=y'(t)dt.
+\]
+Maka
+\[
+du=-se^{-st}dt,\qquad v=y(t).
+\]
+Sehingga
+\[
+\Lap\{y'\}=\left[e^{-st}y(t)\right]_0^\infty+s\int_0^\infty e^{-st}y(t)\,dt.
+\]
+\end{frame}
+
+\begin{frame}{Hasil Transformasi Turunan}
+Dengan asumsi suku di tak hingga hilang,
+\[
+\left[e^{-st}y(t)\right]_0^\infty=0-y(0)=-y(0).
+\]
+Maka
+\[
+\Lap\{y'\}=sY(s)-y(0).
+\]
+Untuk turunan kedua:
+\[
+\Lap\{y''\}=s\Lap\{y'\}-y'(0)
+=s[sY(s)-y(0)]-y'(0).
+\]
+Jadi
+\[
+\boxed{\Lap\{y''\}=s^2Y(s)-sy(0)-y'(0).}
+\]
+\end{frame}
+
+\begin{frame}{Alur Menyelesaikan PDB dengan Laplace}
+\begin{enumerate}
+  \item Transformasikan semua suku PDB.
+  \item Masukkan syarat awal $y(0),y'(0),\ldots$.
+  \item Selesaikan persamaan aljabar untuk $Y(s)$.
+  \item Pecah $Y(s)$ agar cocok dengan tabel.
+  \item Ambil transformasi balik untuk memperoleh $y(t)$.
+\end{enumerate}
+\[
+\text{PDB dalam } t
+\quad \longrightarrow \quad
+\text{aljabar dalam } Y(s)
+\quad \longrightarrow \quad
+ y(t).
+\]
+\end{frame}
+
+\begin{frame}{Contoh Laplace 1: Orde Satu Homogen}
+Selesaikan
+\[
+y'+2y=0,\qquad y(0)=3.
+\]
+Transformasi:
+\[
+[sY-y(0)]+2Y=0.
+\]
+Masukkan $y(0)=3$:
+\[
+(s+2)Y=3.
+\]
+Maka
+\[
+Y=\frac{3}{s+2}.
+\]
+Transformasi balik:
+\[
+\boxed{y(t)=3e^{-2t}}.
+\]
+\end{frame}
+
+\begin{frame}{Contoh Laplace 2: Orde Satu Nonhomogen}
+Selesaikan
+\[
+y'+2y=4,
+\qquad y(0)=0.
+\]
+Transformasi:
+\[
+(sY-0)+2Y=\frac{4}{s}.
+\]
+Maka
+\[
+Y=\frac{4}{s(s+2)}.
+\]
+Pecahan parsial:
+\[
+\frac{4}{s(s+2)}=\frac{2}{s}-\frac{2}{s+2}.
+\]
+Jadi
+\[
+\boxed{y(t)=2-2e^{-2t}}.
+\]
+\end{frame}
+
+\begin{frame}{Contoh Laplace 3: Orde Dua Homogen}
+Selesaikan
+\[
+y''+3y'+2y=0,
+\qquad y(0)=1,
+\quad y'(0)=0.
+\]
+Transformasi:
+\[
+(s^2Y-s)+(3sY-3)+2Y=0.
+\]
+Maka
+\[
+(s^2+3s+2)Y=s+3.
+\]
+Karena
+\[
+s^2+3s+2=(s+1)(s+2),
+\]
+\[
+Y=\frac{s+3}{(s+1)(s+2)}=\frac{2}{s+1}-\frac{1}{s+2}.
+\]
+\[
+\boxed{y(t)=2e^{-t}-e^{-2t}}.
+\]
+\end{frame}
+
+\section{Latihan}
+
+\begin{frame}{Latihan: Identifikasi PDB dan PDP}
+Tentukan apakah persamaan berikut PDB atau PDP, lalu tentukan ordenya.
+\begin{enumerate}
+  \item $y'+3y=0$.
+  \item $y''+5y'+4y=\cos t$.
+  \item $u_t=c^2u_{xx}$.
+  \item $T_{xx}+T_{yy}=0$.
+  \item $yy'=1$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Latihan: Separabel}
+Selesaikan PDB berikut.
+\begin{enumerate}
+  \item $\displaystyle \frac{dy}{dt}=3y$.
+  \item $\displaystyle \frac{dy}{dt}=-2y,\quad y(0)=5$.
+  \item $\displaystyle t\frac{dy}{dt}=y+1,\quad t>0$.
+  \item $\displaystyle \frac{dI}{ds}=-\mu I,\quad I(0)=I_0$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Latihan: Operator dan Karakteristik}
+Gunakan operator diferensial atau persamaan karakteristik.
+\begin{enumerate}
+  \item $y''+5y'+4y=0$.
+  \item $y''-6y'+9y=0$.
+  \item $y''+4y=0$.
+  \item $y''+2y'+10y=0$.
+\end{enumerate}
+Tandai kasus akar berbeda, akar kembar, dan akar kompleks.
+\end{frame}
+
+\begin{frame}{Latihan: Solusi Partikular}
+Tentukan bentuk tebakan $y_p$, lalu cari $y_p$.
+\begin{enumerate}
+  \item $y''-2y'+3y=5$.
+  \item $y''+y'-2y=e^{2t}$.
+  \item $y''+y'-2y=e^t$.
+  \item $y''+4y=\sin 2t$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Latihan: Transformasi dari Definisi dan Tabel}
+Hitung dengan definisi atau tabel.
+\begin{enumerate}
+  \item $\displaystyle \Lap\{1\}$.
+  \item $\displaystyle \Lap\{e^{-3t}\}$.
+  \item $\displaystyle \Lap\{t^2\}$.
+  \item $\displaystyle \Lap\{\sin 4t\}$.
+  \item $\displaystyle \Lap\{3e^{-2t}+5\cos 3t\}$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Latihan: Transformasi Balik}
+Tentukan $f(t)$.
+\begin{enumerate}
+  \item $\displaystyle F(s)=\frac{1}{s+5}$.
+  \item $\displaystyle F(s)=\frac{6}{s^4}$.
+  \item $\displaystyle F(s)=\frac{4}{s^2+16}$.
+  \item $\displaystyle F(s)=\frac{s}{s^2+9}$.
+  \item $\displaystyle F(s)=\frac{2s+3}{s^2+4}$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Latihan: Selesaikan PDB dengan Laplace}
+Selesaikan dari yang sederhana ke yang lebih rumit.
+\begin{enumerate}
+  \item $y'+3y=0,\quad y(0)=2$.
+  \item $y'+2y=6,\quad y(0)=1$.
+  \item $y''+4y=0,\quad y(0)=0,\quad y'(0)=2$.
+  \item $y''+3y'+2y=0,\quad y(0)=1,\quad y'(0)=0$.
+  \item $y''+y=\sin t,\quad y(0)=1,\quad y'(0)=0$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Penutup}
+Hari ini kita sudah menempatkan Transformasi Laplace pada jalur yang benar:
+\begin{enumerate}
+  \item PDB lahir dari masalah laju dan perubahan.
+  \item PDB separabel memberi pola logaritma dan eksponen.
+  \item Operator diferensial membantu PDB linear orde dua.
+  \item Nonhomogen membutuhkan solusi komplementer dan partikular.
+  \item Transformasi Laplace mengubah PDB dengan syarat awal menjadi aljabar.
+\end{enumerate}
+\begin{alertblock}{Pertemuan berikutnya}
+Perbanyak latihan tabel, invers, pecahan parsial, dan penyelesaian PDB dengan Laplace.
+\end{alertblock}
+\end{frame}
+
+\end{document}

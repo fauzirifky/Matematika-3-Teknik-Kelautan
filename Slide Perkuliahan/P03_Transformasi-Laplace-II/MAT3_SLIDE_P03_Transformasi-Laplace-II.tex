@@ -81,7 +81,7 @@ Program Studi Teknik Kelautan\\Institut Teknologi Sumatera
 \includegraphics[height=1.05cm]{itera_logo.png}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Posisi Pertemuan 3 dalam Matematika 3}
+\begin{frame}{Posisi Pertemuan 3 dalam Matematika 3}
 \begin{block}{Yang sudah dibangun}
 Pertemuan 1: refresh fungsi, turunan, integral, PDB.\\
 Pertemuan 2: definisi Transformasi Laplace, linearitas, dan tabel transformasi dasar.
@@ -96,7 +96,7 @@ Kita belajar bagaimana \key{turunan membawa kondisi awal masuk ke domain Laplace
 $f(t)\ \longrightarrow\ F(s)\ \longrightarrow\ \boxed{\text{aljabar}}\ \longrightarrow\ f(t)$
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Target Pertemuan 3}
+\begin{frame}{Target Pertemuan 3}
 Setelah pertemuan ini, mahasiswa diharapkan mampu:
 \begin{enumerate}
 \item menghitung $\Lap{y'}$, $\Lap{y''}$, dan bentuk turunan orde lebih tinggi;
@@ -108,7 +108,7 @@ Setelah pertemuan ini, mahasiswa diharapkan mampu:
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Notasi: Boas memakai $p$, kita memakai $s$}
+\begin{frame}{Notasi: Boas memakai $p$, kita memakai $s$}
 \begin{block}{Definisi yang sama}
 \[
 F(s)=\Lap{f(t)}=\int_0^\infty e^{-st}f(t)\,dt.
@@ -123,7 +123,7 @@ F(s)=\Lap{f(t)}=\int_0^\infty e^{-st}f(t)\,dt.
 \boasnote
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Tabel Dasar}
+\begin{frame}{Tabel Dasar}
 \small
 \begin{center}
 \begin{tabular}{>{\centering\arraybackslash}m{.34\textwidth} >{\centering\arraybackslash}m{.45\textwidth}}
@@ -143,7 +143,7 @@ Invers Laplace pada dasarnya adalah membaca tabel ini dari kanan ke kiri, setela
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Transformasi Langsung}
+\begin{frame}{Transformasi Langsung}
 Tanpa melihat catatan, tentukan:
 \begin{enumerate}
 \item $\Lap{5t^2}$
@@ -158,7 +158,7 @@ Pisahkan dengan linearitas, lalu cocokkan satu per satu dengan tabel.
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Mengapa Transformasi Turunan Penting?}
+\begin{frame}{Mengapa Transformasi Turunan Penting?}
 PDB hampir selalu berisi $y'$, $y''$, dan seterusnya.
 \[
 y''+4y'+4y=f(t).
@@ -170,7 +170,7 @@ Jika $Y(s)=\Lap{y(t)}$, apa bentuk $\Lap{y'(t)}$ dan $\Lap{y''(t)}$?
 \end{block}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Menurunkan $\Lap{y'}$: Mulai dari Definisi}
+\begin{frame}{Menurunkan $\Lap{y'}$: Mulai dari Definisi}
 \[
 \Lap{y'}=\int_0^\infty e^{-st}y'(t)\,dt.
 \]
@@ -188,7 +188,7 @@ du=-se^{-st}dt,\qquad v=y(t).
 \]
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Hasil $\Lap{y'}$}
+\begin{frame}{Hasil $\Lap{y'}$}
 \begin{align*}
 \Lap{y'}
 &=\left[e^{-st}y(t)\right]_0^\infty
@@ -206,7 +206,7 @@ du=-se^{-st}dt,\qquad v=y(t).
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Dari $y'$ ke $y''$}
+\begin{frame}{Dari $y'$ ke $y''$}
 Anggap $y''=(y')'$. Terapkan rumus yang sama:
 \[
 \Lap{y''}=s\Lap{y'}-y'(0).
@@ -222,7 +222,7 @@ Substitusikan $\Lap{y'}=sY-y(0)$:
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Pola Turunan Orde Tinggi}
+\begin{frame}{Pola Turunan Orde Tinggi}
 \small
 \[
 \Lap{y^{(n)}}=s^nY-s^{n-1}y(0)-s^{n-2}y'(0)-\cdots-y^{(n-1)}(0).
@@ -238,7 +238,7 @@ Pangkat $s$ turun satu per satu, sedangkan orde kondisi awal naik satu per satu.
 \boasnote
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Latihan: Transformasi Turunan}
+\begin{frame}{Latihan: Transformasi Turunan}
 Diketahui $Y(s)=\Lap{y(t)}$. Tuliskan transformasi dari:
 \begin{enumerate}
 \item $y'$ jika $y(0)=4$;
@@ -248,7 +248,7 @@ Diketahui $Y(s)=\Lap{y(t)}$. Tuliskan transformasi dari:
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Contoh: Transformasikan PDB, Belum Perlu Diselesaikan}
+\begin{frame}{Contoh: Transformasikan PDB, Belum Perlu Diselesaikan}
 Diberikan
 \[
 y''+3y'+2y=4t,\qquad y(0)=1,\quad y'(0)=0.
@@ -266,7 +266,7 @@ PDB di $t$ berubah menjadi \textbf{persamaan aljabar dalam $Y(s)$}.
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Invers Laplace: Jalan Pulang}
+\begin{frame}{Invers Laplace: Jalan Pulang}
 Jika
 \[
 F(s)=\Lap{f(t)},
@@ -283,7 +283,7 @@ Kita tidak biasanya menghitung integral invers dari nol. Kita merapikan $F(s)$ a
 $F(s)\ \xrightarrow{\text{rapikan}}\ \text{bentuk tabel}\ \xrightarrow{\Lcal^{-1}}\ f(t)$
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Contoh Invers Laplace Dasar}
+\begin{frame}{Contoh Invers Laplace Dasar}
 \begin{exampleblock}{Contoh 1}
 \[
 \invLap{\frac{6}{s^4}}
@@ -303,7 +303,7 @@ $F(s)\ \xrightarrow{\text{rapikan}}\ \text{bentuk tabel}\ \xrightarrow{\Lcal^{-1
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Latihan: Invers dari Tabel}
+\begin{frame}{Latihan: Invers dari Tabel}
 Tentukan:
 \begin{enumerate}
 \item $\displaystyle \invLap{\frac{1}{s+4}}$
@@ -314,7 +314,7 @@ Tentukan:
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Masalah Nyata: Bentuknya Tidak Selalu Ada di Tabel}
+\begin{frame}{Masalah Nyata: Bentuknya Tidak Selalu Ada di Tabel}
 Misalnya
 \[
 Y(s)=\frac{3s+5}{s(s+2)}.
@@ -330,7 +330,7 @@ Inilah \textbf{pecahan parsial}.
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Pecahan Parsial: Faktor Linear Berbeda}
+\begin{frame}{Pecahan Parsial: Faktor Linear Berbeda}
 Untuk
 \[
 \frac{P(s)}{(s-a)(s-b)},
@@ -351,7 +351,7 @@ Set $s=0\Rightarrow A=\frac52$; set $s=-2\Rightarrow B=\frac12$.
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Dari Pecahan Parsial ke Invers}
+\begin{frame}{Dari Pecahan Parsial ke Invers}
 Dari
 \[
 Y(s)=\frac{5/2}{s}+\frac{1/2}{s+2},
@@ -370,7 +370,7 @@ y(t)=\frac52+\frac12e^{-2t}.
 \end{block}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Pecahan Parsial: Faktor Berulang}
+\begin{frame}{Pecahan Parsial: Faktor Berulang}
 Jika penyebut mengandung $(s+a)^2$, jangan hanya tulis satu suku.
 \[
 \frac{P(s)}{s(s+2)^2}
@@ -384,7 +384,7 @@ Untuk faktor berulang $(s+a)^m$, tuliskan semua pangkat:
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Penyebut Kuadrat: Lengkapi Kuadrat}
+\begin{frame}{Penyebut Kuadrat: Lengkapi Kuadrat}
 Bentuk
 \[
 s^2+4s+13
@@ -403,7 +403,7 @@ Masing-masing cocok dengan bentuk eksponensial-kosinus dan eksponensial-sinus.
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Contoh Boas: Mengapa Pecahan Parsial Muncul}
+\begin{frame}{Contoh Boas: Mengapa Pecahan Parsial Muncul}
 Pada salah satu contoh Boas,
 \[
 Y(s)=\frac{s^2+8s+27}{(s+1)(s^2+4s+13)}.
@@ -422,7 +422,7 @@ e^{-t},\qquad e^{-2t}\cos 3t,\qquad e^{-2t}\sin 3t.
 \boasnote
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Latihan: Pecahan Parsial}
+\begin{frame}{Latihan: Pecahan Parsial}
 Uraikan, lalu tentukan invers Laplace bila memungkinkan:
 \begin{enumerate}
 \item $\displaystyle \frac{2s+3}{s(s+1)}$
@@ -433,7 +433,7 @@ Uraikan, lalu tentukan invers Laplace bila memungkinkan:
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Shifting I: Pergeseran di Domain $s$}
+\begin{frame}{Shifting I: Pergeseran di Domain $s$}
 Jika
 \[
 \Lap{f(t)}=F(s),
@@ -455,7 +455,7 @@ Karena $\Lap{\sin bt}=\dfrac{b}{s^2+b^2}$,
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Latihan: Shifting I}
+\begin{frame}{Latihan: Shifting I}
 Tentukan transformasi atau inversnya:
 \begin{enumerate}
 \item $\Lap{e^{-3t}\cos 2t}$
@@ -466,7 +466,7 @@ Tentukan transformasi atau inversnya:
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Shifting II: Fungsi yang Mulai Terlambat}
+\begin{frame}{Shifting II: Fungsi yang Mulai Terlambat}
 Definisikan fungsi step Heaviside
 \[
 u(t-a)=\begin{cases}
@@ -483,7 +483,7 @@ Faktor $e^{-as}$ di domain Laplace menandakan pergeseran waktu sebesar $a$.
 \end{block}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Contoh Pergeseran Waktu}
+\begin{frame}{Contoh Pergeseran Waktu}
 Tentukan invers:
 \[
 F(s)=e^{-\pi s}\frac{s}{s^2+1}.
@@ -501,7 +501,7 @@ Sinyal kosinus ``dinyalakan'' mulai $t=\pi$.
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Latihan: Shifting II}
+\begin{frame}{Latihan: Shifting II}
 Tentukan invers Laplace:
 \begin{enumerate}
 \item $\displaystyle e^{-2s}\frac{1}{s}$
@@ -511,7 +511,7 @@ Tentukan invers Laplace:
 Kemudian gambarkan secara skematik fungsi waktunya: kapan fungsi bernilai nol, dan kapan mulai aktif?
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Jembatan ke Penyelesaian PDB}
+\begin{frame}{Jembatan ke Penyelesaian PDB}
 Pertemuan berikutnya akan memakai alur berikut:
 \begin{enumerate}
 \item transformasikan semua suku PDB;
@@ -523,7 +523,7 @@ Pertemuan berikutnya akan memakai alur berikut:
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Contoh Mini IVP: Sampai Selesai}
+\begin{frame}{Contoh Mini IVP: Sampai Selesai}
 Selesaikan
 \[
 y'+2y=1,\qquad y(0)=0.
@@ -543,7 +543,7 @@ Invers:
 \]
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Latihan: IVP Ringan}
+\begin{frame}{Latihan: IVP Ringan}
 Selesaikan dengan Transformasi Laplace:
 \begin{enumerate}
 \item $y'+y=2$, $y(0)=1$.
@@ -556,7 +556,7 @@ Jika bentuk aljabarnya terasa tidak langsung, justru itu latihan untuk merapikan
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Latihan: Pilih Strategi}
+\begin{frame}{Latihan: Pilih Strategi}
 Untuk setiap bentuk berikut, sebutkan \textbf{strategi pertama} yang harus dilakukan:
 \begin{enumerate}
 \item $\displaystyle \frac{4}{s^2+16}$
@@ -568,7 +568,7 @@ Untuk setiap bentuk berikut, sebutkan \textbf{strategi pertama} yang harus dilak
 Pilihan strategi: \emph{langsung tabel, shifting, pecahan parsial, melengkapi kuadrat}.
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Kaitan dengan Tugas Pekan 2--4}
+\begin{frame}{Kaitan dengan Tugas Pekan 2--4}
 Bank tugas resmi meminta kemampuan yang sama, antara lain:
 \begin{itemize}
 \item transformasi fungsi polinomial, sinus, eksponensial, dan kombinasi;
@@ -582,7 +582,7 @@ Kerjakan latihan kelas dulu. Setelah itu, lanjutkan ke bank soal Lembar Kerja Ma
 \end{block}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Ringkasan Rumus Hari Ini}
+\begin{frame}{Ringkasan Rumus Hari Ini}
 \small
 \begin{align*}
 \Lap{y'} &= sY-y(0),\\
@@ -596,7 +596,7 @@ Rumus penting, tetapi kemampuan paling penting hari ini adalah \textbf{merapikan
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Transformasi Laplace: Exit Ticket}
+\begin{frame}{Exit Ticket}
 Kerjakan tanpa melihat catatan selama 8--10 menit.
 \begin{enumerate}
 \item Tuliskan $\Lap{y''}$ jika $y(0)=2$, $y'(0)=-3$.
