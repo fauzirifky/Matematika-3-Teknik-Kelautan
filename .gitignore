@@ -1,28 +1,22 @@
-# LaTeX temporary files
+# LaTeX auxiliary files
 *.aux
-*.bbl
-*.bcf
-*.blg
-*.fdb_latexmk
-*.fls
-*.lof
 *.log
-*.lot
 *.nav
 *.out
-*.run.xml
 *.snm
-*.synctex.gz
 *.toc
-*.vrb
-*.xdv
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
 
-# OS/editor
-.DS_Store
-*~
-*.swp
-
-# Microsoft Word source files are intentionally excluded
+# Word source files should not enter this repository
 *.doc
 *.docx
 *.docm
+~$*
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
