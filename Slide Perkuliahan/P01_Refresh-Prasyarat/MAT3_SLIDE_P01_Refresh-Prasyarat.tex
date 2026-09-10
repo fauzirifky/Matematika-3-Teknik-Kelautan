@@ -1,0 +1,674 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\graphicspath{{../../assets/}}
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{footline}{size=\tiny}
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox{%
+  \begin{beamercolorbox}[wd=.82\paperwidth,ht=2.6ex,dp=1.1ex,leftskip=.45cm]{author in head/foot}%
+  \color{gray}Matematika 3 - KL25-21001 | Kelas RB | Rifky Fauzi
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.18\paperwidth,ht=2.6ex,dp=1.1ex,rightskip=.45cm plus1fil]{date in head/foot}%
+  \hfill\color{gray}\insertframenumber/\inserttotalframenumber
+  \end{beamercolorbox}}}
+\definecolor{iteraBlue}{RGB}{23,70,125}
+\definecolor{iteraGold}{RGB}{175,145,55}
+\setbeamercolor{title}{fg=iteraBlue}
+\setbeamercolor{frametitle}{fg=iteraBlue}
+\setbeamercolor{block title}{bg=iteraBlue,fg=white}
+\setbeamercolor{block body}{bg=blue!3,fg=black}
+\newcommand{\course}{Matematika 3 - KL25-21001}
+\newcommand{\kelas}{Kelas RB}
+\newcommand{\jadwal}{Kamis, 14.50-17.30 - E302}
+\newcommand{\pengajar}{Rifky Fauzi}
+
+\title[Matematika 3 RB]{Pertemuan 1\\Kontrak Kuliah dan Refresh Prasyarat Matematika 3}
+\subtitle{Kontrak kuliah, turunan, integral, trigonometri, PDB, dan jembatan menuju Laplace - Fourier - PDP}
+\author{\pengajar}
+\institute{Program Studi Teknik Kelautan\\Institut Teknologi Sumatera}
+\date{\kelas\quad |\quad \jadwal}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+  \vspace{-0.4cm}
+  \centering\includegraphics[width=1.2cm]{itera_logo.png}
+\end{frame}
+
+\begin{frame}{Identitas Kelas}
+\begin{tabular}{>{\bfseries}p{3.5cm}p{8.5cm}}
+Mata kuliah & \course \\
+Kelas & RB \\
+Pertemuan & 1 - Refresh Prasyarat \\
+Jadwal & \jadwal \\
+Pengajar & \pengajar \\
+Sifat materi & Penguatan dasar sebelum masuk Transformasi Laplace, Fourier, dan PDP \\
+\end{tabular}
+\end{frame}
+
+
+\section{Kontrak Kuliah}
+
+\begin{frame}{Kontrak Kuliah: Identitas Kelas}
+\begin{tabular}{>{\bfseries}p{3.6cm}p{8.3cm}}
+Mata kuliah & Matematika 3 (KL25-21001) \\
+Kelas & RB \\
+Semester & Ganjil 2026/2027 \\
+Jadwal & Kamis, 14.50--17.30 \\
+Ruang & E302 \\
+Pengajar & Rifky Fauzi \\
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Referensi Buku dan Materi}
+\begin{enumerate}
+  \item \textbf{Mary L. Boas, \textit{Mathematical Methods in the Physical Sciences}.}
+  \begin{itemize}
+    \item Bab 8: Transformasi Laplace.
+    \item Bab 7: Deret/Transformasi Fourier.
+    \item Bab 13: Persamaan diferensial parsial dan permasalahan nilai batas.
+  \end{itemize}
+  \item \textbf{Erwin Kreyszig, \textit{Advanced Engineering Mathematics}.} Referensi pendamping untuk Laplace, Fourier, dan PDE/BVP.
+  \item \textbf{Modul dan PR Matematika 3}. Materi dan latihan pendukung perkuliahan.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Agenda Perkuliahan: Minggu 1--8}
+\scriptsize
+\begin{tabular}{c p{9.8cm}}
+\toprule
+\textbf{Minggu} & \textbf{Agenda} \\
+\midrule
+1 & Kontrak kuliah dan refresh: aljabar, sin-cos, radian, turunan, integral, turunan parsial, PDB, kondisi awal/batas. \\
+2 & Transformasi Laplace I: definisi, linearitas, tabel transformasi dasar. \\
+3 & Transformasi Laplace II: turunan, invers Laplace, pergeseran, pecahan parsial. \\
+4 & Transformasi Laplace III: penyelesaian PDB dan sistem sederhana. \\
+5 & Fourier I: fungsi harmonik, periode, frekuensi, rata-rata, ortogonalitas. \\
+6 & Fourier II: koefisien dan Deret Fourier, fungsi genap/ganjil. \\
+7 & Fourier III: representasi fungsi periodik, interpretasi, dan aplikasi. \\
+8 & \textbf{Ujian Tengah Semester (UTS).} \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Agenda Perkuliahan: Minggu 9--16}
+\scriptsize
+\begin{tabular}{c p{9.8cm}}
+\toprule
+\textbf{Minggu} & \textbf{Agenda} \\
+\midrule
+9 & PDB vs PDP; Laplace, Poisson, Helmholtz, wave equation; unsur BVP. \\
+10 & Separation of variables dan pemilihan bentuk solusi dari kondisi batas. \\
+11 & Persamaan Laplace pada domain persegi panjang sederhana. \\
+12 & BVP Laplace: kondisi batas dan ekspansi Fourier. \\
+13 & Interpretasi solusi PDP dan visualisasi sederhana. \\
+14 & Persamaan gelombang dan vibrating string. \\
+15 & Kondisi awal vibrating string, koefisien Fourier, dan interpretasi mode. \\
+16 & \textbf{Ujian Akhir Semester (UAS).} \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Penilaian}
+\begin{center}
+\begin{tabular}{l c}
+\toprule
+\textbf{Komponen} & \textbf{Bobot} \\
+\midrule
+Tugas & 30\% \\
+Kuis & 20\% \\
+Ujian Tengah Semester (UTS) & 25\% \\
+Ujian Akhir Semester (UAS) & 25\% \\
+\midrule
+\textbf{Total} & \textbf{100\%} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Tata Tertib Perkuliahan}
+\begin{enumerate}
+  \item Kehadiran minimum 70\% untuk mengikuti UAS, mengikuti ketentuan akademik yang berlaku.
+  \item Mahasiswa mengikuti kuliah dengan berpakaian rapi dan sopan.
+  \item Proses pengerjaan harus dapat dijelaskan. Cara instan, termasuk penggunaan AI untuk menggantikan proses berpikir, tidak dianjurkan.
+  \item Integritas akademik berlaku pada seluruh kegiatan perkuliahan dan ujian. Ketentuan pelaksanaan ujian disampaikan sebelum ujian.
+  \item Ketentuan lain dapat disepakati bersama selama perkuliahan.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Ketua Kelas: Tindak Lanjut Hari Ini}
+\begin{alertblock}{Untuk penandatanganan kontrak kuliah}
+Ketua kelas RB diminta menghubungi \textbf{Rifky} melalui WhatsApp:
+\begin{center}
+{\Large\bfseries 082248055134}
+\end{center}
+\textbf{Hari ini, Kamis 3 September 2026, maksimal pukul 17.00 WIB.}
+\end{alertblock}
+\vspace{0.2cm}
+Tujuan: koordinasi penandatanganan kontrak kuliah antara pengajar dan perwakilan mahasiswa.
+\end{frame}
+
+\section{Refresh Prasyarat}
+
+\begin{frame}{Target Hari Ini}
+Setelah pertemuan ini, mahasiswa diharapkan mampu:
+\begin{enumerate}
+  \item Mengingat kembali operasi aljabar, fungsi, sinus, cosinus, dan radian.
+  \item Menghitung turunan biasa, turunan parsial, dan integral dasar.
+  \item Membaca persamaan diferensial sebagai model perubahan.
+  \item Menjelaskan makna solusi, kondisi awal, dan kondisi batas.
+  \item Melihat kebutuhan skill dasar tersebut untuk Laplace, Fourier, dan PDP.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Peta Besar Matematika 3}
+\begin{block}{Tiga blok utama}
+\begin{enumerate}
+  \item Transformasi Laplace: integral tak wajar dan penyelesaian PDB.
+  \item Deret / Transformasi Fourier: sinus, cosinus, integral, dan fungsi periodik.
+  \item Persamaan Diferensial Parsial: turunan parsial, kondisi batas, dan pemisahan variabel.
+\end{enumerate}
+\end{block}
+\vspace{0.2cm}
+\begin{center}
+Dasar hari ini $\rightarrow$ siap membaca rumus, bukan menghafal rumus.
+\end{center}
+\end{frame}
+
+\begin{frame}{Mulai dari yang Paling Dasar: Fungsi}
+\begin{block}{Fungsi}
+Fungsi memasangkan masukan ke keluaran.
+\[
+ y=f(x), \qquad T=T(x,y), \qquad u=u(x,t).
+\]
+\end{block}
+\begin{itemize}
+  \item $f(x)$: satu variabel.
+  \item $T(x,y)$: dua variabel ruang.
+  \item $u(x,t)$: posisi dan waktu, umum pada gelombang atau panas.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Aljabar yang Selalu Muncul}
+\begin{columns}
+\column{0.52\textwidth}
+\begin{block}{Aturan eksponen}
+\[
+a^m a^n=a^{m+n},\quad \frac{a^m}{a^n}=a^{m-n},\quad (a^m)^n=a^{mn}.
+\]
+\end{block}
+\column{0.43\textwidth}
+\begin{block}{Contoh cepat}
+Sederhanakan:
+\[
+\frac{x^3 e^{-2t}}{x}=x^2e^{-2t}.
+\]
+\end{block}
+\end{columns}
+\vspace{0.2cm}
+Ini sering muncul saat menyelesaikan ODE/PDE dan saat merapikan hasil transformasi.
+\end{frame}
+
+\begin{frame}{Trigonometri: Sinus dan Cosinus}
+\begin{block}{Sudut dalam radian}
+\[
+180^\circ=\pi,\qquad 360^\circ=2\pi.
+\]
+\end{block}
+\begin{block}{Identitas dasar}
+\[
+\sin^2 x+\cos^2 x=1,
+\qquad \sin(-x)=-\sin x,
+\qquad \cos(-x)=\cos x.
+\]
+\end{block}
+Sinus dan cosinus menjadi bahasa utama untuk fungsi periodik dan gelombang.
+\end{frame}
+
+\begin{frame}{Fungsi Periodik dan Gelombang}
+\begin{block}{Periodik}
+Fungsi $f$ periodik jika ada $T>0$ sehingga
+\[
+f(x+T)=f(x).
+\]
+\end{block}
+\begin{exampleblock}{Contoh}
+\[
+\sin(x+2\pi)=\sin x,\qquad \cos(x+2\pi)=\cos x.
+\]
+\end{exampleblock}
+Fourier memakai sinus dan cosinus untuk membangun fungsi periodik yang lebih rumit.
+\end{frame}
+
+
+\begin{frame}{Limit: Bahasa Awal Turunan}
+\begin{block}{Ide limit}
+\[
+\lim_{x\to a} f(x)=L
+\]
+Artinya: ketika $x$ mendekati $a$, nilai $f(x)$ mendekati $L$.
+\end{block}
+\begin{exampleblock}{Contoh}
+\[
+\lim_{x\to 2}(x^2+3x+1)=4+6+1=11.
+\]
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Limit Bentuk $0/0$: Faktorkan Dulu}
+\begin{exampleblock}{Contoh}
+\[
+\lim_{x\to 1}\frac{x^2-1}{x-1}
+\]
+\end{exampleblock}
+\[
+\frac{x^2-1}{x-1}=\frac{(x-1)(x+1)}{x-1}=x+1,\quad x\ne 1.
+\]
+\[
+\lim_{x\to 1}\frac{x^2-1}{x-1}=\lim_{x\to 1}(x+1)=2.
+\]
+\end{frame}
+
+\begin{frame}{Turunan dari Proses Limit}
+Untuk $f(x)=x^2$,
+\[
+f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}.
+\]
+\[
+=\lim_{h\to0}\frac{(x+h)^2-x^2}{h}
+=\lim_{h\to0}\frac{2xh+h^2}{h}
+\]
+\[
+=\lim_{h\to0}(2x+h)=2x.
+\]
+Rumus turunan berasal dari proses limit.
+\end{frame}
+
+\begin{frame}{Turunan: Ide Dasar}
+\begin{block}{Makna turunan}
+Turunan menyatakan laju perubahan.
+\[
+f'(x)=\frac{df}{dx}=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}.
+\]
+\end{block}
+\begin{itemize}
+  \item Kecepatan adalah turunan posisi terhadap waktu.
+  \item Percepatan adalah turunan kecepatan terhadap waktu.
+  \item Gradien temperatur adalah turunan temperatur terhadap posisi.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Rumus Turunan Dasar}
+\begin{columns}
+\column{0.5\textwidth}
+\[
+\frac{d}{dx}x^n=nx^{n-1}
+\]
+\[
+\frac{d}{dx}e^{ax}=ae^{ax}
+\]
+\[
+\frac{d}{dx}\sin(ax)=a\cos(ax)
+\]
+\column{0.5\textwidth}
+\[
+\frac{d}{dx}\cos(ax)=-a\sin(ax)
+\]
+\[
+(uv)'=u'v+uv'
+\]
+\[
+\left(\frac{u}{v}\right)'=\frac{u'v-uv'}{v^2}
+\]
+\end{columns}
+\end{frame}
+
+\begin{frame}{Contoh Turunan}
+\begin{exampleblock}{Contoh 1}
+Hitung turunan $f(x)=x^3\sin(2x)$.
+\end{exampleblock}
+\[
+\frac{df}{dx}=3x^2\sin(2x)+x^3\cdot 2\cos(2x).
+\]
+\vspace{0.2cm}
+\begin{exampleblock}{Contoh 2}
+Jika $s(t)=5t^2+2t+1$, maka kecepatan
+\[
+u(t)=\frac{ds}{dt}=10t+2.
+\]
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Turunan Parsial}
+\begin{block}{Ide}
+Jika fungsi punya lebih dari satu variabel, turunkan terhadap satu variabel dan variabel lain dianggap konstan.
+\[
+T=T(x,y),\quad \frac{\partial T}{\partial x},\quad \frac{\partial T}{\partial y}.
+\]
+\end{block}
+\begin{exampleblock}{Contoh}
+\[
+T(x,y)=x^2y+\sin x.
+\]
+\[
+\frac{\partial T}{\partial x}=2xy+\cos x,
+\qquad
+\frac{\partial T}{\partial y}=x^2.
+\]
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Integral: Ide Dasar}
+\begin{block}{Makna integral}
+Integral dapat dibaca sebagai akumulasi atau luas total.
+\[
+\int_a^b f(x)\,dx.
+\]
+\end{block}
+\begin{itemize}
+  \item Dari kecepatan ke posisi: $s(t)=\int u(t)\,dt$.
+  \item Nilai rata-rata fungsi: $\frac{1}{b-a}\int_a^b f(x)\,dx$.
+  \item Laplace dan Fourier sama-sama memakai integral sebagai alat utama.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Rumus Integral Dasar}
+\begin{columns}
+\column{0.5\textwidth}
+\[
+\int x^n dx=\frac{x^{n+1}}{n+1}+C,\quad n\neq -1
+\]
+\[
+\int e^{ax}dx=\frac{1}{a}e^{ax}+C
+\]
+\column{0.5\textwidth}
+\[
+\int \sin(ax)dx=-\frac{1}{a}\cos(ax)+C
+\]
+\[
+\int \cos(ax)dx=\frac{1}{a}\sin(ax)+C
+\]
+\end{columns}
+\begin{block}{Integral tentu}
+\[
+\int_a^b f(x)\,dx=F(b)-F(a).
+\]
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Integral Tak Tentu}
+\begin{block}{Bentuk umum}
+\[
+\int f(x)\,dx=F(x)+C,
+\qquad F'(x)=f(x).
+\]
+\end{block}
+\begin{exampleblock}{Contoh polinom}
+\[
+\int(3x^2-4x+5)\,dx=x^3-2x^2+5x+C.
+\]
+\end{exampleblock}
+\begin{exampleblock}{Contoh trigonometri-eksponen}
+\[
+\int(2\cos 2x-3e^{-x})\,dx=\sin 2x+3e^{-x}+C.
+\]
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Latihan Integral Tak Tentu}
+Kerjakan cepat.
+\begin{enumerate}
+  \item $\displaystyle \int (4x^3-6x+2)\,dx$.
+  \item $\displaystyle \int \left(5e^{2x}+\sin(3x)\right)\,dx$.
+  \item $\displaystyle \int (\cos x+x^2)\,dx$.
+  \item $\displaystyle \int \sin(5t)\,dt$.
+\end{enumerate}
+Ingat: untuk integral tak tentu, jangan lupa konstanta $C$.
+\end{frame}
+
+\begin{frame}{Contoh Integral}
+\begin{exampleblock}{Contoh 1}
+\[
+\int_0^\pi \sin x\,dx = [-\cos x]_0^\pi=2.
+\]
+\end{exampleblock}
+\begin{exampleblock}{Contoh 2}
+Untuk $p>0$,
+\[
+\int_0^\infty e^{-pt}\,dt
+=\left[-\frac{1}{p}e^{-pt}\right]_0^\infty
+=\frac{1}{p}.
+\]
+\end{exampleblock}
+Contoh 2 adalah pintu masuk Transformasi Laplace.
+\end{frame}
+
+\begin{frame}{Persamaan Diferensial Biasa (PDB)}
+\begin{block}{PDB / ODE}
+Persamaan yang memuat turunan terhadap satu variabel bebas.
+\[
+\frac{dy}{dt}=ky,
+\qquad
+\frac{d^2y}{dt^2}+\omega^2y=0.
+\]
+\end{block}
+\begin{itemize}
+  \item Orde 1: turunan tertinggi orde satu.
+  \item Orde 2: turunan tertinggi orde dua.
+  \item Solusi adalah fungsi yang membuat persamaan bernilai benar.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Solusi Umum, Kondisi Awal, Kondisi Batas}
+\begin{block}{Solusi umum}
+\[
+y(t)=C_1\cos(\omega t)+C_2\sin(\omega t).
+\]
+Konstanta $C_1$ dan $C_2$ perlu ditentukan.
+\end{block}
+\begin{exampleblock}{Kondisi awal}
+\[
+y(0)=0,\qquad y'(0)=1.
+\]
+\end{exampleblock}
+\begin{exampleblock}{Kondisi batas}
+\[
+T(0)=100,\qquad T(10)=50.
+\]
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Contoh PDB: Benda Jatuh Sederhana}
+\begin{exampleblock}{Model}
+Kecepatan $u$ memenuhi
+\[
+\frac{du}{dt}=g,\qquad u(0)=1.
+\]
+\end{exampleblock}
+\[
+u(t)=gt+1.
+\]
+Jika $s'(t)=u(t)$ dan $s(0)=2$, maka
+\[
+s(t)=\frac{1}{2}gt^2+t+2.
+\]
+Inilah contoh model perubahan yang diselesaikan dengan integral.
+\end{frame}
+
+\begin{frame}{Contoh PDB: Pegas Sederhana}
+\begin{exampleblock}{Model}
+\[
+\frac{d^2y}{dt^2}+\omega^2y=0,
+\qquad y(0)=0,
+\qquad y'(0)=1.
+\]
+\end{exampleblock}
+Solusi umum:
+\[
+y(t)=C_1\cos(\omega t)+C_2\sin(\omega t).
+\]
+Dari kondisi awal:
+\[
+C_1=0,
+\qquad C_2=\frac{1}{\omega}.
+\]
+Jadi $y(t)=\frac{1}{\omega}\sin(\omega t)$.
+\end{frame}
+
+\begin{frame}{Jembatan ke Transformasi Laplace}
+\begin{block}{Definisi dasar}
+\[
+\mathcal{L}\{f(t)\}=F(p)=\int_0^\infty f(t)e^{-pt}\,dt.
+\]
+\end{block}
+Skill yang diperlukan:
+\begin{enumerate}
+  \item Integral tentu dan integral tak wajar.
+  \item Eksponen $e^{-pt}$.
+  \item Menyelesaikan PDB dengan kondisi awal.
+\end{enumerate}
+\begin{exampleblock}{Paling awal}
+\[
+\mathcal{L}\{1\}=\int_0^\infty e^{-pt}dt=\frac{1}{p}.
+\]
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Jembatan ke Fourier}
+\begin{block}{Gagasan Fourier}
+Fungsi periodik dapat didekati dengan kombinasi sinus dan cosinus.
+\[
+f(x)=\frac{a_0}{2}+a_1\cos x+b_1\sin x+a_2\cos 2x+b_2\sin 2x+\cdots
+\]
+\end{block}
+Skill yang diperlukan:
+\begin{enumerate}
+  \item Mengenali fungsi periodik.
+  \item Sinus, cosinus, genap, dan ganjil.
+  \item Integral untuk mencari koefisien.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Jembatan ke Persamaan Diferensial Parsial}
+\begin{block}{PDP / PDE}
+Persamaan yang memuat turunan parsial.
+\[
+\frac{\partial^2 T}{\partial x^2}+\frac{\partial^2 T}{\partial y^2}=0
+\]
+Ini adalah salah satu bentuk persamaan Laplace.
+\end{block}
+\begin{itemize}
+  \item Butuh turunan parsial.
+  \item Butuh domain, misalnya pelat persegi panjang.
+  \item Butuh kondisi batas di tepi domain.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Latihan Kelas 1: Fungsi, Aljabar, Trigonometri}
+\small
+\begin{enumerate}
+  \item Hitung $f(2)$ jika $f(x)=3x^2-2x+4$.
+  \item Jika $T(x,y)=x^2y+2xy+y^2$, hitung $T(1,3)$.
+  \item Ubah $30^\circ$, $90^\circ$, $180^\circ$, dan $270^\circ$ ke radian.
+  \item Tentukan apakah $x$, $x^2$, $x^3$, $\sin x$, dan $\cos x$ genap, ganjil, atau bukan keduanya.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Latihan Kelas 2: Limit dan Turunan}
+\small
+\begin{enumerate}
+  \item Hitung $\displaystyle \lim_{x\to 2}(x^2+4x-1)$.
+  \item Hitung $\displaystyle \lim_{x\to 3}\frac{x^2-9}{x-3}$.
+  \item Dengan definisi limit, cari turunan $f(x)=x^2+1$.
+  \item Hitung $\dfrac{d}{dx}\left(x^2e^{-3x}\right)$.
+  \item Hitung $\dfrac{d}{dx}\left(\sin(5x)+x\cos x\right)$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Latihan Kelas 3: Integral}
+\small
+\begin{enumerate}
+  \item Hitung $\displaystyle \int (3x^2+2x-1)\,dx$.
+  \item Hitung $\displaystyle \int \left(4e^{2t}+\cos t\right)\,dt$.
+  \item Hitung $\displaystyle \int \sin(3x)\,dx$.
+  \item Hitung $\displaystyle \int_0^1 (3x^2+2x)\,dx$.
+  \item Untuk $p>0$, hitung $\displaystyle \int_0^\infty e^{-pt}\,dt$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Latihan Kelas 4: Parsial dan Persamaan Diferensial}
+\small
+\begin{enumerate}
+  \item Jika $T(x,y)=x^2y+y^3+\cos x$, tentukan $T_x$ dan $T_y$.
+  \item Hitung $\dfrac{\partial}{\partial t}\left(e^{-2t}\sin x\right)$ dan $\dfrac{\partial}{\partial x}\left(e^{-2t}\sin x\right)$.
+  \item Jelaskan perbedaan kondisi awal dan kondisi batas.
+  \item Periksa apakah $y(t)=Ce^{2t}$ adalah solusi dari $\dfrac{dy}{dt}=2y$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Tugas 01 (pekan 1): Soal 1}
+\small
+\textbf{Kerjakan soal-soal berikut!}
+\vspace{0.2cm}
+
+\textbf{Soal 1}
+\begin{enumerate}
+  \item[1a.] Jelaskan mengapa mempelajari persamaan diferensial penting bagi kemampuan rekayasa!
+  \item[1b.] Jelaskan mengapa Matematika termasuk sebagai bahasa!\\
+  {\scriptsize Referensi: \url{https://www.thoughtco.com/why-mathematics-is-a-language-4158142}}
+  \item[1c.] Jelaskan apa yang dimaksud dengan ``solusi'' persamaan diferensial!
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Tugas 01 (pekan 1): Soal 2--3}
+\small
+\textbf{Soal 2}\\
+Diketahui sebuah bola jatuh dengan massa $m$. Kecepatan pada detik ke-0 adalah 1 m/s. Diasumsikan pada detik ke-0 jarak ($s$) yang sudah ditempuh adalah 2 m. Carilah persamaan jarak bola jatuh tersebut!
+
+\vspace{0.25cm}
+Petunjuk: gunakan persamaan
+\[
+\frac{du}{dt}=g!
+\]
+Dimana $u=\dfrac{ds}{dt}$ = kecepatan jatuh.
+
+\vspace{0.3cm}
+\textbf{Soal 3}\\
+Dari soal 2, carilah jarak yang sudah ditempuh benda pada detik ke-10!
+\end{frame}
+
+\begin{frame}{Tugas 01 (pekan 1): Soal 4}
+\small
+\textbf{Soal 4}\\
+Diketahui hubungan gaya pada benda bergerak yang tersambung pegas adalah
+\[
+\frac{d^2y}{dt^2}+\omega^2y=0,
+\]
+dimana $\omega^2=k/m$ ($k$ = kekakuan pegas, dan $m$ = massa benda). Jika diketahui pada detik ke-0 kecepatan massa adalah 1 m/s dan posisinya adalah $y=0$, carilah persamaan gerak benda $y$ tersebut!
+\end{frame}
+
+\begin{frame}{Penutup}
+Hari ini bukan mengejar rumus banyak.
+\vspace{0.3cm}
+\begin{block}{Yang penting siap}
+\begin{enumerate}
+  \item Bisa menurunkan.
+  \item Bisa mengintegralkan.
+  \item Bisa membaca PDB/PDP sebagai model.
+  \item Paham sinus-cosinus sebagai bahasa gelombang.
+\end{enumerate}
+\end{block}
+Minggu depan: Transformasi Laplace.
+\end{frame}
+
+\end{document}

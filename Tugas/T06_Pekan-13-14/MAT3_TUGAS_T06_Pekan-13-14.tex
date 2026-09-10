@@ -1,0 +1,100 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.0cm,top=1.55cm,bottom=1.7cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array,tabularx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{hyperref}
+\definecolor{iteraBlue}{RGB}{17,79,111}
+\definecolor{iteraLight}{RGB}{238,246,250}
+\definecolor{iteraGold}{RGB}{196,158,68}
+\hypersetup{colorlinks=true,urlcolor=iteraBlue,linkcolor=iteraBlue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlist[enumerate]{leftmargin=7mm,itemsep=2pt,topsep=2pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{\scriptsize Matematika 3 - KL25-21001 | Teknik Kelautan ITERA}
+\fancyfoot[C]{\scriptsize Rifky Fauzi}
+\fancyfoot[R]{\scriptsize Hal. \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\newtcolorbox{taskbox}[1][]{enhanced,breakable,colback=white,colframe=iteraBlue,boxrule=.55pt,arc=2mm,left=2.5mm,right=2.5mm,top=2mm,bottom=2mm,#1}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,frame=single,rulecolor=\color{iteraBlue!35},backgroundcolor=\color{iteraLight!35},showstringspaces=false,columns=fullflexible}
+\newcommand{\degree}{^{\circ}}
+\begin{document}
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}m{2.2cm} X@{}}
+\includegraphics[width=1.55cm]{../../assets/itera_logo.png} &
+{\Large\bfseries\color{iteraBlue} TUGAS 06 - MATEMATIKA 3}\\[-1mm]
+& {\large KL25-21001 | Pekan 13-14}\\[1mm]
+& Program Studi Teknik Kelautan - Institut Teknologi Sumatera\\
+& Semester Ganjil 2026/2027 | Pengajar: Rifky Fauzi
+\end{tabularx}
+\end{center}
+\vspace{1mm}
+\begin{taskbox}[colback=iteraLight!45]
+\textbf{Petunjuk.} Kerjakan soal-soal berikut. Tuliskan proses dan langkah penyelesaian dengan jelas.
+\end{taskbox}
+\begin{taskbox}[title={Soal 1},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Diketahui fenomena ``tali bergetar'' di mana kondisi awal tali sebagai berikut:
+\begin{center}
+\begin{tikzpicture}[x=8cm,y=2.2cm,>=stealth]
+\draw[->] (0,0) -- (1.08,0) node[right] {$x$};
+\draw[->] (0,-0.08) -- (0,1.05) node[above] {$y$};
+\draw[thick] (0,0) -- (0.5,0.78) -- (1,0);
+\draw[dashed] (0.5,0) -- (0.5,0.78);
+\node[above] at (0.5,0.78) {$y_0=f(x)$};
+\node[right] at (0.5,0.39) {$h$};
+\node[below] at (0,0) {$0$};
+\node[below] at (1,0) {$l$};
+\end{tikzpicture}
+\end{center}
+Penyelesaian kasus tersebut sudah ada di buku Mary L. Boas Section 13.4 (halaman 653). Lengkapi langkah penyelesaian tersebut terutama ketika mencari nilai $b_n$!
+\end{taskbox}
+\begin{taskbox}[title={Soal 2},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Buatlah plot Matlab kasus di Soal 1! (script pendukung tersedia di Lampiran)
+\end{taskbox}
+\newpage
+\section*{Lampiran - script Matlab ``vibrating string''}
+\begin{lstlisting}[language=Matlab]
+% Vibrating string with triangular initial displacement at x=L/2
+clear all; clc; close all;
+% --- Parameters ---
+L = 1;
+v = 1; % wave velocity
+h = 1;
+N = 20;
+nx = 100;
+nt = 200; % number of time steps
+x = linspace(0, L, nx);
+tmax = 2*L/v;
+t = linspace(0, tmax, nt);
+Y = zeros(nx, nt);
+% -- summation of series --
+for k = 0:(N-1)
+    n = 2*k + 1; % only odd modes
+    a_n = 8*h/(pi^2 * n^2) * (-1)^k;
+    sin_nx = sin(n*pi*x/L);
+    cos_nt = cos(n*pi*v/L * t);
+    Y =Y+a_n*(sin_nx.' * cos_nt);
+end
+% -- plot --
+figure;
+for j = 1:nt
+    plot(x, Y(:,j), 'b-', 'LineWidth', 2);
+    axis([0 L -1.2*h 1.2*h]);
+    xlabel('x'); ylabel('y(x,t)');
+    title(sprintf('String vibration at t = %.3f', t(j)));
+    drawnow;
+end
+\end{lstlisting}
+\vfill\begin{center}--- habis ---\end{center}
+\end{document}

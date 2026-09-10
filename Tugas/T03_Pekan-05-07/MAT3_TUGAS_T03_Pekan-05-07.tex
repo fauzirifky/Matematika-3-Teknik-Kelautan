@@ -1,0 +1,123 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.0cm,top=1.55cm,bottom=1.7cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array,tabularx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{hyperref}
+\definecolor{iteraBlue}{RGB}{17,79,111}
+\definecolor{iteraLight}{RGB}{238,246,250}
+\definecolor{iteraGold}{RGB}{196,158,68}
+\hypersetup{colorlinks=true,urlcolor=iteraBlue,linkcolor=iteraBlue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlist[enumerate]{leftmargin=7mm,itemsep=2pt,topsep=2pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{\scriptsize Matematika 3 - KL25-21001 | Teknik Kelautan ITERA}
+\fancyfoot[C]{\scriptsize Rifky Fauzi}
+\fancyfoot[R]{\scriptsize Hal. \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\newtcolorbox{taskbox}[1][]{enhanced,breakable,colback=white,colframe=iteraBlue,boxrule=.55pt,arc=2mm,left=2.5mm,right=2.5mm,top=2mm,bottom=2mm,#1}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,frame=single,rulecolor=\color{iteraBlue!35},backgroundcolor=\color{iteraLight!35},showstringspaces=false,columns=fullflexible}
+\newcommand{\degree}{^{\circ}}
+\begin{document}
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}m{2.2cm} X@{}}
+\includegraphics[width=1.55cm]{../../assets/itera_logo.png} &
+{\Large\bfseries\color{iteraBlue} TUGAS 03 - MATEMATIKA 3}\\[-1mm]
+& {\large KL25-21001 | Pekan 05-07}\\[1mm]
+& Program Studi Teknik Kelautan - Institut Teknologi Sumatera\\
+& Semester Ganjil 2026/2027 | Pengajar: Rifky Fauzi
+\end{tabularx}
+\end{center}
+\vspace{1mm}
+\begin{taskbox}[colback=iteraLight!45]
+\textbf{Petunjuk.} Kerjakan soal-soal berikut. Tuliskan proses dan langkah penyelesaian dengan jelas.
+\end{taskbox}
+\begin{taskbox}[title={Soal 1},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Jelaskan bagaimana suatu fungsi dapat direpresentasikan dalam bentuk fungsi sinus dan cosinus! Berikan ilustrasi!
+\end{taskbox}
+\begin{taskbox}[title={Soal 2},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Uraikan asal muasal
+\[
+a_n=\frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos(nx)\,dx,
+\qquad
+b_n=\frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin(nx)\,dx.
+\]
+Referensi: Buku Mary L. Boas Chapter 7.5.
+\end{taskbox}
+\begin{taskbox}[title={Soal 3},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Jika $f(x)$ adalah persamaan pada Example 1 (Modul halaman 4), maka carilah ekspansi Fourier dari $h(x)$ di mana
+\[
+h(x)=f\left(x+\frac{\pi}{2}\right).
+\]
+(Modul halaman 6)
+\end{taskbox}
+\begin{taskbox}[title={Soal 4},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Terdapat \textbf{skrip Matlab} untuk menghitung ekspansi Fourier di Example 1 (Modul). Jalankan skrip Matlab tersebut untuk beberapa nilai $n$! Tampilkan hasilnya lalu beri ulasan!
+\end{taskbox}
+\begin{taskbox}[title={Soal 5},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Carilah ekspansi Fourier terhadap $f(x)$ berikut:
+\[
+f(x)=\begin{cases}
+0, & -\pi<x<0,\\
+x, & 0<x<\pi.
+\end{cases}
+\]
+\end{taskbox}
+\begin{taskbox}[title={Soal 6},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+$f(x)$ selama satu periode adalah sebagai berikut:
+\[
+f(x)=\begin{cases}
+-1, & -l<x<0,\\
+1, & 0<x<l.
+\end{cases}
+\]
+Tentukan apakah $f(x)$ fungsi genap atau ganjil, buatkan plotnya untuk beberapa periode (dapat dengan tulis tangan), dan tentukan persamaan ekspansi Fourier-nya!
+\end{taskbox}
+\begin{taskbox}[title={Soal 7},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Buatlah plot Matlab untuk solusi pada Soal 5!
+\end{taskbox}
+\begin{taskbox}[title={Soal 8},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Jelaskan kegunaan transformasi Fourier dalam bidang teknik kelautan!
+\end{taskbox}
+\newpage
+\section*{Lampiran - p5sumfourier.m}
+\begin{lstlisting}[language=Matlab]
+% Sum of fourier expansion
+% KL ITERA
+% Matematika 3 - tugas pekan 5
+% Function:
+% f(x)= -> 0, -pi<x<0
+%       -> 1, 0<x<pi
+clc; clear all; close all;
+ne=100;
+x=-ne*pi:0.1:ne*pi;
+ss=size(x);
+sx=ss(2);
+a0=pi/2;
+nn=10; %ini bisa dirubah-rubah
+fx=0;
+bnn=0;
+% sum of fourier expansion
+for i=1:nn
+    ia=2*i-1;
+    fi=(1/ia)*sin(ia*x);
+    fx=fx+fi;
+end
+plot(x,0.5+fx*2/pi);
+xlim([-10,10]); ylim([-2,4]);
+grid on
+xlabel('x'); ylabel('f(x)');
+\end{lstlisting}
+\vfill\begin{center}--- habis ---\end{center}
+\end{document}

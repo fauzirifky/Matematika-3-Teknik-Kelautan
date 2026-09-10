@@ -30,6 +30,14 @@ jobs:
             texlive-latex-extra \
             texlive-fonts-recommended
 
+      - name: Reject Microsoft Word files
+        run: |
+          if find . -type f \( -iname "*.doc" -o -iname "*.docx" -o -iname "*.docm" \) -not -path "./.git/*" | grep -q .; then
+            echo "Word files are not allowed in this repository."
+            find . -type f \( -iname "*.doc" -o -iname "*.docx" -o -iname "*.docm" \) -not -path "./.git/*"
+            exit 1
+          fi
+
       - name: Compile all LaTeX sources
         run: bash tools/build.sh --force
 

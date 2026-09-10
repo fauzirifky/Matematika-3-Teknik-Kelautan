@@ -21,3 +21,8 @@
 .DS_Store
 *~
 *.swp
+
+# Microsoft Word source files are intentionally excluded
+*.doc
+*.docx
+*.docm

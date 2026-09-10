@@ -1,0 +1,113 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.0cm,top=1.55cm,bottom=1.7cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array,tabularx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{hyperref}
+\definecolor{iteraBlue}{RGB}{17,79,111}
+\definecolor{iteraLight}{RGB}{238,246,250}
+\definecolor{iteraGold}{RGB}{196,158,68}
+\hypersetup{colorlinks=true,urlcolor=iteraBlue,linkcolor=iteraBlue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlist[enumerate]{leftmargin=7mm,itemsep=2pt,topsep=2pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{\scriptsize Matematika 3 - KL25-21001 | Teknik Kelautan ITERA}
+\fancyfoot[C]{\scriptsize Rifky Fauzi}
+\fancyfoot[R]{\scriptsize Hal. \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\newtcolorbox{taskbox}[1][]{enhanced,breakable,colback=white,colframe=iteraBlue,boxrule=.55pt,arc=2mm,left=2.5mm,right=2.5mm,top=2mm,bottom=2mm,#1}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,frame=single,rulecolor=\color{iteraBlue!35},backgroundcolor=\color{iteraLight!35},showstringspaces=false,columns=fullflexible}
+\newcommand{\degree}{^{\circ}}
+\begin{document}
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}m{2.2cm} X@{}}
+\includegraphics[width=1.55cm]{../../assets/itera_logo.png} &
+{\Large\bfseries\color{iteraBlue} TUGAS 02 - MATEMATIKA 3}\\[-1mm]
+& {\large KL25-21001 | Pekan 02-04}\\[1mm]
+& Program Studi Teknik Kelautan - Institut Teknologi Sumatera\\
+& Semester Ganjil 2026/2027 | Pengajar: Rifky Fauzi
+\end{tabularx}
+\end{center}
+\vspace{1mm}
+\begin{taskbox}[colback=iteraLight!45]
+\textbf{Petunjuk.} Kerjakan soal-soal berikut. Tuliskan proses dan langkah penyelesaian dengan jelas.
+\end{taskbox}
+\begin{taskbox}[title={Soal 1},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Jelaskan apa yang dimaksud dengan transformasi Laplace dan kegunaannya!
+\end{taskbox}
+\begin{taskbox}[title={Soal 2},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Carilah transformasi Laplace fungsi-fungsi berikut:
+\begin{enumerate}
+\item $f(t)=5t^2$
+\item $f(t)=3\sin(3t)$
+\item $f(t)=t e^{2t}$
+\end{enumerate}
+\end{taskbox}
+\begin{taskbox}[title={Soal 3},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Buktikan bahwa transformasi Laplace $e^{it}$ adalah
+\[
+\frac{p+ia}{p^2+a^2}.
+\]
+\end{taskbox}
+\begin{taskbox}[title={Soal 4},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Carilah transformasi Laplace fungsi-fungsi berikut:
+\begin{enumerate}[label=4\alph*.]
+\item $f(t)=2-2\cos 2t$
+\item $f(t)=\dfrac{1}{t}\sin(3t)$
+\item $f(t)=e^{2t}\sin(2t)$
+\item $f(t)=\dfrac{10}{t}\left(e^t-e^{7t}\right)$
+\item $f(t)=2\sin(kx-t)$
+\item $f(t)=\tanh 2t$
+\end{enumerate}
+\end{taskbox}
+\begin{taskbox}[title={Soal 5},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Verifikasikan transformasi Laplace pada L12 dengan cara men-derivasikan hubungan pada L3!
+\end{taskbox}
+\begin{taskbox}[title={Soal 6},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+\begin{enumerate}[label=3\alph*.]
+\item Buktikan bahwa transformasi Laplace pada L14 dengan memanfaatkan hubungan pada L29!
+\item Buktikan bahwa transformasi Laplace pada L18 dengan memanfaatkan hubungan pada L29!
+\end{enumerate}
+\end{taskbox}
+\begin{taskbox}[title={Soal 7},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Selesaikan persamaan diferensial berikut dengan Transformasi Laplace:
+\begin{enumerate}[label=1\alph*.]
+\item $y''-y=8e^{3t}$, dengan $y_0=1$ dan $y'_0=3$.
+\item $y''+4y'+4y=0.5t^2e^{-2t}$, dengan $y_0=0$ dan $y'_0=0$.
+\item $y''+9y=\cos 3t$, dengan $y_0=0$ dan $y'_0=6$.
+\item $y''+y=5\sinh 2t$, dengan $y_0=0$ dan $y'_0=2$.
+\end{enumerate}
+\end{taskbox}
+\begin{taskbox}[title={Soal 8},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Selesaikan persamaan diferensial berikut dengan Transformasi Laplace:
+\[
+y''+2y'+10y=-6e^{-t}\sin 3t,
+\]
+dengan kondisi batas $y_0=0$ dan $y'_0=1$.
+\end{taskbox}
+\begin{taskbox}[title={Soal 9},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Diketahui sistem persamaan diferensial berikut dan kondisi awalnya, selesaikanlah dengan metode Transformasi Laplace!
+\begin{enumerate}[label=2\alph*.]
+\item $y'+z'-3z=0$ dan $y''+z'=0$, di mana $y_0=y'_0=0$, dan $z_0=4/3$.
+\item $y'+2z=1$ dan $2y-z'=2t$, di mana $y_0=0$, dan $z_0=1$.
+\end{enumerate}
+\end{taskbox}
+\begin{taskbox}[title={Soal 10},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Selesaikan integral berikut:
+\[
+\int_0^\infty \frac{1}{t}e^{-2t}\sin\left(t\sqrt{2}\right)\,dt.
+\]
+\end{taskbox}
+\vfill\begin{center}--- habis ---\end{center}
+\end{document}

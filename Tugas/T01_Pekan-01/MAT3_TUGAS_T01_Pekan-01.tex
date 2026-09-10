@@ -1,0 +1,70 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.0cm,top=1.55cm,bottom=1.7cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array,tabularx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{hyperref}
+\definecolor{iteraBlue}{RGB}{17,79,111}
+\definecolor{iteraLight}{RGB}{238,246,250}
+\definecolor{iteraGold}{RGB}{196,158,68}
+\hypersetup{colorlinks=true,urlcolor=iteraBlue,linkcolor=iteraBlue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlist[enumerate]{leftmargin=7mm,itemsep=2pt,topsep=2pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{\scriptsize Matematika 3 - KL25-21001 | Teknik Kelautan ITERA}
+\fancyfoot[C]{\scriptsize Rifky Fauzi}
+\fancyfoot[R]{\scriptsize Hal. \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\newtcolorbox{taskbox}[1][]{enhanced,breakable,colback=white,colframe=iteraBlue,boxrule=.55pt,arc=2mm,left=2.5mm,right=2.5mm,top=2mm,bottom=2mm,#1}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,frame=single,rulecolor=\color{iteraBlue!35},backgroundcolor=\color{iteraLight!35},showstringspaces=false,columns=fullflexible}
+\newcommand{\degree}{^{\circ}}
+\begin{document}
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}m{2.2cm} X@{}}
+\includegraphics[width=1.55cm]{../../assets/itera_logo.png} &
+{\Large\bfseries\color{iteraBlue} TUGAS 01 - MATEMATIKA 3}\\[-1mm]
+& {\large KL25-21001 | Pekan 01}\\[1mm]
+& Program Studi Teknik Kelautan - Institut Teknologi Sumatera\\
+& Semester Ganjil 2026/2027 | Pengajar: Rifky Fauzi
+\end{tabularx}
+\end{center}
+\vspace{1mm}
+\begin{taskbox}[colback=iteraLight!45]
+\textbf{Petunjuk.} Kerjakan soal-soal berikut. Tuliskan proses dan langkah penyelesaian dengan jelas.
+\end{taskbox}
+\begin{taskbox}[title={Soal 1},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+\begin{enumerate}[label=\alph*.]
+\item Jelaskan mengapa mempelajari persamaan diferensial penting bagi kemampuan rekayasa!
+\item Jelaskan mengapa Matematika termasuk sebagai bahasa!\\
+Referensi: \url{https://www.thoughtco.com/why-mathematics-is-a-language-4158142}
+\item Jelaskan apa yang dimaksud dengan ``solusi'' persamaan diferensial!
+\end{enumerate}
+\end{taskbox}
+\begin{taskbox}[title={Soal 2},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Diketahui sebuah bola jatuh dengan massa $m$. Kecepatan pada detik ke-0 adalah $1$ m/s. Diasumsikan pada detik ke-0 jarak ($s$) yang sudah ditempuh adalah $2$ m. Carilah persamaan jarak bola jatuh tersebut!
+
+\textbf{Petunjuk:} gunakan persamaan $\frac{du}{dt}=g$. Di mana $u=\frac{ds}{dt}$ adalah kecepatan jatuh.
+\end{taskbox}
+\begin{taskbox}[title={Soal 3},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Dari Soal 2, carilah jarak yang sudah ditempuh benda pada detik ke-10!
+\end{taskbox}
+\begin{taskbox}[title={Soal 4},fonttitle=\bfseries,colbacktitle=iteraBlue,coltitle=white]
+Diketahui hubungan gaya pada benda bergerak yang tersambung pegas adalah
+\[
+\frac{d^2y}{dt^2}+\omega^2 y=0,
+\]
+di mana $\omega^2=k/m$ ($k$ = kekakuan pegas, dan $m$ = massa benda). Jika diketahui pada detik ke-0 kecepatan massa adalah $1$ m/s dan posisinya adalah $y=0$, carilah persamaan gerak benda $y$ tersebut!
+\end{taskbox}
+\vfill\begin{center}--- habis ---\end{center}
+\end{document}
