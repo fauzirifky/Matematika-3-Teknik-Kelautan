@@ -1,0 +1,445 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Matematika 3 -- KL25-21001}
+\chead{Slide Pertemuan 4 Asynchronous}
+\rhead{Rifky Fauzi}
+\cfoot{\thepage/\pageref{LastPage}}
+
+\definecolor{iteraBlue}{RGB}{20,76,123}
+\definecolor{iteraLight}{RGB}{236,241,248}
+\definecolor{iteraGold}{RGB}{197,159,70}
+
+\newcommand{\Lcal}{\mathcal{L}}
+\newcommand{\Lap}[1]{\Lcal\left\{#1\right\}}
+\newcommand{\invLap}[1]{\Lcal^{-1}\left\{#1\right\}}
+\newcommand{\bigfill}{\vspace{0.18cm}\noindent\dotfill\\[0.18cm]\dotfill\\[0.18cm]\dotfill\vspace{0.08cm}}
+\newcommand{\stepbox}[1]{\vspace{0.2cm}\colorbox{iteraLight}{\parbox{0.98\linewidth}{\textbf{#1}}}\vspace{0.15cm}}
+
+\begin{document}
+
+\begin{center}
+  {\Large\bfseries Slide Pertemuan 4 Asynchronous\\[1mm]
+  Transformasi Laplace}\\[2mm]
+  Matematika 3 (KL25-21001) -- Teknik Kelautan\\
+  Kelas RB -- Pembelajaran Mandiri\\[1mm]
+  Pengajar: \textbf{Rifky Fauzi}
+\end{center}
+
+\vspace{0.15cm}
+\begin{center}
+\IfFileExists{../../assets/itera_logo.png}{\includegraphics[width=1.45cm]{../../assets/itera_logo.png}}{}
+\end{center}
+
+\textbf{Nama:} \dotfill \hfill \textbf{NIM:} \dotfill
+
+\section*{Alur belajar mandiri}
+Dokumen ini adalah slide versi asynchronous dalam bentuk dokumen portrait. Ikuti urutan berikut:
+\begin{enumerate}[nosep]
+    \item Baca ringkasan konsep.
+    \item Isi bagian bertitik-titik.
+    \item Cek pola jawaban pada bagian akhir.
+    \item Unggah hasil kerja sesuai instruksi Google Classroom.
+\end{enumerate}
+
+\section{Target Pertemuan}
+Setelah menyelesaikan dokumen ini, mahasiswa diharapkan mampu:
+\begin{enumerate}[nosep]
+    \item membaca tabel Transformasi Laplace,
+    \item menggunakan operasi $e^{at}f(t)$, $t^n f(t)$, dan $f(t)/t$,
+    \item menentukan transformasi dan transformasi balik,
+    \item menyelesaikan PDB sederhana dengan Transformasi Laplace.
+\end{enumerate}
+
+\section{Definisi dan tabel dasar}
+\stepbox{1.1 Definisi Transformasi Laplace}
+
+Lengkapi definisi berikut:
+\[
+F(s)=\Lap{f(t)}=\int_{\underline{\hspace{1.2cm}}}^{\underline{\hspace{1.2cm}}}
+\underline{\hspace{2.5cm}}\,dt.
+\]
+
+Makna umum: fungsi pada domain waktu $f(t)$ dipetakan menjadi fungsi baru
+\[
+F(s)=\underline{\hspace{8cm}}.
+\]
+
+\stepbox{1.2 Tabel dasar}
+Lengkapi tabel berikut.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{|m{0.32\linewidth}|m{0.52\linewidth}|}
+\hline
+$f(t)$ & $F(s)=\Lap{f(t)}$\\
+\hline
+$1$ & \dotfill\\
+\hline
+$e^{at}$ & \dotfill\\
+\hline
+$\sin at$ & \dotfill\\
+\hline
+$\cos at$ & \dotfill\\
+\hline
+$t^n$ & \dotfill\\
+\hline
+$\sinh at$ & \dotfill\\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Transformasi fungsi dasar}
+\stepbox{2.1 Linearitas}
+
+Gunakan linearitas untuk mencari
+\[
+\Lap{2-5\sin(4t)}.
+\]
+
+Langkah 1. Tulis sifat linearitas:
+\[
+\Lap{af(t)+bg(t)}=\underline{\hspace{6cm}}.
+\]
+
+Langkah 2. Terapkan pada soal:
+\[
+\Lap{2-5\sin(4t)}
+=
+\underline{\hspace{8cm}}.
+\]
+
+Langkah 3. Gunakan tabel:
+\[
+\Lap{2}=\underline{\hspace{3cm}},
+\qquad
+\Lap{\sin(4t)}=\underline{\hspace{3cm}}.
+\]
+
+Langkah 4. Hasil akhir:
+\[
+\Lap{2-5\sin(4t)}=
+\underline{\hspace{8cm}}.
+\]
+
+\stepbox{2.2 Shift eksponensial}
+
+Cari
+\[
+\Lap{e^{2t}\cos(3t)}.
+\]
+
+Langkah 1. Tuliskan aturan:
+\[
+\Lap{e^{at}f(t)}=\underline{\hspace{6cm}}.
+\]
+
+Langkah 2. Ambil $f(t)=\cos 3t$, sehingga
+\[
+F(s)=\Lap{\cos 3t}=\underline{\hspace{5cm}}.
+\]
+
+Langkah 3. Geser $s\mapsto s-2$:
+\[
+\Lap{e^{2t}\cos 3t}
+=
+\underline{\hspace{8cm}}.
+\]
+
+\stepbox{2.3 Perkalian dengan $t^n$}
+
+Cari
+\[
+\Lap{t^2e^t}.
+\]
+
+Langkah 1. Mulai dari rumus dasar:
+\[
+\Lap{e^t}=\underline{\hspace{5cm}}.
+\]
+
+Langkah 2. Gunakan aturan:
+\[
+\Lap{t^n f(t)}
+=
+(-1)^n\frac{d^n}{ds^n}F(s).
+\]
+
+Langkah 3. Karena ada $t^2$, maka perlu turunan ke-\underline{\hspace{1cm}} terhadap $s$.
+
+Langkah 4. Hitung:
+\[
+\frac{d}{ds}\left(\frac{1}{s-1}\right)=\underline{\hspace{4cm}},
+\qquad
+\frac{d^2}{ds^2}\left(\frac{1}{s-1}\right)=\underline{\hspace{4cm}}.
+\]
+
+Langkah 5. Hasil akhir:
+\[
+\Lap{t^2e^t}=\underline{\hspace{8cm}}.
+\]
+
+\section{Pembagian oleh $t$}
+\stepbox{3.1 Apakah $1/t$ boleh dianggap $t^{-1}$?}
+
+Secara aljabar,
+\[
+\frac{1}{t}=t^{-1}.
+\]
+Namun pada Transformasi Laplace, rumus
+\[
+\Lap{t^n}=\frac{\Gamma(n+1)}{s^{n+1}}
+\]
+berlaku untuk syarat
+\[
+n\ \underline{\hspace{3cm}}.
+\]
+
+Karena untuk $1/t$ berarti $n=\underline{\hspace{1.5cm}}$, maka
+\[
+\Lap{1/t}=\int_0^\infty \frac{e^{-st}}{t}\,dt
+\]
+bersifat \underline{\hspace{5cm}} di sekitar $t=0$.
+
+\stepbox{3.2 Aturan yang benar untuk $f(t)/t$}
+
+Jika $F(s)=\Lap{f(t)}$, maka
+\[
+\Lap{\frac{f(t)}{t}}
+=
+\underline{\hspace{8cm}},
+\]
+asalkan integralnya konvergen.
+
+\stepbox{3.3 Contoh terpandu}
+
+Cari
+\[
+\Lap{\frac{e^{-t}-e^{-4t}}{t}}.
+\]
+
+Langkah 1. Transformasi masing-masing fungsi:
+\[
+\Lap{e^{-t}}=\underline{\hspace{3cm}},
+\qquad
+\Lap{e^{-4t}}=\underline{\hspace{3cm}}.
+\]
+
+Langkah 2. Gunakan aturan $f(t)/t$:
+\[
+\Lap{\frac{e^{-t}-e^{-4t}}{t}}
+=
+\int_s^\infty
+\left(
+\underline{\hspace{2.5cm}}
+-
+\underline{\hspace{2.5cm}}
+\right)\,du.
+\]
+
+Langkah 3. Integralkan:
+\[
+\int
+\left(
+\frac{1}{u+1}-\frac{1}{u+4}
+\right)\,du
+=
+\underline{\hspace{8cm}}.
+\]
+
+Langkah 4. Evaluasi batas:
+\[
+\left[
+\underline{\hspace{7cm}}
+\right]_s^\infty
+=
+\underline{\hspace{7cm}}.
+\]
+
+Langkah 5. Hasil akhir:
+\[
+\Lap{\frac{e^{-t}-e^{-4t}}{t}}
+=
+\underline{\hspace{8cm}}.
+\]
+
+\section{Transformasi balik}
+\stepbox{4.1 Invers Laplace dari bentuk standar}
+
+Tentukan invers Laplace berikut.
+
+\begin{enumerate}
+    \item
+    \[
+    \invLap{\frac{2}{(s-1)^3}}=\underline{\hspace{7cm}}.
+    \]
+
+    \item
+    \[
+    \invLap{\frac{1}{s^2-1}}=\underline{\hspace{7cm}}.
+    \]
+
+    \item
+    \[
+    \invLap{\ln\left(\frac{s+4}{s+1}\right)}
+    =
+    \underline{\hspace{8cm}}.
+    \]
+\end{enumerate}
+
+\section{PDB dengan Transformasi Laplace}
+\stepbox{5.1 Contoh terpandu}
+
+Selesaikan
+\[
+y'+3y=t^2e^t,
+\qquad
+y(0)=1.
+\]
+
+Langkah 1. Transformasikan ruas kiri:
+\[
+\Lap{y'}+3\Lap{y}
+=
+\underline{\hspace{8cm}}.
+\]
+
+Karena $y(0)=1$, maka
+\[
+\Lap{y'}+3\Lap{y}
+=
+\underline{\hspace{8cm}}.
+\]
+
+Langkah 2. Transformasikan ruas kanan:
+\[
+\Lap{t^2e^t}
+=
+\underline{\hspace{6cm}}.
+\]
+
+Langkah 3. Bentuk persamaan dalam $Y(s)$:
+\[
+\underline{\hspace{10cm}}
+=
+\underline{\hspace{5cm}}.
+\]
+
+Langkah 4. Nyatakan $Y(s)$:
+\[
+Y(s)=\underline{\hspace{11cm}}.
+\]
+
+Langkah 5. Pecahan parsial:
+\[
+Y(s)
+=
+\frac{A}{s+3}
++
+\frac{B}{s-1}
++
+\frac{C}{(s-1)^2}
++
+\frac{D}{(s-1)^3}.
+\]
+
+Cari koefisien:
+\[
+A=\underline{\hspace{1.6cm}},
+\quad
+B=\underline{\hspace{1.6cm}},
+\quad
+C=\underline{\hspace{1.6cm}},
+\quad
+D=\underline{\hspace{1.6cm}}.
+\]
+
+Langkah 6. Ambil invers Laplace:
+\[
+y(t)=\underline{\hspace{12cm}}.
+\]
+
+\stepbox{5.2 Latihan terpandu}
+
+Selesaikan
+\[
+y''-4y=\sinh(2t),
+\qquad
+y(0)=0,\quad y'(0)=0.
+\]
+
+Langkah 1. Transformasikan ruas kiri:
+\[
+\Lap{y''-4y}
+=
+\underline{\hspace{8cm}}.
+\]
+
+Karena $y(0)=0$ dan $y'(0)=0$, maka
+\[
+\Lap{y''-4y}
+=
+\underline{\hspace{8cm}}.
+\]
+
+Langkah 2. Transformasikan ruas kanan:
+\[
+\Lap{\sinh(2t)}
+=
+\underline{\hspace{6cm}}.
+\]
+
+Langkah 3. Bentuk persamaan dalam $Y(s)$:
+\[
+\underline{\hspace{10cm}}
+=
+\underline{\hspace{5cm}}.
+\]
+
+Langkah 4. Nyatakan $Y(s)$:
+\[
+Y(s)=\underline{\hspace{11cm}}.
+\]
+
+Langkah 5. Ambil invers Laplace:
+\[
+y(t)=\underline{\hspace{12cm}}.
+\]
+
+\newpage
+\section*{Cek hasil ringkas}
+Gunakan bagian ini setelah mencoba mengerjakan sendiri.
+
+\begin{enumerate}
+    \item $\displaystyle \Lap{2-5\sin(4t)}=\frac{2}{s}-\frac{20}{s^2+16}$.
+    \item $\displaystyle \Lap{e^{2t}\cos(3t)}=\frac{s-2}{(s-2)^2+9}$.
+    \item $\displaystyle \Lap{t^2e^t}=\frac{2}{(s-1)^3}$.
+    \item $\displaystyle \Lap{\frac{e^{-t}-e^{-4t}}{t}}=\ln\left(\frac{s+4}{s+1}\right)$.
+    \item $\displaystyle \invLap{\frac{2}{(s-1)^3}}=t^2e^t$.
+\end{enumerate}
+
+\vfill
+\begin{center}
+\textit{Dokumen ini disusun untuk pembelajaran mandiri Pertemuan 4.}
+\end{center}
+
+\end{document}
+
