@@ -1,0 +1,90 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper,margin=1.45cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,booktabs,array,longtable,multicol,fancyhdr,xcolor}
+\definecolor{iteraBlue}{RGB}{20,76,123}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Matematika 3 - KL25-21001}
+\rhead{Tabel Transformasi Laplace}
+\cfoot{Rifky Fauzi \quad | \quad Hal. \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\arraystretch}{1.55}
+\newcommand{\Lcal}{\mathcal{L}}
+\newcommand{\Lap}[1]{\Lcal\{#1\}}
+\begin{document}
+\begin{center}
+{\Large\bfseries\color{iteraBlue} Tabel Transformasi Laplace L1--L35}\\[2mm]
+{\normalsize Matematika 3 - KL25-21001 | Program Studi Teknik Kelautan | ITERA}\\[1mm]
+{\normalsize Rifky Fauzi}
+\end{center}
+\vspace{2mm}
+
+\noindent\textbf{Konvensi.} Tabel ini memakai variabel $s$. Pada beberapa buku, termasuk Mary L. Boas, variabel transform sering ditulis $p$. Jika $Y(s)=\Lap{y(t)}$, maka transformasi Laplace didefinisikan oleh
+\[
+Y(s)=\Lap{y(t)}=\int_0^\infty e^{-st}y(t)\,dt.
+\]
+Syarat konvergensi ditulis secara ringkas. Dalam latihan dasar biasanya diasumsikan $s$ berada pada daerah konvergensi yang sesuai.
+
+\small
+\begin{longtable}{>{\bfseries}p{0.08\textwidth} p{0.35\textwidth} p{0.43\textwidth}}
+\toprule
+No. & Fungsi $y=f(t)$ & Transformasi $Y(s)=\Lap{f(t)}$\\
+\midrule
+\endfirsthead
+\toprule
+No. & Fungsi $y=f(t)$ & Transformasi $Y(s)=\Lap{f(t)}$\\
+\midrule
+\endhead
+L1 & $1$ & $\dfrac{1}{s}$\\
+L2 & $e^{-at}$ & $\dfrac{1}{s+a}$\\
+L3 & $\sin at$ & $\dfrac{a}{s^2+a^2}$\\
+L4 & $\cos at$ & $\dfrac{s}{s^2+a^2}$\\
+L5 & $t^k$, $k>-1$ & $\dfrac{\Gamma(k+1)}{s^{k+1}}$; untuk $k$ bulat $\dfrac{k!}{s^{k+1}}$\\
+L6 & $t^k e^{-at}$, $k>-1$ & $\dfrac{\Gamma(k+1)}{(s+a)^{k+1}}$; untuk $k$ bulat $\dfrac{k!}{(s+a)^{k+1}}$\\
+L7 & $\dfrac{e^{-at}-e^{-bt}}{b-a}$ & $\dfrac{1}{(s+a)(s+b)}$\\
+L8 & $\dfrac{ae^{-at}-be^{-bt}}{a-b}$ & $\dfrac{s}{(s+a)(s+b)}$\\
+L9 & $\sinh at$ & $\dfrac{a}{s^2-a^2}$\\
+L10 & $\cosh at$ & $\dfrac{s}{s^2-a^2}$\\
+L11 & $t\sin at$ & $\dfrac{2as}{(s^2+a^2)^2}$\\
+L12 & $t\cos at$ & $\dfrac{s^2-a^2}{(s^2+a^2)^2}$\\
+L13 & $e^{-at}\sin bt$ & $\dfrac{b}{(s+a)^2+b^2}$\\
+L14 & $e^{-at}\cos bt$ & $\dfrac{s+a}{(s+a)^2+b^2}$\\
+L15 & $1-\cos at$ & $\dfrac{a^2}{s(s^2+a^2)}$\\
+L16 & $at-\sin at$ & $\dfrac{a^3}{s^2(s^2+a^2)}$\\
+L17 & $\sin at-at\cos at$ & $\dfrac{2a^3}{(s^2+a^2)^2}$\\
+L18 & $e^{-at}(1-at)$ & $\dfrac{s}{(s+a)^2}$\\
+L19 & $\dfrac{\sin at}{t}$ & $\tan^{-1}\left(\dfrac{a}{s}\right)$\\
+L20 & $\dfrac{\sin at\cos bt}{t}$, $a,b>0$ & $\dfrac12\left[\tan^{-1}\left(\dfrac{a+b}{s}\right)+\tan^{-1}\left(\dfrac{a-b}{s}\right)\right]$\\
+L21 & $\dfrac{e^{-at}-e^{-bt}}{t}$ & $\ln\left(\dfrac{s+b}{s+a}\right)$\\
+L22 & $1-\operatorname{erf}\left(\dfrac{a}{2\sqrt{t}}\right)$, $a>0$ & $\dfrac{1}{s}e^{-a\sqrt{s}}$\\
+L23 & $J_0(at)$ & $(s^2+a^2)^{-1/2}$\\
+L24 & $u(t-a)$, $a>0$ & $\dfrac{e^{-as}}{s}$\\
+L25 & $u(t-a)-u(t-b)$, $0<a<b$ & $\dfrac{e^{-as}-e^{-bs}}{s}$\\
+L26 & Fungsi persegi periodik bernilai $1,-1$ dengan interval $a$ & $\dfrac{1}{s}\tanh\left(\dfrac{as}{2}\right)$\\
+L27 & $\delta(t-a)$, $a\ge0$ & $e^{-as}$\\
+L28 & $g(t-a)u(t-a)$ & $e^{-as}G(s)$, dengan $G(s)=\Lap{g(t)}$\\
+L29 & $e^{-at}g(t)$ & $G(s+a)$\\
+L30 & $g(at)$, $a>0$ & $\dfrac{1}{a}G\left(\dfrac{s}{a}\right)$\\
+L31 & $\dfrac{g(t)}{t}$, jika integrabel & $\displaystyle\int_s^\infty G(u)\,du$\\
+L32 & $t^n g(t)$ & $(-1)^n\dfrac{d^nG(s)}{ds^n}$\\
+L33 & $\displaystyle\int_0^t g(\tau)\,d\tau$ & $\dfrac{1}{s}G(s)$\\
+L34 & $\displaystyle\int_0^t g(t-\tau)h(\tau)\,d\tau=(g*h)(t)$ & $G(s)H(s)$\\
+L35 & Turunan $y$, dengan $Y(s)=\Lap{y(t)}$ & $\Lap{y'}=sY-y(0)$\\
+ & & $\Lap{y''}=s^2Y-sy(0)-y'(0)$\\
+ & & $\Lap{y^{(n)}}=s^nY-s^{n-1}y(0)-s^{n-2}y'(0)-\cdots-y^{(n-1)}(0)$\\
+\bottomrule
+\end{longtable}
+
+\normalsize
+\noindent\textbf{Catatan tanda eksponen.} Jika tabel menulis $e^{-at}$ maka hasilnya memakai $s+a$. Untuk bentuk $e^{at}$, ganti $a$ dengan $-a$, sehingga misalnya
+\[
+\Lap{e^{at}}=\frac{1}{s-a},\qquad
+\Lap{e^{at}\sin bt}=\frac{b}{(s-a)^2+b^2},\qquad
+\Lap{e^{at}\cos bt}=\frac{s-a}{(s-a)^2+b^2}.
+\]
+
+\end{document}
+
