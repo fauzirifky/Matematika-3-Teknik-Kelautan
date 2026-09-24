@@ -3,19 +3,28 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb,mathtools}
-\usepackage{booktabs,array,multicol}
+\usepackage{booktabs}
+\usepackage{array}
 \usepackage{graphicx}
+\usepackage{tikz}
 \usepackage{ragged2e}
-\graphicspath{{../../assets/}{./}}
+\graphicspath{{../../assets/}{../../}}
 
 \definecolor{iteraBlue}{RGB}{20,76,123}
 \definecolor{iteraLav}{RGB}{226,226,247}
 \definecolor{iteraGreen}{RGB}{24,122,48}
 \definecolor{iteraGreenLight}{RGB}{231,245,233}
 \definecolor{iteraRed}{RGB}{180,35,35}
+\definecolor{iteraRedLight}{RGB}{252,235,235}
+\definecolor{iteraGold}{RGB}{197,159,70}
 \definecolor{iteraGray}{RGB}{90,90,90}
+
 \setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{frametitle}{\nointerlineskip\begin{beamercolorbox}[wd=\paperwidth,ht=0.72cm,dp=0.18cm,leftskip=0.45cm]{frametitle}\usebeamerfont{frametitle}\insertframetitle\end{beamercolorbox}}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.72cm,dp=0.18cm,leftskip=0.45cm]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}}
 \setbeamercolor{frametitle}{bg=iteraLav,fg=iteraBlue}
 \setbeamerfont{frametitle}{series=\bfseries,size=\large}
 \setbeamercolor{structure}{fg=iteraBlue}
@@ -28,16 +37,24 @@
 \setbeamertemplate{itemize item}{\color{iteraBlue}$\bullet$}
 \setbeamertemplate{itemize subitem}{\color{iteraBlue}$\circ$}
 \setbeamerfont{footline}{size=\tiny}
-\setbeamertemplate{footline}{\leavevmode\hbox{\begin{beamercolorbox}[wd=.78\paperwidth,ht=2.6ex,dp=1.1ex,leftskip=.45cm]{author in head/foot}\color{iteraGray}Matematika 3 - KL25-21001 | Kelas RB | Rifky Fauzi\end{beamercolorbox}\begin{beamercolorbox}[wd=.22\paperwidth,ht=2.6ex,dp=1.1ex,rightskip=.45cm plus1fil]{date in head/foot}\hfill\color{iteraGray}\insertframenumber/\inserttotalframenumber\end{beamercolorbox}}}
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox{%
+  \begin{beamercolorbox}[wd=.78\paperwidth,ht=2.6ex,dp=1.1ex,leftskip=.45cm]{author in head/foot}%
+  \color{iteraGray}Matematika 3 - KL25-21001 | Kelas RB | Rifky Fauzi
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.22\paperwidth,ht=2.6ex,dp=1.1ex,rightskip=.45cm plus1fil]{date in head/foot}%
+  \hfill\color{iteraGray}\insertframenumber/\inserttotalframenumber
+  \end{beamercolorbox}}}
 
 \newcommand{\Lcal}{\mathcal{L}}
 \newcommand{\Lap}[1]{\Lcal\left\{#1\right\}}
-\newcommand{\Inv}[1]{\Lcal^{-1}\left\{#1\right\}}
+\newcommand{\invLap}[1]{\Lcal^{-1}\left\{#1\right\}}
 \newcommand{\key}[1]{\textcolor{iteraBlue}{\textbf{#1}}}
 \newcommand{\warn}[1]{\textcolor{iteraRed}{\textbf{#1}}}
+\newcommand{\boasnote}{\scriptsize\color{iteraGray}Acuan utama: Mary L. Boas, \textit{Mathematical Methods in the Physical Sciences}, bab Transformasi Laplace.}
 
 \title{Pertemuan 4\\Transformasi Laplace}
-\subtitle{Integral, transformasi balik, dan penyelesaian PDB}
+\subtitle{Operasi lanjutan, soal integral, dan penyelesaian PDB}
 \author{Rifky Fauzi}
 \institute{Program Studi Teknik Kelautan\\Institut Teknologi Sumatera}
 \date{Kelas RB | Kamis, 14.50--17.30 | E302}
@@ -48,10 +65,11 @@
 \centering
 \vspace{0.4cm}
 \begin{beamercolorbox}[wd=.93\textwidth,sep=10pt,rounded=true,shadow=true]{frametitle}
-\centering\Large\bfseries Pertemuan 4\\[2mm]\large Transformasi Laplace
+\centering\Large\bfseries Pertemuan 4\\[2mm]
+\large Transformasi Laplace
 \end{beamercolorbox}
 \vspace{0.35cm}
-\large Integral, transformasi balik, dan penyelesaian PDB
+\large Operasi lanjutan, soal integral, dan penyelesaian PDB
 \vspace{0.55cm}
 
 \normalsize Rifky Fauzi\\[1mm]
@@ -60,504 +78,358 @@ Program Studi Teknik Kelautan\\Institut Teknologi Sumatera
 
 \textbf{Kelas RB} \quad | \quad Kamis, 14.50--17.30 \quad | \quad E302
 \vfill
-\IfFileExists{itera_logo.png}{\includegraphics[height=1.05cm]{itera_logo.png}}{\vspace{1.05cm}}
+\IfFileExists{../../assets/itera_logo.png}{\includegraphics[height=1.05cm]{itera_logo.png}}{}
 \end{frame}
 
-\begin{frame}{Posisi Pertemuan 4}
-\begin{block}{Pekan 2--4: Transformasi Laplace}
-Pertemuan ini menutup blok Transformasi Laplace sebelum masuk blok berikutnya. Fokusnya adalah latihan yang paling sering muncul pada soal ujian: konsep, transformasi fungsi, transformasi balik, dan penyelesaian PDB.
+\begin{frame}{Orientasi Pertemuan 4}
+\begin{block}{Fokus}
+Pertemuan ini diarahkan untuk memperkuat kesiapan menghadapi jenis soal Transformasi Laplace yang biasa muncul pada latihan dan UTS: transformasi fungsi, transformasi balik, operasi lanjutan, serta penyelesaian PDB.
 \end{block}
-\begin{exampleblock}{Target praktis}
-Mahasiswa mampu mengubah masalah dari domain waktu ke domain $s$, menyelesaikan bentuk aljabar yang muncul, lalu kembali ke fungsi waktu.
-\end{exampleblock}
-\[
-f(t)\quad \xrightarrow{\;\mathcal L\;}\quad F(s)\quad \xrightarrow{\text{aljabar}}\quad Y(s)\quad \xrightarrow{\;\mathcal L^{-1}\;}\quad y(t)
-\]
-\end{frame}
-
-\begin{frame}{Orientasi Latihan UTS}
 \begin{enumerate}
-\item Menjelaskan definisi dan kegunaan Transformasi Laplace.
-\item Menghitung transformasi Laplace fungsi dasar dan gabungannya.
-\item Menghitung transformasi balik dengan membaca tabel dan pecahan parsial.
-\item Menyelesaikan PDB dengan kondisi awal menggunakan Transformasi Laplace.
+\item rekap definisi dan tabel dasar,
+\item operasi lanjutan: shift, perkalian dengan $t^n$, pembagian oleh $t$,
+\item contoh integral yang menghasilkan logaritma atau arctan,
+\item penyelesaian PDB dengan ruas yang memuat $\sinh t$ dan $t^2 e^t$.
 \end{enumerate}
-\begin{alertblock}{Pegangan pengerjaan}
-Mulai dari definisi, cek tabel, rapikan bentuk aljabar, lalu tulis jawaban akhir dalam fungsi waktu.
-\end{alertblock}
 \end{frame}
 
-\begin{frame}{Definisi yang Dipakai}
-\begin{block}{Transformasi Laplace}
-Untuk fungsi $f(t)$ dengan $t\ge 0$,
+\begin{frame}{Definisi Transformasi Laplace}
 \[
-F(s)=\Lap{f(t)}=\int_0^\infty e^{-st}f(t)\,dt.
+F(s)=\Lap{f(t)}=\int_0^{\infty} e^{-st} f(t)\,dt.
 \]
+\begin{block}{Makna}
+Fungsi pada domain waktu $f(t)$ dipetakan menjadi fungsi baru $F(s)$ pada domain Laplace. Pada domain ini, operasi diferensial sering berubah menjadi operasi aljabar yang lebih mudah ditangani.
 \end{block}
-\begin{itemize}
-\item Fungsi awal: $f(t)$, berada di domain waktu.
-\item Hasil transformasi: $F(s)$, berada di domain $s$.
-\item Jika integralnya tidak konvergen, transformasi Laplace biasa tidak ada.
-\end{itemize}
+\boasnote
 \end{frame}
 
-\begin{frame}{Contoh dari Definisi: $f(t)=1$}
-\[
-\Lap{1}=\int_0^\infty e^{-st}\,dt.
-\]
-Untuk $s>0$,
-\[
-\int_0^\infty e^{-st}\,dt
-=\left[-\frac{1}{s}e^{-st}\right]_0^\infty
-=0-\left(-\frac{1}{s}\right)=\frac{1}{s}.
-\]
-\begin{exampleblock}{Hasil}
-\[
-\boxed{\Lap{1}=\frac{1}{s}},\qquad s>0.
-\]
-\end{exampleblock}
-\end{frame}
-
-\begin{frame}{Contoh dari Definisi: Eksponen}
-Hitung $\Lap{e^{at}}$.
-\[
-\Lap{e^{at}}=\int_0^\infty e^{-st}e^{at}\,dt
-=\int_0^\infty e^{-(s-a)t}\,dt.
-\]
-Jika $s>a$,
-\[
-\int_0^\infty e^{-(s-a)t}\,dt=\frac{1}{s-a}.
-\]
-\begin{exampleblock}{Hasil}
-\[
-\boxed{\Lap{e^{at}}=\frac{1}{s-a}},\qquad s>a.
-\]
-\end{exampleblock}
-\end{frame}
-
-\begin{frame}{Contoh dari Definisi: Sinus}
-Dengan integral parsial dua kali, diperoleh
-\[
-I=\Lap{\sin at}=\int_0^\infty e^{-st}\sin(at)\,dt.
-\]
-Hasil akhirnya:
-\[
-\boxed{\Lap{\sin at}=\frac{a}{s^2+a^2}}.
-\]
-\begin{block}{Pasangannya}
-\[
-\boxed{\Lap{\cos at}=\frac{s}{s^2+a^2}}.
-\]
-\end{block}
-\end{frame}
-
-\begin{frame}{Dari Definisi ke Tabel}
-Menghitung integral dari definisi selalu boleh, tetapi sering lambat. Karena itu kita memakai tabel.
-\begin{center}\small
-\begin{tabular}{c c}
+\begin{frame}{Tabel Dasar yang Harus Dikuasai}
+\small
+\begin{center}
+\begin{tabular}{>{\centering\arraybackslash}m{.38\textwidth} >{\centering\arraybackslash}m{.44\textwidth}}
 \toprule
-$f(t)$ & $\Lap{f(t)}$\\
+$f(t)$ & $F(s)=\Lap{f(t)}$\\
 \midrule
-$1$ & $1/s$\\[1mm]
-$t^n$ & $n!/s^{n+1}$\\[1mm]
-$e^{at}$ & $1/(s-a)$\\[1mm]
-$\sin at$ & $a/(s^2+a^2)$\\[1mm]
-$\cos at$ & $s/(s^2+a^2)$\\
+$1$ & $\dfrac{1}{s}$\\[2mm]
+$t^n$ & $\dfrac{n!}{s^{n+1}}$\\[2mm]
+$e^{at}$ & $\dfrac{1}{s-a}$\\[2mm]
+$\sin at$ & $\dfrac{a}{s^2+a^2}$\\[2mm]
+$\cos at$ & $\dfrac{s}{s^2+a^2}$\\[2mm]
+$\sinh at$ & $\dfrac{a}{s^2-a^2}$\\[2mm]
+$\cosh at$ & $\dfrac{s}{s^2-a^2}$\\
 \bottomrule
 \end{tabular}
 \end{center}
-\begin{alertblock}{Catatan}
-Tabel lengkap L1--L35 ada pada PDF terpisah di folder tabel referensi.
+\end{frame}
+
+\begin{frame}{Rekap Contoh Transformasi Dasar}
+Tentukan transformasi Laplace dari:
+\begin{enumerate}
+\item $2-5\sin(4t)$
+\item $e^{3t}\cos(2t)$
+\item $t^2 e^t$
+\item $\sinh t$
+\end{enumerate}
+\vspace{1mm}
+\begin{exampleblock}{Jawaban singkat}
+\[
+\Lap{2-5\sin(4t)}=\frac{2}{s}-\frac{20}{s^2+16}
+\]
+\[
+\Lap{e^{3t}\cos 2t}=\frac{s-3}{(s-3)^2+4},\qquad \Lap{t^2e^t}=\frac{2}{(s-1)^3}
+\]
+\[
+\Lap{\sinh t}=\frac{1}{s^2-1}
+\]
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Operasi yang Boleh dan Tidak Boleh}
+\begin{block}{Boleh}
+\[
+\Lap{af(t)+bg(t)}=aF(s)+bG(s)
+\]
+\[
+\Lap{e^{at}f(t)}=F(s-a)
+\]
+\[
+\Lap{tf(t)}=-\frac{d}{ds}F(s)
+\]
+\end{block}
+\begin{alertblock}{Tidak boleh disederhanakan seperti ini}
+\[
+\Lap{f(t)g(t)} \neq F(s)G(s)
+\]
+secara umum.
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Linearitas: Cara Menggabungkan Tabel}
-\begin{block}{Sifat linear}
+\begin{frame}{Perkalian oleh $t$ dan $t^n$}
+Jika $F(s)=\Lap{f(t)}$, maka
 \[
-\Lap{af(t)+bg(t)}=a\Lap{f(t)}+b\Lap{g(t)}.
+\Lap{t f(t)}=-\frac{dF}{ds},
+\qquad
+\Lap{t^n f(t)}=(-1)^n\frac{d^nF}{ds^n}.
 \]
-\end{block}
 \begin{exampleblock}{Contoh}
+Dari $\Lap{e^t}=\dfrac{1}{s-1}$, diperoleh
 \[
-\Lap{2-5\sin(4t)}=2\Lap{1}-5\Lap{\sin(4t)}.
+\Lap{t e^t}=-\frac{d}{ds}\left(\frac{1}{s-1}\right)=\frac{1}{(s-1)^2}
 \]
+dan
 \[
-=\frac{2}{s}-5\frac{4}{s^2+16}
-=\boxed{\frac{2}{s}-\frac{20}{s^2+16}}.
+\Lap{t^2 e^t}=\frac{d^2}{ds^2}\left(\frac{1}{s-1}\right)=\frac{2}{(s-1)^3}.
 \]
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Eksponen Kali Trigonometri}
-Gunakan pergeseran pada variabel $s$:
+\begin{frame}{Apakah $1/t$ Bisa Ditulis sebagai $t^{-1}$?}
+Bisa saja secara aljabar kita menulis
 \[
-\Lap{e^{at}g(t)}=G(s-a),\quad G(s)=\Lap{g(t)}.
+\frac{1}{t}=t^{-1}.
 \]
-\begin{exampleblock}{Contoh 1}
+Namun untuk Transformasi Laplace biasa,
 \[
-\Lap{e^{-t}\sin(3t)}=\frac{3}{(s+1)^2+9}.
+\Lap{t^n}=\frac{\Gamma(n+1)}{s^{n+1}}
 \]
-\end{exampleblock}
-\begin{exampleblock}{Contoh 2}
+berlaku untuk $n>-1$.
+\begin{alertblock}{Akibatnya}
+Untuk $n=-1$, integral
 \[
-\Lap{e^{2t}\cos(4t)}=\frac{s-2}{(s-2)^2+16}.
+\Lap{1/t}=\int_0^{\infty}\frac{e^{-st}}{t}\,dt
 \]
+\textbf{divergen} di sekitar $t=0$.
+\end{alertblock}
+Jadi $\Lap{1/t}$ tidak ada dalam pengertian biasa.
+\end{frame}
+
+\begin{frame}{Pembagian oleh $t$}
+Jika $F(s)=\Lap{f(t)}$, maka berlaku aturan
+\[
+\Lap{\frac{f(t)}{t}}=\int_s^{\infty} F(u)\,du,
+\]
+asalkan integralnya konvergen.
+\begin{block}{Catatan penting}
+Aturan ini \textbf{bukan} berarti kita bebas mengubah $1/t$ menjadi $t^{-1}$ lalu memakai rumus pangkat biasa. Yang dipakai adalah aturan integral di atas.
+\end{block}
+\end{frame}
+
+\begin{frame}{Contoh yang Salah jika Diperlakukan Terlalu Cepat}
+Misalkan ingin mencari
+\[
+\Lap{\frac{e^{6t}}{t}}.
+\]
+Dari $\Lap{e^{6t}}=\dfrac{1}{s-6}$, aturan pembagian oleh $t$ memberi
+\[
+\Lap{\frac{e^{6t}}{t}}=\int_s^{\infty}\frac{1}{u-6}\,du.
+\]
+Integral ini divergen, sehingga contoh ini \textbf{tidak cocok} untuk Laplace biasa.
+\begin{alertblock}{Pesan utama}
+Tidak semua bentuk $f(t)/t$ mempunyai transformasi Laplace yang terdefinisi.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Contoh yang Baik: Selisih Dua Eksponensial Dibagi $t$}
+Cari
+\[
+\Lap{\frac{e^{-2t}-e^{-5t}}{t}}.
+\]
+Karena
+\[
+\Lap{e^{-2t}}=\frac{1}{s+2},\qquad \Lap{e^{-5t}}=\frac{1}{s+5},
+\]
+maka
+\[
+\Lap{\frac{e^{-2t}-e^{-5t}}{t}}
+=
+\int_s^{\infty}\left(\frac{1}{u+2}-\frac{1}{u+5}\right)du.
+\]
+\end{frame}
+
+\begin{frame}{Lanjutan Contoh Pembagian oleh $t$}
+\[
+\int_s^{\infty}\left(\frac{1}{u+2}-\frac{1}{u+5}\right)du
+=
+\left[\ln(u+2)-\ln(u+5)\right]_s^{\infty}.
+\]
+Bagian limit di tak hingga bernilai $0$, sehingga
+\[
+\Lap{\frac{e^{-2t}-e^{-5t}}{t}}=
+\ln\left(\frac{s+5}{s+2}\right).
+\]
+\begin{exampleblock}{Pelajaran}
+Pembagian oleh $t$ sering melahirkan bentuk logaritma.
 \end{exampleblock}
 \end{frame}
 
 \begin{frame}{Membuktikan Rumus dari Rumus Dasar}
-Misal sudah diketahui
+Contoh: buktikan
 \[
-\Lap{\sin bt}=\frac{b}{s^2+b^2}.
+\Lap{t^2 e^t}=\frac{2}{(s-1)^3}.
 \]
-Dengan sifat pergeseran,
+Mulai dari rumus dasar
 \[
-\Lap{e^{-at}\sin bt}
-=\left.\frac{b}{s^2+b^2}\right|_{s\mapsto s+a}
-=\boxed{\frac{b}{(s+a)^2+b^2}}.
+\Lap{e^t}=\frac{1}{s-1}.
 \]
-\begin{block}{Ide pembuktian}
-Kalikan fungsi awal dengan eksponen, lalu geser variabel $s$ pada hasil transformasinya.
-\end{block}
+Karena
+\[
+\Lap{t^2 f(t)}=\frac{d^2}{ds^2}F(s),
+\]
+maka
+\[
+\Lap{t^2 e^t}=\frac{d^2}{ds^2}\left(\frac{1}{s-1}\right)=\frac{2}{(s-1)^3}.
+\]
 \end{frame}
 
-\begin{frame}{Membuktikan Rumus dengan Turunan terhadap $s$}
-Dari definisi,
+\begin{frame}{Contoh Transformasi Balik}
+Tentukan invers Laplace dari:
+\begin{enumerate}
+\item $\dfrac{2}{(s-1)^3}$
+\item $\dfrac{1}{s^2-1}$
+\item $\ln\left(\dfrac{s+5}{s+2}\right)$
+\end{enumerate}
+\vspace{1mm}
+\begin{exampleblock}{Jawaban}
 \[
-F(s)=\int_0^\infty e^{-st}f(t)\,dt.
+\invLap{\frac{2}{(s-1)^3}}=t^2 e^t,
+\qquad
+\invLap{\frac{1}{s^2-1}}=\sinh t
 \]
-Turunkan terhadap $s$:
+dan dari hasil sebelumnya
 \[
-F'(s)=\int_0^\infty (-t)e^{-st}f(t)\,dt=-\Lap{tf(t)}.
+\invLap{\ln\left(\frac{s+5}{s+2}\right)}=\frac{e^{-2t}-e^{-5t}}{t}.
+\]
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{PDB 1: Ruas Memuat $\sinh t$}
+Selesaikan
+\[
+y''-y=\sinh t,
+\qquad y(0)=0,
+\qquad y'(0)=1.
+\]
+Transformasi Laplace memberi
+\[
+(s^2Y-1)-Y=\frac{1}{s^2-1}.
+\]
+Maka
+\[
+(s^2-1)Y=1+\frac{1}{s^2-1}.
+\]
+\end{frame}
+
+\begin{frame}{Lanjutan PDB 1}
+\[
+Y=\frac{1}{s^2-1}+\frac{1}{(s^2-1)^2}.
+\]
+Dengan pecahan parsial,
+\[
+\frac{1}{(s^2-1)^2}
+=\frac{1}{4}\left(\frac{1}{(s-1)^2}+\frac{1}{(s+1)^2}\right)-\frac{1}{4}\left(\frac{1}{s-1}-\frac{1}{s+1}\right).
+\]
+Sehingga invers Laplace memberi bentuk solusi eksplisit.\vspace{1mm}
+
+\begin{exampleblock}{Hasil}
+\[
+y(t)=\sinh t+\frac14\,t e^t+\frac14\,t e^{-t}-\frac12\sinh t
+=\frac12\sinh t+\frac14 t(e^t+e^{-t}).
+\]
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{PDB 2: Ruas Memuat $t^2e^t$}
+Selesaikan
+\[
+y'+2y=t^2e^t,
+\qquad y(0)=0.
+\]
+Transformasi Laplace memberi
+\[
+(sY-0)+2Y=\frac{2}{(s-1)^3}.
 \]
 Jadi
 \[
-\boxed{\Lap{tf(t)}=-\frac{d}{ds}F(s)}.
+Y=\frac{2}{(s+2)(s-1)^3}.
 \]
-\begin{exampleblock}{Contoh}
-Jika $\Lap{\sin at}=\frac{a}{s^2+a^2}$, maka
-\[
-\Lap{t\sin at}= -\frac{d}{ds}\left(\frac{a}{s^2+a^2}\right)=\frac{2as}{(s^2+a^2)^2}.
-\]
-\end{exampleblock}
+Langkah berikutnya adalah pecahan parsial.
 \end{frame}
 
-\begin{frame}{Bentuk dengan $1/t$: Tidak Selalu Ada}
-Ekspresi yang memuat $1/t$ harus diperiksa dekat $t=0$.
-\begin{alertblock}{Contoh yang tidak konvergen}
+\begin{frame}{Pecahan Parsial untuk PDB 2}
+Tuliskan
 \[
-\Lap{\frac{e^{6t}}{t}}=\int_0^\infty e^{-st}\frac{e^{6t}}{t}\,dt
-=\int_0^\infty \frac{e^{-(s-6)t}}{t}\,dt.
+\frac{2}{(s+2)(s-1)^3}
+=
+\frac{A}{s+2}+\frac{B}{s-1}+\frac{C}{(s-1)^2}+\frac{D}{(s-1)^3}.
 \]
-Dekat $t=0$, integrannya seperti $1/t$, sehingga integralnya divergen.
-\end{alertblock}
-\begin{block}{Pelajaran}
-Sebelum memakai tabel, cek apakah bentuknya memang memiliki Transformasi Laplace biasa.
-\end{block}
-\end{frame}
-
-\begin{frame}{Bentuk $1/t$ yang Valid}
-Ada bentuk $1/t$ yang valid karena pembilangnya juga menuju nol.
+Diperoleh
 \[
-\Lap{\frac{\sin at}{t}}=\tan^{-1}\left(\frac{a}{s}\right).
-\]
-Mengapa tidak bermasalah di $t=0$?
-\[
-\lim_{t\to0}\frac{\sin at}{t}=a.
-\]
-\begin{exampleblock}{Contoh}
-\[
-\Lap{\frac{\sin 6t}{t}}=\tan^{-1}\left(\frac{6}{s}\right).
-\]
-\end{exampleblock}
-\end{frame}
-
-\begin{frame}{Integral dengan Transformasi Laplace}
-Dari definisi,
-\[
-F(s)=\Lap{f(t)}=\int_0^\infty e^{-st}f(t)\,dt.
-\]
-Jadi tabel Laplace bisa dipakai untuk menghitung integral tak wajar.
-\begin{exampleblock}{Contoh}
-Hitung
-\[
-\int_0^\infty e^{-2t}\left(2-5\sin4t\right)dt.
-\]
-Ini sama dengan $\Lap{2-5\sin4t}$ pada $s=2$.
-\end{exampleblock}
-\[
-\frac{2}{2}-\frac{20}{2^2+16}=1-1=0.
-\]
-\end{frame}
-
-\begin{frame}{Transformasi Balik: Membaca Tabel Mundur}
-\begin{exampleblock}{Contoh 1}
-\[
-\Inv{\frac{1}{s-3}}=e^{3t}.
-\]
-\end{exampleblock}
-\begin{exampleblock}{Contoh 2}
-\[
-\Inv{\frac{4}{s^2+16}}=\sin4t.
-\]
-\end{exampleblock}
-\begin{exampleblock}{Contoh 3}
-\[
-\Inv{\frac{s+2}{(s+2)^2+9}}=e^{-2t}\cos3t.
-\]
-\end{exampleblock}
-\end{frame}
-
-\begin{frame}{Pecahan Parsial: Jika Belum Cocok Tabel}
-\begin{exampleblock}{Contoh}
-\[
-F(s)=\frac{5}{(s+1)(s+4)}.
-\]
-Tulis
-\[
-\frac{5}{(s+1)(s+4)}=\frac{A}{s+1}+\frac{B}{s+4}.
-\]
-Diperoleh $A=5/3$ dan $B=-5/3$, sehingga
-\[
-\Inv{F(s)}=\frac{5}{3}e^{-t}-\frac{5}{3}e^{-4t}.
-\]
-\end{exampleblock}
-\end{frame}
-
-\begin{frame}{Transformasi Turunan dari Definisi}
-Jika $Y(s)=\Lap{y(t)}$, maka
-\[
-\Lap{y'}=\int_0^\infty e^{-st}y'(t)dt.
-\]
-Dengan integral parsial:
-\[
-\Lap{y'}=\left[e^{-st}y(t)\right]_0^\infty+s\int_0^\infty e^{-st}y(t)dt.
-\]
-Jika suku di tak hingga nol,
-\[
-\boxed{\Lap{y'}=sY-y(0)}.
-\]
-\end{frame}
-
-\begin{frame}{Turunan Kedua dan Ketiga}
-\[
-\boxed{\Lap{y''}=s^2Y-sy(0)-y'(0)}
-\]
-\[
-\boxed{\Lap{y'''}=s^3Y-s^2y(0)-sy'(0)-y''(0)}
-\]
-\begin{block}{Pola}
-Turunan menjadi perkalian oleh $s$, tetapi kondisi awal ikut masuk.
-\end{block}
-\end{frame}
-
-\begin{frame}{PDB dengan Laplace: Alur Umum}
-\begin{enumerate}
-\item Transformasikan seluruh suku PDB.
-\item Masukkan kondisi awal.
-\item Kumpulkan semua suku yang memuat $Y(s)$.
-\item Selesaikan aljabar untuk memperoleh $Y(s)$.
-\item Ubah $Y(s)$ kembali ke $y(t)$ dengan tabel atau pecahan parsial.
-\end{enumerate}
-\begin{alertblock}{Hal yang sering hilang}
-Jangan lupa $y(0)$ dan $y'(0)$ ketika mentransformasikan turunan.
-\end{alertblock}
-\end{frame}
-
-\begin{frame}{Contoh PDB 1: Masuk Akal Dulu}
-Selesaikan
-\[
-y'-y=t^2e^t,\qquad y(0)=0.
-\]
-Transformasi:
-\[
-(sY-0)-Y=\Lap{t^2e^t}.
-\]
-Dari tabel,
-\[
-\Lap{t^2e^t}=\frac{2}{(s-1)^3}.
+A=-\frac{2}{27},\qquad B=\frac{2}{27},\qquad C=-\frac{2}{9},\qquad D=\frac{2}{3}.
 \]
 Maka
 \[
-(s-1)Y=\frac{2}{(s-1)^3},\qquad
-Y=\frac{2}{(s-1)^4}.
+Y=-\frac{2}{27}\frac{1}{s+2}+\frac{2}{27}\frac{1}{s-1}-\frac{2}{9}\frac{1}{(s-1)^2}+\frac{2}{3}\frac{1}{(s-1)^3}.
 \]
 \end{frame}
 
-\begin{frame}{Lanjutan Contoh PDB 1}
-Gunakan
+\begin{frame}{Hasil PDB 2}
+Ambil invers Laplace satu per satu:
 \[
-\Lap{t^3e^t}=\frac{3!}{(s-1)^4}=\frac{6}{(s-1)^4}.
+y(t)=-\frac{2}{27}e^{-2t}+\frac{2}{27}e^t-\frac{2}{9}te^t+\frac13 t^2 e^t.
 \]
-Karena
-\[
-Y=\frac{2}{(s-1)^4}=\frac{1}{3}\frac{6}{(s-1)^4},
-\]
-maka
-\[
-\boxed{y(t)=\frac{1}{3}t^3e^t}.
-\]
-\begin{block}{Cek cepat}
-$y'-y=t^2e^t$ dan $y(0)=0$.
+\begin{block}{Poin penting}
+Soal seperti ini memaksa kita menguasai sekaligus:
+\begin{itemize}
+\item shift eksponensial,
+\item transformasi $t^2f(t)$,
+\item pecahan parsial,
+\item transformasi balik.
+\end{itemize}
 \end{block}
 \end{frame}
 
-\begin{frame}{Contoh PDB 2: Memuat $\sinh$}
-Selesaikan
-\[
-y''-y=\sinh(2t),\qquad y(0)=0,\quad y'(0)=0.
-\]
-Transformasi:
-\[
-(s^2Y)-Y=\Lap{\sinh(2t)}=\frac{2}{s^2-4}.
-\]
-Maka
-\[
-(s^2-1)Y=\frac{2}{s^2-4},
-\qquad
-Y=\frac{2}{(s^2-1)(s^2-4)}.
-\]
-\end{frame}
-
-\begin{frame}{Lanjutan Contoh PDB 2}
-Pecahan parsial:
-\[
-\frac{2}{(s^2-1)(s^2-4)}
-=-\frac{2}{3}\frac{1}{s^2-1}+\frac{2}{3}\frac{1}{s^2-4}.
-\]
-Karena
-\[
-\Inv{\frac{1}{s^2-1}}=\sinh t,
-\qquad
-\Inv{\frac{1}{s^2-4}}=\frac12\sinh 2t,
-\]
-maka
-\[
-\boxed{y(t)=-\frac{2}{3}\sinh t+\frac{1}{3}\sinh 2t}.
-\]
-\end{frame}
-
-\begin{frame}{Contoh PDB 3: Eksponen Kali Sinus}
-Selesaikan model latihan
-\[
-y''+2y'+5y=e^{-t}\sin(2t),\quad y(0)=0,\quad y'(0)=1.
-\]
-Transformasi kiri:
-\[
-\Lap{y''}+2\Lap{y'}+5\Lap{y}
-=(s^2Y-1)+2sY+5Y.
-\]
-Transformasi kanan:
-\[
-\Lap{e^{-t}\sin2t}=\frac{2}{(s+1)^2+4}.
-\]
-Sehingga
-\[
-(s^2+2s+5)Y-1=\frac{2}{(s+1)^2+4}.
-\]
-\end{frame}
-
-\begin{frame}{Lanjutan Contoh PDB 3}
-Karena
-\[
-s^2+2s+5=(s+1)^2+4,
-\]
-
-diperoleh
-\[
-Y=\frac{1}{(s+1)^2+4}+\frac{2}{\big((s+1)^2+4\big)^2}.
-\]
-Bagian pertama langsung:
-\[
-\Inv{\frac{1}{(s+1)^2+4}}=\frac12 e^{-t}\sin2t.
-\]
-Bagian kedua dapat dicari memakai tabel lengkap atau sifat turunan terhadap parameter. Di sini yang penting adalah alur transformasi sampai bentuk $Y(s)$.
-\end{frame}
-
-\begin{frame}{Latihan A: Transformasi Langsung}
-Hitung Transformasi Laplace berikut.
+\begin{frame}{Latihan}
+Tentukan transformasi Laplace dari:
 \begin{enumerate}
-\item $f(t)=7e^{3t}$
-\item $f(t)=2-5\sin(4t)$
-\item $f(t)=e^{-2t}\cos(5t)$
-\item $f(t)=3e^t\sin(2t)$
-\item $f(t)=t^2e^t$
-\item $f(t)=\sinh(3t)$
+\item $2-5\sin(4t)$
+\item $e^{2t}\sin(3t)$
+\item $t^2e^t$
+\item $\dfrac{e^{-t}-e^{-4t}}{t}$
+\item $\sinh(2t)$
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Latihan B: Cek Ada atau Tidak}
-Tentukan apakah transformasi Laplace biasa ada. Jika ada, hitung hasilnya.
+\begin{frame}{Latihan}
+Tentukan invers Laplace dari:
 \begin{enumerate}
-\item $\displaystyle f(t)=\frac{e^{6t}}{t}$
-\item $\displaystyle f(t)=\frac{\sin 6t}{t}$
-\item $\displaystyle f(t)=\frac{1-e^{-4t}}{t}$
-\item $\displaystyle f(t)=e^{-t}\frac{\sin 3t}{t}$
-\end{enumerate}
-\begin{alertblock}{Petunjuk}
-Periksa perilaku fungsi saat $t\to0$ sebelum memakai tabel.
-\end{alertblock}
-\end{frame}
-
-\begin{frame}{Latihan C: Transformasi Balik}
-Tentukan fungsi asal dari bentuk berikut.
-\begin{enumerate}
-\item $\displaystyle F(s)=\frac{1}{s-4}$
-\item $\displaystyle F(s)=\frac{6}{(s+2)^4}$
-\item $\displaystyle F(s)=\frac{4}{s^2+16}$
-\item $\displaystyle F(s)=\frac{s+1}{(s+1)^2+9}$
-\item $\displaystyle F(s)=\frac{3}{(s-2)^2+9}$
-\item $\displaystyle F(s)=\frac{10}{(s+1)(s+4)}$
+\item $\dfrac{s-2}{(s-2)^2+9}$
+\item $\dfrac{3}{(s-1)^2+9}$
+\item $\dfrac{2}{(s-1)^3}$
+\item $\dfrac{2}{s}-\dfrac{20}{s^2+16}$
+\item $\ln\left(\dfrac{s+4}{s+1}\right)$
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Latihan D: PDB Bertahap}
-Selesaikan dengan Transformasi Laplace.
+\begin{frame}{Latihan}
+Selesaikan dengan Transformasi Laplace:
 \begin{enumerate}
-\item $y'-2y=3e^{2t},\quad y(0)=1$.
-\item $y'+y=t^2e^{-t},\quad y(0)=0$.
-\item $y''+4y=\cos(2t),\quad y(0)=0,\ y'(0)=1$.
-\item $y''-y=\sinh(3t),\quad y(0)=0,\ y'(0)=0$.
-\item $y''+2y'+5y=e^{-t}\cos(2t),\quad y(0)=1,\ y'(0)=0$.
+\item $y'+3y=t^2e^t,\quad y(0)=1$
+\item $y''-4y=\sinh(2t),\quad y(0)=0,\ y'(0)=0$
+\item $y''+2y'+5y=e^{-t}\cos 2t,\quad y(0)=0,\ y'(0)=1$
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Tabel Ringkas yang Paling Dipakai}
-\scriptsize
-\begin{center}
-\begin{tabular}{c c c}
-\toprule
-No. & $f(t)$ & $F(s)$\\
-\midrule
-L1 & $1$ & $1/s$\\
-L2 & $e^{at}$ & $1/(s-a)$\\
-L3 & $\sin at$ & $a/(s^2+a^2)$\\
-L4 & $\cos at$ & $s/(s^2+a^2)$\\
-L5 & $t^n$ & $n!/s^{n+1}$\\
-L6 & $t^n e^{at}$ & $n!/(s-a)^{n+1}$\\
-L9 & $\sinh at$ & $a/(s^2-a^2)$\\
-L10 & $\cosh at$ & $s/(s^2-a^2)$\\
-L13 & $e^{at}\sin bt$ & $b/((s-a)^2+b^2)$\\
-L14 & $e^{at}\cos bt$ & $(s-a)/((s-a)^2+b^2)$\\
-L19 & $\sin at/t$ & $\tan^{-1}(a/s)$\\
-L35 & $y''$ & $s^2Y-sy(0)-y'(0)$\\
-\bottomrule
-\end{tabular}
-\end{center}
-\end{frame}
-
-\begin{frame}{Ringkasan Pertemuan 4}
+\begin{frame}{Ringkasan}
 \begin{enumerate}
-\item Definisi Laplace berasal dari integral tak wajar.
-\item Tabel mempercepat transformasi dan transformasi balik.
-\item Eksponen kali sinus/cosinus diselesaikan dengan pergeseran pada $s$.
-\item Bentuk $1/t$ harus dicek konvergensinya.
-\item PDB diselesaikan dengan mengubah turunan menjadi bentuk aljabar dalam $Y(s)$.
+\item $1/t$ boleh ditulis $t^{-1}$ secara aljabar, tetapi \textbf{tidak otomatis} boleh memakai rumus pangkat biasa pada Laplace.
+\item Operasi hasil kali tidak berubah menjadi hasil kali transformasi secara umum.
+\item Untuk $f(t)/t$, gunakan aturan
+\[
+\Lap{f(t)/t}=\int_s^{\infty}F(u)\,du.
+\]
+\item Contoh penting minggu ini: $t^2e^t$, $\sinh t$, dan bentuk logaritma dari pembagian oleh $t$.
+\item Penyelesaian PDB dengan Laplace menuntut penguasaan tabel, operasi, dan pecahan parsial.
 \end{enumerate}
-\begin{block}{Latihan utama}
-Biasakan menulis langkah lengkap: transformasi, substitusi kondisi awal, aljabar $Y(s)$, invers Laplace.
-\end{block}
 \end{frame}
 
 \end{document}
-
