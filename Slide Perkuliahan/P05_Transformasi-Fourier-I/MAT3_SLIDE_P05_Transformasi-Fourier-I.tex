@@ -1,0 +1,501 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs,array}
+\usepackage{listings}
+\usepackage{xcolor}
+\graphicspath{{../../assets/}}
+\definecolor{iteraBlue}{RGB}{20,76,123}
+\definecolor{iteraLav}{RGB}{226,226,247}
+\definecolor{iteraGreen}{RGB}{24,122,48}
+\definecolor{iteraGreenLight}{RGB}{231,245,233}
+\definecolor{iteraRed}{RGB}{180,35,35}
+\definecolor{iteraGray}{RGB}{90,90,90}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{frametitle}{bg=iteraLav,fg=iteraBlue}
+\setbeamerfont{frametitle}{series=\bfseries,size=\large}
+\setbeamercolor{structure}{fg=iteraBlue}
+\setbeamercolor{block title}{bg=iteraBlue,fg=white}
+\setbeamercolor{block body}{bg=iteraLav!35,fg=black}
+\setbeamercolor{example title}{bg=iteraGreen,fg=white}
+\setbeamercolor{example body}{bg=iteraGreenLight,fg=black}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamerfont{footline}{size=\tiny}
+\setbeamertemplate{footline}{%
+\leavevmode\hbox{%
+\begin{beamercolorbox}[wd=.78\paperwidth,ht=2.6ex,dp=1.1ex,leftskip=.45cm]{author in head/foot}
+\color{iteraGray}Matematika 3 - KL25-21001 | Kelas RB | Rifky Fauzi
+\end{beamercolorbox}
+\begin{beamercolorbox}[wd=.22\paperwidth,ht=2.6ex,dp=1.1ex,rightskip=.45cm plus1fil]{date in head/foot}
+\hfill\color{iteraGray}\insertframenumber/\inserttotalframenumber
+\end{beamercolorbox}}}
+\lstdefinestyle{matlab}{language=Matlab,basicstyle=\ttfamily\scriptsize,commentstyle=\itshape\color{iteraGray},frame=single,breaklines=true,showstringspaces=false,columns=fullflexible}
+\newcommand{\pauseboard}{\begin{alertblock}{Pause}Kerjakan dulu di papan atau catatan. Jawaban dibuka pada slide berikutnya.\end{alertblock}}
+\begin{document}
+
+
+\begin{frame}[plain]
+\centering
+\vspace{0.35cm}
+\begin{beamercolorbox}[wd=.92\textwidth,sep=10pt,rounded=true,shadow=true]{frametitle}
+\centering\Large\bfseries Pertemuan 5\\[2mm]
+\large Transformasi Fourier I: Deret Fourier dan Representasi Fungsi Periodik
+\end{beamercolorbox}
+\vspace{0.45cm}
+\normalsize Rifky Fauzi\\
+Program Studi Teknik Kelautan -- Institut Teknologi Sumatera
+\vfill
+\includegraphics[height=1.05cm]{itera_logo.png}
+\end{frame}
+
+
+\begin{frame}{Kemampuan yang Dituntaskan Hari Ini}
+Setelah pertemuan ini, mahasiswa mampu:
+\begin{enumerate}
+\item mengenali fungsi periodik dan periode dasarnya;
+\item menuliskan bentuk umum deret Fourier;
+\item menjelaskan asal koefisien $a_0,a_n,b_n$ dari ortogonalitas;
+\item menghitung deret Fourier fungsi piecewise pada satu periode;
+\item memakai sifat genap/ganjil untuk menyederhanakan perhitungan;
+\item membaca arti koefisien sebagai kandungan harmonik;
+\item merekonstruksi fungsi dengan MATLAB.
+\end{enumerate}
+\begin{block}{Pertemuan 6}
+Fokusnya latihan dan variasi soal; teori dasar deret Fourier selesai pada pertemuan ini.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Mengapa Fourier Muncul di Teknik Kelautan?}
+Banyak besaran berubah berulang terhadap waktu atau posisi:
+\begin{itemize}
+\item elevasi gelombang dan pasang surut;
+\item gerak heave, pitch, dan roll;
+\item beban periodik pada struktur;
+\item getaran mesin dan sinyal sensor.
+\end{itemize}
+\begin{block}{Ide Fourier}
+Bentuk periodik yang rumit dapat diuraikan menjadi gabungan sinus dan cosinus dengan frekuensi berbeda.
+\end{block}
+\[
+\text{sinyal periodik}\longleftrightarrow\text{komponen harmonik}
+\]
+\end{frame}
+
+
+\begin{frame}{Fungsi Periodik}
+\begin{block}{Definisi}
+$f$ periodik jika ada $T>0$ sehingga
+\[
+f(x+T)=f(x).
+\]
+Nilai positif terkecil yang memenuhi disebut periode dasar.
+\end{block}
+Untuk fungsi berperiode $2\pi$, cukup definisikan $f(x)$ pada $(-\pi,\pi)$ lalu lanjutkan secara periodik.
+\end{frame}
+
+
+\begin{frame}{Bentuk Umum Deret Fourier}
+Untuk periode $2\pi$:
+\[
+\boxed{f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}\left[a_n\cos(nx)+b_n\sin(nx)\right]}
+\]
+\begin{itemize}
+\item $a_0/2$: komponen rata-rata;
+\item $a_n$: bobot harmonik cosinus ke-$n$;
+\item $b_n$: bobot harmonik sinus ke-$n$.
+\end{itemize}
+Pertanyaan kita sekarang: dari mana koefisien-koefisien itu datang?
+\end{frame}
+
+
+\begin{frame}{Ortogonalitas Sinus dan Cosinus}
+Untuk $m,n=1,2,\ldots$:
+\[
+\int_{-\pi}^{\pi}\cos(mx)\cos(nx)\,dx=
+\begin{cases}0,&m\ne n,\\ \pi,&m=n,\end{cases}
+\]
+\[
+\int_{-\pi}^{\pi}\sin(mx)\sin(nx)\,dx=
+\begin{cases}0,&m\ne n,\\ \pi,&m=n,\end{cases}
+\]
+dan
+\[
+\int_{-\pi}^{\pi}\sin(mx)\cos(nx)\,dx=0.
+\]
+\begin{block}{Makna}
+Kalikan deret dengan satu harmonik lalu integralkan: harmonik lain lenyap.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Menurunkan Koefisien Fourier}
+Integralkan deret pada $[-\pi,\pi]$:
+\[
+\boxed{a_0=\frac1\pi\int_{-\pi}^{\pi}f(x)\,dx.}
+\]
+Kalikan deret dengan $\cos(mx)$ lalu integralkan:
+\[
+\boxed{a_n=\frac1\pi\int_{-\pi}^{\pi}f(x)\cos(nx)\,dx.}
+\]
+Kalikan deret dengan $\sin(mx)$ lalu integralkan:
+\[
+\boxed{b_n=\frac1\pi\int_{-\pi}^{\pi}f(x)\sin(nx)\,dx.}
+\]
+\end{frame}
+
+
+\begin{frame}{Jika Periodenya $2L$}
+\[
+f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}\left[
+a_n\cos\left(\frac{n\pi x}{L}\right)+
+b_n\sin\left(\frac{n\pi x}{L}\right)\right],
+\]
+\[
+a_0=\frac1L\int_{-L}^{L}f(x)\,dx,
+\]
+\[
+a_n=\frac1L\int_{-L}^{L}f(x)\cos\left(\frac{n\pi x}{L}\right)dx,\quad
+b_n=\frac1L\int_{-L}^{L}f(x)\sin\left(\frac{n\pi x}{L}\right)dx.
+\]
+\begin{alertblock}{Perhatikan}
+$\cos(nx)$ dan $\sin(nx)$ adalah bentuk khusus ketika $L=\pi$.
+\end{alertblock}
+\end{frame}
+
+
+\begin{frame}{Genap dan Ganjil: Jalan Pintas}
+\begin{columns}[T]
+\column{.48\textwidth}
+\begin{block}{Genap: $f(-x)=f(x)$}
+\[
+b_n=0,\qquad
+a_n=\frac2\pi\int_0^\pi f(x)\cos(nx)\,dx.
+\]
+Deret hanya memuat cosinus.
+\end{block}
+\column{.48\textwidth}
+\begin{block}{Ganjil: $f(-x)=-f(x)$}
+\[
+a_0=a_n=0,\qquad
+b_n=\frac2\pi\int_0^\pi f(x)\sin(nx)\,dx.
+\]
+Deret hanya memuat sinus.
+\end{block}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Contoh 1 - Pulsa Kotak Periodik}
+Untuk satu periode:
+\[
+f(x)=
+\begin{cases}
+0,&-\pi<x<0,\\
+A,&0<x<\pi,
+\end{cases}
+\qquad f(x+2\pi)=f(x).
+\]
+Tentukan deret Fourier-nya.
+\pauseboard
+\end{frame}
+
+
+\begin{frame}{Contoh 1 - Menyusun Integral}
+\[
+a_0=\frac1\pi\left[\int_{-\pi}^{0}0\,dx+\int_0^\pi A\,dx\right],
+\]
+\[
+a_n=\frac1\pi\int_0^\pi A\cos(nx)\,dx,\qquad
+b_n=\frac1\pi\int_0^\pi A\sin(nx)\,dx.
+\]
+\pauseboard
+\end{frame}
+
+
+\begin{frame}{Contoh 1 - Jawaban}
+\[
+a_0=A,\qquad a_n=0,
+\]
+\[
+b_n=\frac{A}{n\pi}\left(1-(-1)^n\right)
+=
+\begin{cases}
+\dfrac{2A}{n\pi},&n\text{ ganjil},\\
+0,&n\text{ genap}.
+\end{cases}
+\]
+Maka
+\[
+\boxed{
+f(x)=\frac A2+\frac{2A}{\pi}
+\left(\sin x+\frac13\sin3x+\frac15\sin5x+\cdots\right).
+}
+\]
+\end{frame}
+
+
+\begin{frame}{Membaca Hasil Pulsa Kotak}
+\begin{itemize}
+\item nilai rata-rata fungsi adalah $A/2$;
+\item hanya harmonik sinus ganjil yang muncul;
+\item amplitudo harmonik menurun seperti $1/n$;
+\item makin banyak harmonik, makin dekat rekonstruksi ke pulsa kotak.
+\end{itemize}
+\begin{block}{Di titik loncatan}
+Deret konvergen ke rata-rata limit kiri dan kanan. Di sekitar loncatan muncul fenomena Gibbs.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Contoh 2 - Fungsi Piecewise Linier}
+Diberikan fungsi berperiode $2\pi$:
+\[
+g(x)=
+\begin{cases}
+0,&-\pi<x<0,\\
+\dfrac{2x}{\pi},&0<x<\pi.
+\end{cases}
+\]
+Susun integral untuk $a_0,a_n,b_n$.
+\pauseboard
+\end{frame}
+
+
+\begin{frame}{Contoh 2 - Jawaban}
+\[
+a_0=\frac1\pi\int_0^\pi\frac{2x}{\pi}\,dx=1,
+\]
+\[
+a_n=\frac1\pi\int_0^\pi\frac{2x}{\pi}\cos(nx)\,dx
+=\frac{2\left((-1)^n-1\right)}{\pi^2n^2},
+\]
+\[
+b_n=\frac1\pi\int_0^\pi\frac{2x}{\pi}\sin(nx)\,dx
+=-\frac{2(-1)^n}{\pi n}.
+\]
+Jadi
+\[
+g(x)=\frac12+\sum_{n=1}^{\infty}\left[
+\frac{2\left((-1)^n-1\right)}{\pi^2n^2}\cos(nx)
+-\frac{2(-1)^n}{\pi n}\sin(nx)\right].
+\]
+\end{frame}
+
+
+\begin{frame}{Pergeseran Fungsi dan Fase}
+Jika $h(x)=f(x+\alpha)$, grafik bergeser ke kiri sejauh $\alpha$.
+\[
+\cos(n(x+\alpha))=\cos(nx)\cos(n\alpha)-\sin(nx)\sin(n\alpha),
+\]
+\[
+\sin(n(x+\alpha))=\sin(nx)\cos(n\alpha)+\cos(nx)\sin(n\alpha).
+\]
+\begin{block}{Akibat}
+Pergeseran tidak menambah frekuensi baru; yang berubah adalah fase dan pasangan koefisien sinus-cosinus.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Contoh 3 - Pergeseran}
+Diketahui
+\[
+f(x)=2+3\cos x-4\sin x.
+\]
+Tuliskan $h(x)=f(x+\pi/2)$ dalam bentuk
+\[
+\frac{a_0}{2}+a_1\cos x+b_1\sin x.
+\]
+\pauseboard
+\end{frame}
+
+
+\begin{frame}{Contoh 3 - Jawaban}
+\[
+h(x)=2+3\cos\left(x+\frac\pi2\right)
+-4\sin\left(x+\frac\pi2\right).
+\]
+Karena
+\[
+\cos(x+\pi/2)=-\sin x,\qquad
+\sin(x+\pi/2)=\cos x,
+\]
+maka
+\[
+\boxed{h(x)=2-4\cos x-3\sin x.}
+\]
+Frekuensi tetap, tetapi koefisien berubah akibat fase.
+\end{frame}
+
+
+\begin{frame}{Menjawab Pertanyaan Aplikasi secara Utuh}
+Jangan berhenti pada kalimat sederhana bahwa Fourier hanya digunakan untuk menganalisis gelombang.
+\begin{block}{Struktur}
+\textbf{Fenomena} $\rightarrow$ \textbf{uraian harmonik} $\rightarrow$ \textbf{informasi} $\rightarrow$ \textbf{kegunaan teknik}.
+\end{block}
+\begin{itemize}
+\item elevasi muka air $\rightarrow$ harmonik $\rightarrow$ frekuensi/amplitudo dominan $\rightarrow$ analisis gelombang atau pasut;
+\item respons struktur $\rightarrow$ harmonik respons $\rightarrow$ frekuensi dominan $\rightarrow$ identifikasi resonansi/beban;
+\item sinyal sensor $\rightarrow$ spektrum $\rightarrow$ noise dan komponen utama $\rightarrow$ pemrosesan pengukuran.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Deret Fourier dan Transformasi Fourier}
+\begin{columns}[T]
+\column{.48\textwidth}
+\begin{block}{Deret Fourier}
+Untuk fungsi periodik; frekuensi muncul sebagai harmonik diskrit:
+\[
+n\omega_0,\quad n=0,1,2,\ldots
+\]
+\end{block}
+\column{.48\textwidth}
+\begin{block}{Transformasi Fourier}
+Lebih umum, termasuk untuk sinyal nonperiodik; spektrum dapat kontinu.
+\end{block}
+\end{columns}
+\vspace{2mm}
+Pertemuan ini menuntaskan \textbf{Deret Fourier}. Judul Transformasi Fourier I mengikuti kontrak perkuliahan.
+\end{frame}
+
+
+\begin{frame}{MATLAB Online - Target Demo}
+Kita akan:
+\begin{enumerate}
+\item mendefinisikan pulsa kotak periodik;
+\item membentuk jumlah parsial $S_N(x)$;
+\item membandingkan $N=1,3,5,10,25,50$;
+\item melihat harmonik yang aktif;
+\item mengamati konvergensi dan Gibbs.
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]{MATLAB Online - Skrip Siap Run (1/2)}
+\begin{lstlisting}[style=matlab]
+%% Fourier series: periodic square pulse
+clear; clc; close all;
+
+
+A = 1;
+N = 15;
+x = linspace(-3*pi,3*pi,5000);
+
+
+% f=0 on (-pi,0), f=A on (0,pi), period 2*pi
+phase = mod(x,2*pi);
+f = A*(phase > 0 & phase < pi);
+
+
+S = (A/2)*ones(size(x));
+for n = 1:N
+    an = 0;
+    bn = A/(pi*n)*(1-(-1)^n);
+    S = S + an*cos(n*x) + bn*sin(n*x);
+end
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{MATLAB Online - Skrip Siap Run (2/2)}
+\begin{lstlisting}[style=matlab]
+figure;
+plot(x,f,'LineWidth',1.6); hold on;
+plot(x,S,'LineWidth',1.4);
+grid on; xlim([-2*pi 2*pi]); ylim([-0.3 1.3]);
+xticks([-2*pi -pi 0 pi 2*pi]);
+xticklabels({'-2\pi','-\pi','0','\pi','2\pi'});
+xlabel('x'); ylabel('f(x)');
+legend('Original','Fourier S_N','Location','best');
+title(sprintf('Square pulse Fourier series, N = %d',N));
+
+
+fprintf(' n        a_n             b_n\n');
+for n = 1:min(N,12)
+    an = 0;
+    bn = A/(pi*n)*(1-(-1)^n);
+    fprintf('%2d   %12.6f   %12.6f\n',n,an,bn);
+end
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{MATLAB Online - Bandingkan Banyak $N$}
+\begin{lstlisting}[style=matlab]
+Ns = [1 3 5 10 25 50];
+figure; tiledlayout(2,3);
+for k = 1:numel(Ns)
+    N = Ns(k);
+    S = (A/2)*ones(size(x));
+    for n = 1:N
+        bn = A/(pi*n)*(1-(-1)^n);
+        S = S + bn*sin(n*x);
+    end
+    nexttile;
+    plot(x,f,'LineWidth',1.0); hold on;
+    plot(x,S,'LineWidth',1.2); grid on;
+    xlim([-pi pi]); ylim([-0.25 1.25]);
+    title(sprintf('N = %d',N));
+end
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}{Latihan Penutup}
+Untuk fungsi berperiode $2\pi$,
+\[
+q(x)=
+\begin{cases}
+-2,&-\pi<x<0,\\
+2,&0<x<\pi,
+\end{cases}
+\]
+tentukan:
+\begin{enumerate}
+\item apakah $q$ genap atau ganjil;
+\item koefisien mana yang otomatis nol;
+\item integral koefisien yang masih perlu dihitung;
+\item tiga harmonik tak nol pertama.
+\end{enumerate}
+\pauseboard
+\end{frame}
+
+
+\begin{frame}{Checklist Sebelum Pertemuan 6}
+Saya siap masuk sesi latihan jika dapat:
+\begin{itemize}
+\item[$\square$] menulis fungsi periodik piecewise dari grafik;
+\item[$\square$] memilih rumus periode $2\pi$ atau $2L$;
+\item[$\square$] menghitung $a_0,a_n,b_n$;
+\item[$\square$] memakai genap/ganjil;
+\item[$\square$] menjelaskan arti harmonik;
+\item[$\square$] memahami efek pergeseran;
+\item[$\square$] merekonstruksi deret di MATLAB;
+\item[$\square$] menjelaskan kegunaan Fourier dalam teknik kelautan secara kontekstual.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Ringkasan}
+\[
+f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}
+[a_n\cos(nx)+b_n\sin(nx)].
+\]
+\begin{enumerate}
+\item Koefisien muncul dari ortogonalitas sinus dan cosinus.
+\item Fungsi piecewise dihitung dengan memisahkan integral sesuai intervalnya.
+\item Simetri dapat memangkas banyak perhitungan.
+\item Pergeseran mengubah fase, bukan daftar frekuensi harmonik.
+\item Jumlah parsial memberi rekonstruksi numerik; diskontinuitas menimbulkan Gibbs.
+\item Fourier memberi bahasa untuk membaca kandungan harmonik fenomena periodik teknik kelautan.
+\end{enumerate}
+\end{frame}
+
+
+\end{document}
