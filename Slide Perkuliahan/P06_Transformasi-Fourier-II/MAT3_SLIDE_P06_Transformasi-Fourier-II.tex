@@ -173,6 +173,38 @@ a_0=\ ? \qquad a_n=\ ? \qquad b_n=\ ?
 \end{block}
 \end{frame}
 
+
+\begin{frame}{Perhitungan Lengkap Contoh 1}
+\scriptsize
+Untuk
+\[
+f(x)=\begin{cases}0,&0<x<\pi,\\ H,&\pi<x<2\pi,
+\end{cases}
+\qquad f(x+2\pi)=f(x).
+\]
+\textbf{Koefisien konstan}
+\[
+a_0=\frac{1}{\pi}\int_0^{2\pi}f(x)\,dx
+=\frac{1}{\pi}\left(\int_0^\pi 0\,dx+\int_\pi^{2\pi}H\,dx\right)=H.
+\]
+\textbf{Koefisien kosinus}
+\[
+a_n=\frac{1}{\pi}\int_0^{2\pi}f(x)\cos nx\,dx
+=\frac{H}{\pi}\int_\pi^{2\pi}\cos nx\,dx
+=\frac{H}{n\pi}\bigl[\sin nx\bigr]_\pi^{2\pi}=0.
+\]
+\textbf{Koefisien sinus}
+\[
+b_n=\frac{H}{\pi}\int_\pi^{2\pi}\sin nx\,dx
+=\frac{H}{\pi}\left[-\frac{\cos nx}{n}\right]_\pi^{2\pi}
+=\frac{H}{n\pi}\bigl(\cos n\pi-\cos 2n\pi\bigr).
+\]
+Karena \(\cos n\pi=(-1)^n\) dan \(\cos 2n\pi=1\), maka
+\[
+b_n=\frac{H}{n\pi}\bigl((-1)^n-1\bigr).
+\]
+\end{frame}
+
 \begin{frame}{Hasil Contoh 1}
 Diperoleh
 \[
@@ -240,6 +272,36 @@ Karena level bawah sekarang bernilai negatif, rata-rata fungsi ikut berubah. Art
 \begin{alertblock}{Arah berpikir}
 Kalau level bawah tidak nol, jangan buru-buru berharap hasilnya sama persis dengan contoh sebelumnya. \(a_0\) hampir pasti berubah.
 \end{alertblock}
+\end{frame}
+
+
+\begin{frame}{Perhitungan Lengkap Contoh 2}
+\scriptsize
+Untuk
+\[
+f(x)=\begin{cases}2,&0<x<\pi,\\ -1,&\pi<x<2\pi,
+\end{cases}
+\qquad f(x+2\pi)=f(x).
+\]
+\textbf{Koefisien konstan}
+\[
+a_0=\frac{1}{\pi}\left(\int_0^\pi 2\,dx+\int_\pi^{2\pi}(-1)\,dx\right)=\frac{1}{\pi}(2\pi-\pi)=1.
+\]
+\textbf{Koefisien kosinus}
+\[
+a_n=\frac{1}{\pi}\left(2\int_0^\pi\cos nx\,dx-\int_\pi^{2\pi}\cos nx\,dx\right)
+\]
+\[
+=\frac{1}{n\pi}\left(2[\sin nx]_0^\pi-[\sin nx]_\pi^{2\pi}\right)=0.
+\]
+\textbf{Koefisien sinus}
+\[
+b_n=\frac{1}{\pi}\left(2\int_0^\pi\sin nx\,dx-\int_\pi^{2\pi}\sin nx\,dx\right)
+\]
+\[
+=\frac{1}{\pi}\left(\frac{2(1-(-1)^n)}{n}-\frac{(-1)^n-1}{n}\right)
+=\frac{3}{n\pi}\bigl(1-(-1)^n\bigr).
+\]
 \end{frame}
 
 \begin{frame}{Hasil Contoh 2}
@@ -315,6 +377,38 @@ a_0=\ ? \qquad a_n=\ ? \qquad b_n=\ ?
 \]
 setidaknya sampai tahap integral.
 \end{block}
+\end{frame}
+
+
+\begin{frame}{Perhitungan Lengkap Gelombang Gergaji}
+\scriptsize
+Untuk
+\[
+f(x)=x,
+\qquad 0<x<2\pi,
+\qquad f(x+2\pi)=f(x).
+\]
+\textbf{Koefisien konstan}
+\[
+a_0=\frac{1}{\pi}\int_0^{2\pi}x\,dx
+=\frac{1}{\pi}\left[\frac{x^2}{2}\right]_0^{2\pi}=2\pi.
+\]
+\textbf{Koefisien kosinus} dengan integrasi parsial:
+\[
+a_n=\frac{1}{\pi}\int_0^{2\pi}x\cos nx\,dx.
+\]
+Ambil \(u=x\), \(dv=\cos nx\,dx\), maka \(du=dx\), \(v=\sin nx/n\).
+\[
+a_n=\frac{1}{\pi}\left(\left[\frac{x\sin nx}{n}\right]_0^{2\pi}-\frac{1}{n}\int_0^{2\pi}\sin nx\,dx\right)=0.
+\]
+\textbf{Koefisien sinus}:
+\[
+b_n=\frac{1}{\pi}\int_0^{2\pi}x\sin nx\,dx.
+\]
+Ambil \(u=x\), \(dv=\sin nx\,dx\), maka \(du=dx\), \(v=-\cos nx/n\).
+\[
+b_n=\frac{1}{\pi}\left(\left[-\frac{x\cos nx}{n}\right]_0^{2\pi}+\frac{1}{n}\int_0^{2\pi}\cos nx\,dx\right)=-\frac{2}{n}.
+\]
 \end{frame}
 
 \begin{frame}{Hasil Gelombang Gergaji}
