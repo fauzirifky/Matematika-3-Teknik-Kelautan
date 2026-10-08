@@ -1,0 +1,455 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{xcolor}
+\graphicspath{{../../assets/}{../../../assets/}{./}}
+
+\definecolor{iteraBlue}{RGB}{20,76,123}
+\definecolor{iteraLav}{RGB}{226,226,247}
+\definecolor{iteraGreen}{RGB}{24,122,48}
+\definecolor{iteraGreenLight}{RGB}{231,245,233}
+\definecolor{iteraRed}{RGB}{180,35,35}
+\definecolor{iteraRedLight}{RGB}{252,235,235}
+\definecolor{iteraGold}{RGB}{197,159,70}
+\definecolor{iteraGray}{RGB}{90,90,90}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.72cm,dp=0.18cm,leftskip=0.45cm]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}}
+\setbeamercolor{frametitle}{bg=iteraLav,fg=iteraBlue}
+\setbeamerfont{frametitle}{series=\bfseries,size=\large}
+\setbeamercolor{structure}{fg=iteraBlue}
+\setbeamercolor{block title}{bg=iteraBlue,fg=white}
+\setbeamercolor{block body}{bg=iteraLav!35,fg=black}
+\setbeamercolor{example title}{bg=iteraGreen,fg=white}
+\setbeamercolor{example body}{bg=iteraGreenLight,fg=black}
+\setbeamercolor{alertblock title}{bg=iteraRed,fg=white}
+\setbeamercolor{alertblock body}{bg=iteraRedLight,fg=black}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{itemize item}{\color{iteraBlue}$\bullet$}
+\setbeamertemplate{itemize subitem}{\color{iteraBlue}$\circ$}
+\setbeamerfont{footline}{size=\tiny}
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox{%
+  \begin{beamercolorbox}[wd=.78\paperwidth,ht=2.6ex,dp=1.1ex,leftskip=.45cm]{author in head/foot}%
+  \color{iteraGray}Matematika 3 - KL25-21001 | Kelas RB | Rifky Fauzi
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.22\paperwidth,ht=2.6ex,dp=1.1ex,rightskip=.45cm plus1fil]{date in head/foot}%
+  \hfill\color{iteraGray}\insertframenumber/\inserttotalframenumber
+  \end{beamercolorbox}}}
+
+\lstset{basicstyle=\ttfamily\scriptsize,breaklines=true,frame=single,rulecolor=\color{iteraBlue!35},backgroundcolor=\color{iteraLav!22},showstringspaces=false,columns=fullflexible}
+
+\newcommand{\key}[1]{\textcolor{iteraBlue}{\textbf{#1}}}
+\newcommand{\warn}[1]{\textcolor{iteraRed}{\textbf{#1}}}
+\newcommand{\pausebox}{\begin{alertblock}{Pause}Kerjakan dulu di papan / catatan. Jawaban ada di slide berikutnya.\end{alertblock}}
+\newcommand{\fourierseries}{\displaystyle f(x)\sim \frac{a_0}{2}+\sum_{n=1}^{\infty}\left(a_n\cos nx+b_n\sin nx\right)}
+
+\title{Pertemuan 6\\Transformasi Fourier II}
+\subtitle{Strategi mengerjakan deret Fourier dari grafik, variasi baseline, dan fungsi gergaji}
+\author{Rifky Fauzi}
+\institute{Program Studi Teknik Kelautan\\Institut Teknologi Sumatera}
+\date{Kelas RB | Kamis, 14.50--17.30 | E302}
+
+\begin{document}
+
+\begin{frame}[plain]
+\centering
+\vspace{0.4cm}
+\begin{beamercolorbox}[wd=.93\textwidth,sep=10pt,rounded=true,shadow=true]{frametitle}
+\centering\Large\bfseries Pertemuan 6\\[2mm]
+\large Transformasi Fourier II
+\end{beamercolorbox}
+\vspace{0.35cm}
+\large Strategi mengerjakan deret Fourier dari grafik, variasi baseline, dan fungsi gergaji
+\vspace{0.55cm}
+
+\normalsize Rifky Fauzi\\[1mm]
+Program Studi Teknik Kelautan\\Institut Teknologi Sumatera
+\vspace{0.35cm}
+
+\textbf{Kelas RB} \quad | \quad Kamis, 14.50--17.30 \quad | \quad E302
+\vfill
+\IfFileExists{itera_logo.png}{\includegraphics[height=1.05cm]{itera_logo.png}}{}
+\end{frame}
+
+\begin{frame}{Posisi Pertemuan Ini}
+\begin{block}{Minggu lalu}
+Kita sudah masuk ide dasar deret Fourier: fungsi periodik dapat ditulis sebagai kombinasi konstanta, sinus, dan cosinus.
+\end{block}
+\begin{exampleblock}{Hari ini}
+Fokusnya lebih praktis: \key{bagaimana membaca grafik, mengubahnya menjadi fungsi potongan, lalu menghitung koefisien Fourier dengan strategi yang rapi.}
+\end{exampleblock}
+\begin{alertblock}{Target utama}
+Mahasiswa lebih terarah saat mengerjakan soal grafik pulsa periodik, variasi pulsa yang baseline-nya tidak nol, dan fungsi gergaji.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Formula yang Kita Pakai}
+Untuk periode $2\pi$:
+\[
+\fourierseries.
+\]
+\[
+a_0=\frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\,dx,
+\quad
+ a_n=\frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos nx\,dx,
+\quad
+ b_n=\frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin nx\,dx.
+\]
+\begin{block}{Yang sering membuat salah}
+Bukan formulanya, tetapi tahap sebelum formula: memilih satu periode dan menulis $f(x)$ secara potongan.
+\end{block}
+\end{frame}
+
+\begin{frame}{Strategi Umum dari Grafik ke Deret Fourier}
+\begin{enumerate}
+\item Tentukan periodenya.
+\item Ambil satu interval utuh, biasanya $(-\pi,\pi)$ atau $(0,2\pi)$.
+\item Tulis fungsi potongan pada interval itu.
+\item Hitung $a_0$, $a_n$, dan $b_n$.
+\item Gunakan simetri bila ada: genap $\Rightarrow b_n=0$, ganjil $\Rightarrow a_0=a_n=0$.
+\item Setelah pola koefisien muncul, baru tulis deretnya.
+\end{enumerate}
+\begin{alertblock}{Catatan}
+Nilai fungsi tepat di titik lompat tidak memengaruhi integral Fourier.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Soal Pulsa Periodik: Baca Grafiknya}
+Misalkan tinggi pulsa adalah
+\[
+A=\frac{XY}{2}.
+\]
+Dari grafik, dalam satu periode $(-\pi,\pi)$ fungsi dapat dibaca sebagai
+\[
+f(x)=
+\begin{cases}
+0, & -\pi<x<0,\\
+A, & 0<x<\pi,
+\end{cases}
+\qquad f(x+2\pi)=f(x).
+\]
+\begin{center}
+\begin{tikzpicture}[scale=0.72]
+\draw[->] (-3.8,0)--(3.9,0) node[right] {$x$};
+\draw[->] (0,-0.2)--(0,1.8) node[above] {$f(x)$};
+\draw[very thick,iteraBlue] (-3.14,0)--(0,0);
+\draw[very thick,iteraBlue] (0,1.25)--(3.14,1.25);
+\draw[dashed] (-3.14,0)--(-3.14,1.25) (0,0)--(0,1.25) (3.14,0)--(3.14,1.25);
+\node[below] at (-3.14,0) {$-\pi$};
+\node[below] at (0,0) {$0$};
+\node[below] at (3.14,0) {$\pi$};
+\node[left] at (0,1.25) {$A$};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{Contoh 1: Susun Koefisiennya}
+Untuk
+\[
+f(x)=
+\begin{cases}
+0, & -\pi<x<0,\\
+A, & 0<x<\pi,
+\end{cases}
+\]
+hitung
+\[
+a_0=\frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\,dx,
+\]
+\[
+a_n=\frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos nx\,dx,
+\qquad
+b_n=\frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin nx\,dx.
+\]
+\pausebox
+\end{frame}
+
+\begin{frame}{Contoh 1: Jawaban $a_0$ dan $a_n$}
+Karena $f(x)=0$ pada $(-\pi,0)$ dan $f(x)=A$ pada $(0,\pi)$,
+\[
+a_0=\frac{1}{\pi}\int_0^\pi A\,dx=A.
+\]
+Untuk $n\ge1$,
+\[
+a_n=\frac{1}{\pi}\int_0^\pi A\cos nx\,dx
+=\frac{A}{\pi}\left[\frac{\sin nx}{n}\right]_0^\pi=0.
+\]
+\begin{block}{Interpretasi}
+Pulsa ini punya nilai rata-rata $A/2$, tetapi tidak memiliki komponen cosinus.
+\end{block}
+\end{frame}
+
+\begin{frame}{Contoh 1: Jawaban $b_n$}
+\[
+b_n=\frac{1}{\pi}\int_0^\pi A\sin nx\,dx
+=\frac{A}{\pi}\left[-\frac{\cos nx}{n}\right]_0^\pi.
+\]
+\[
+b_n=\frac{A}{\pi n}\left(1-\cos n\pi\right)
+=\frac{A}{\pi n}\left(1-(-1)^n\right).
+\]
+Jadi
+\[
+b_n=
+\begin{cases}
+0, & n\text{ genap},\\[1mm]
+\dfrac{2A}{\pi n}, & n\text{ ganjil}.
+\end{cases}
+\]
+\end{frame}
+
+\begin{frame}{Contoh 1: Deret Fourier Akhir}
+Karena $a_0=A$, $a_n=0$, dan hanya $b_n$ ganjil yang muncul,
+\[
+f(x)\sim \frac{A}{2}+\frac{2A}{\pi}\left(\sin x+\frac{\sin 3x}{3}+\frac{\sin 5x}{5}+\cdots\right).
+\]
+Dengan $A=\dfrac{XY}{2}$,
+\[
+f(x)\sim \frac{XY}{4}+\frac{XY}{\pi}\left(\sin x+\frac{\sin 3x}{3}+\frac{\sin 5x}{5}+\cdots\right).
+\]
+\begin{alertblock}{Cara aman}
+Hitung dulu dengan simbol $A$, baru substitusi $A=XY/2$ di akhir.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Latihan Terarah 1}
+Ulangi contoh sebelumnya, tetapi tinggi pulsa diganti menjadi $H$:
+\[
+f(x)=
+\begin{cases}
+0, & -\pi<x<0,\\
+H, & 0<x<\pi.
+\end{cases}
+\]
+Tentukan:
+\[
+a_0=\underline{\hspace{2.5cm}},\qquad
+ a_n=\underline{\hspace{2.5cm}},\qquad
+ b_n=\underline{\hspace{5cm}}.
+\]
+Lalu tulis deret Fourier-nya.
+\pausebox
+\end{frame}
+
+\begin{frame}{Latihan Terarah 1: Jawaban}
+\[
+a_0=H,
+\qquad a_n=0,
+\qquad b_n=\frac{H}{\pi n}\left(1-(-1)^n\right).
+\]
+Maka
+\[
+f(x)\sim \frac{H}{2}+\frac{2H}{\pi}\left(\sin x+\frac{\sin 3x}{3}+\frac{\sin 5x}{5}+\cdots\right).
+\]
+\begin{block}{Pola yang perlu diingat}
+Pulsa separuh periode dari $0$ ke $H$ menghasilkan konstanta $H/2$ dan sinus ganjil.
+\end{block}
+\end{frame}
+
+\begin{frame}{Variasi: Bawahnya Tidak Nol}
+Sekarang fungsi tidak turun ke nol, tetapi ke baseline $B$.
+\[
+f(x)=
+\begin{cases}
+B, & -\pi<x<0,\\
+C, & 0<x<\pi,
+\end{cases}
+\qquad f(x+2\pi)=f(x).
+\]
+\begin{center}
+\begin{tikzpicture}[scale=0.72]
+\draw[->] (-3.8,0)--(3.9,0) node[right] {$x$};
+\draw[->] (0,-0.2)--(0,1.9) node[above] {$f(x)$};
+\draw[very thick,iteraBlue] (-3.14,0.55)--(0,0.55);
+\draw[very thick,iteraBlue] (0,1.35)--(3.14,1.35);
+\draw[dashed] (-3.14,0)--(-3.14,0.55) (0,0.55)--(0,1.35) (3.14,0)--(3.14,1.35);
+\node[below] at (-3.14,0) {$-\pi$};
+\node[below] at (0,0) {$0$};
+\node[below] at (3.14,0) {$\pi$};
+\node[left] at (0,0.55) {$B$};
+\node[left] at (0,1.35) {$C$};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{Variasi Baseline: Kerjakan Koefisiennya}
+Untuk
+\[
+f(x)=
+\begin{cases}
+B, & -\pi<x<0,\\
+C, & 0<x<\pi,
+\end{cases}
+\]
+hitung $a_0$, $a_n$, dan $b_n$.
+\[
+a_0=\frac{1}{\pi}\left(\int_{-\pi}^0 B\,dx+\int_0^\pi C\,dx\right)
+\]
+\[
+a_n=\frac{1}{\pi}\left(\int_{-\pi}^0 B\cos nx\,dx+\int_0^\pi C\cos nx\,dx\right)
+\]
+\[
+b_n=\frac{1}{\pi}\left(\int_{-\pi}^0 B\sin nx\,dx+\int_0^\pi C\sin nx\,dx\right).
+\]
+\pausebox
+\end{frame}
+
+\begin{frame}{Variasi Baseline: Jawaban}
+\[
+a_0=B+C,
+\qquad a_n=0,
+\]
+\[
+b_n=\frac{C-B}{\pi n}\left(1-(-1)^n\right).
+\]
+Maka
+\[
+f(x)\sim \frac{B+C}{2}+\frac{2(C-B)}{\pi}
+\left(\sin x+\frac{\sin 3x}{3}+\frac{\sin 5x}{5}+\cdots\right).
+\]
+\begin{block}{Makna}
+Baseline mengubah nilai rata-rata. Selisih $C-B$ mengatur besar osilasi sinus.
+\end{block}
+\end{frame}
+
+\begin{frame}{Fungsi Gergaji: Mengapa Perlu Dibahas?}
+Fungsi gergaji melatih dua hal penting:
+\begin{enumerate}
+\item membaca fungsi periodik yang tidak berbentuk kotak,
+\item memanfaatkan simetri ganjil agar perhitungan jauh lebih singkat.
+\end{enumerate}
+Contoh paling dasar:
+\[
+f(x)=x,\qquad -\pi<x<\pi,\qquad f(x+2\pi)=f(x).
+\]
+\begin{center}
+\begin{tikzpicture}[scale=0.65]
+\draw[->] (-4.0,0)--(4.1,0) node[right] {$x$};
+\draw[->] (0,-1.7)--(0,1.7) node[above] {$f(x)$};
+\draw[very thick,iteraBlue] (-3.14,-1.2)--(3.14,1.2);
+\draw[dashed] (-3.14,-1.2)--(-3.14,1.2) (3.14,-1.2)--(3.14,1.2);
+\node[below] at (-3.14,0) {$-\pi$};
+\node[below] at (3.14,0) {$\pi$};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{Fungsi Gergaji: Gunakan Simetri}
+Untuk $f(x)=x$ pada $(-\pi,\pi)$:
+\[
+f(-x)=-f(x).
+\]
+Jadi $f$ adalah fungsi ganjil.
+\begin{block}{Akibatnya}
+\[
+a_0=0,\qquad a_n=0.
+\]
+Yang perlu dihitung hanya
+\[
+b_n=\frac{1}{\pi}\int_{-\pi}^{\pi} x\sin nx\,dx
+=\frac{2}{\pi}\int_0^\pi x\sin nx\,dx.
+\]
+\end{block}
+\pausebox
+\end{frame}
+
+\begin{frame}{Fungsi Gergaji: Jawaban}
+Dengan integral parsial:
+\[
+\int_0^\pi x\sin nx\,dx
+=\left[-\frac{x\cos nx}{n}\right]_0^\pi+\frac{1}{n}\int_0^\pi \cos nx\,dx
+= -\frac{\pi(-1)^n}{n}.
+\]
+Maka
+\[
+b_n=\frac{2}{\pi}\left(-\frac{\pi(-1)^n}{n}\right)
+=\frac{2(-1)^{n+1}}{n}.
+\]
+Jadi
+\[
+x\sim 2\left(\sin x-\frac{\sin 2x}{2}+\frac{\sin 3x}{3}-\cdots\right).
+\]
+\end{frame}
+
+\begin{frame}{Template Jawaban Soal Aplikasi Fourier}
+Jika diminta menjelaskan kegunaan deret Fourier dalam teknik kelautan, gunakan alur berikut.
+\begin{enumerate}
+\item Banyak fenomena kelautan bersifat periodik atau hampir periodik.
+\item Deret Fourier memecah sinyal menjadi komponen harmonik sinus dan cosinus.
+\item Koefisien Fourier menunjukkan kontribusi tiap harmonik/frekuensi.
+\item Informasi ini membantu analisis gelombang, pasang surut, getaran struktur, respons kapal/bangunan laut, dan sinyal sensor.
+\end{enumerate}
+\begin{exampleblock}{Kalimat inti}
+Fourier membantu melihat sinyal kompleks sebagai gabungan gelombang sederhana, sehingga frekuensi dominan dan amplitudonya dapat dianalisis.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{MATLAB: Pulsa Periodik}
+\begin{lstlisting}[language=Matlab]
+% Pulsa periodik: 0 untuk -pi<x<0, A untuk 0<x<pi
+clear; clc; close all;
+A = 1;             % ganti dengan XY/2 jika perlu
+x = linspace(-2*pi, 4*pi, 4000);
+Nlist = [1 3 5 10 25 50];
+
+figure;
+for k = 1:length(Nlist)
+    N = Nlist(k);
+    S = A/2*ones(size(x));
+    for m = 0:N
+        n = 2*m + 1;
+        S = S + (2*A/pi)*(sin(n*x)/n);
+    end
+    subplot(3,2,k);
+    plot(x,S,'LineWidth',1.2); grid on;
+    title(['N = ', num2str(N)]);
+    ylim([-0.3, A+0.3]); xlim([-2*pi,4*pi]);
+end
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{MATLAB: Fungsi Gergaji}
+\begin{lstlisting}[language=Matlab]
+% Gergaji: f(x)=x pada -pi<x<pi, periodik 2pi
+clear; clc; close all;
+x = linspace(-2*pi, 2*pi, 4000);
+Nlist = [1 3 5 10 25 50];
+
+figure;
+for k = 1:length(Nlist)
+    N = Nlist(k);
+    S = zeros(size(x));
+    for n = 1:N
+        S = S + 2*((-1)^(n+1))*sin(n*x)/n;
+    end
+    subplot(3,2,k);
+    plot(x,S,'LineWidth',1.2); grid on;
+    title(['N = ', num2str(N)]);
+    ylim([-4,4]); xlim([-2*pi,2*pi]);
+end
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Ringkasan Pertemuan 6}
+\begin{enumerate}
+\item Soal grafik dimulai dari menulis fungsi potongan pada satu periode.
+\item Untuk pulsa setengah periode, gunakan simbol tinggi pulsa dulu: $A$, $H$, atau $C-B$.
+\item Pulsa $0/A$ menghasilkan konstanta $A/2$ dan sinus ganjil.
+\item Pulsa $B/C$ menghasilkan rata-rata $(B+C)/2$ dan sinus ganjil dengan amplitudo bergantung pada $C-B$.
+\item Fungsi gergaji $f(x)=x$ adalah ganjil, sehingga hanya koefisien $b_n$ yang perlu dihitung.
+\end{enumerate}
+\end{frame}
+
+\end{document}
